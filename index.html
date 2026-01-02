@@ -169,16 +169,31 @@ h1{
 }
 
 /* fruits */
-.fruit{position:absolute;border-radius:50%;opacity:.75}
-.apple{width:120px;height:120px;background:#ff6f6f;top:25%;left:10%}
+.fruit{position:absolute;border-radius:50%}
+
+.apple{
+  width:120px;height:120px;
+  background:#ff6f6f;
+  top:25%;left:10%;
+  opacity:.75;
+}
+
+/* 🍌 banana – slightly increased */
 .banana{
   width:160px;height:65px;
   background:#ffd966;
   border-radius:65px;
   bottom:30%;left:20%;
-  opacity:.45; /* 🔽 reduced yellow opacity */
+  opacity:.6;
 }
-.orange{width:130px;height:130px;background:#ffb703;top:30%;right:12%}
+
+/* 🍊 orange – decreased */
+.orange{
+  width:130px;height:130px;
+  background:#ffb703;
+  top:30%;right:12%;
+  opacity:.45;
+}
 
 /* ---------- CREDITS ---------- */
 .credits{
@@ -208,7 +223,7 @@ h1{
   width:210px;height:150px;
   background:#9fd8b0;border-radius:50%;
   position:relative;
-  opacity:.45; /* 🔽 reduced kiwi opacity */
+  opacity:.45;
 }
 .kiwi::before{
   content:"";
