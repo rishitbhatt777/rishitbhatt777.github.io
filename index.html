@@ -28,64 +28,93 @@ body{
   align-items:center;
 }
 
-/* 🧸 CARTOON ART */
+/* 🧸 ART AREA */
 .art{
   position:relative;
   width:45%;
-  height:420px;
+  height:450px;
 }
 
-/* luxury blob */
+/* background blob */
 .blob{
   position:absolute;
-  width:300px;
-  height:300px;
+  width:320px;
+  height:320px;
   background:#cceeff;
   border-radius:50% 45% 55% 50%;
   animation:float 6s ease-in-out infinite;
 }
 
-/* 🐤 kiwi bird */
-.kiwi{
+/* 🧸 BEAR */
+.bear{
   position:absolute;
-  width:120px;
-  height:90px;
-  background:#9fd8b0;
+  width:200px;
+  height:200px;
+  background:#c49a6c;
   border-radius:50%;
-  top:140px;
-  left:130px;
+  top:120px;
+  left:80px;
 }
 
-.kiwi::before{
+/* ears */
+.bear::before,
+.bear::after{
   content:"";
   position:absolute;
-  width:14px;
-  height:14px;
+  width:60px;
+  height:60px;
+  background:#c49a6c;
+  border-radius:50%;
+  top:-25px;
+}
+.bear::before{left:10px}
+.bear::after{right:10px}
+
+/* eyes */
+.eye{
+  position:absolute;
+  width:10px;
+  height:10px;
   background:#000;
   border-radius:50%;
-  top:28px;
-  left:35px;
+  top:80px;
 }
+.eye.left{left:65px}
+.eye.right{right:65px}
 
-.kiwi::after{
-  content:"";
+/* nose */
+.nose{
   position:absolute;
-  width:30px;
-  height:10px;
-  background:#ffb703;
-  border-radius:10px;
-  top:45px;
-  left:-20px;
+  width:24px;
+  height:18px;
+  background:#5c3b23;
+  border-radius:50%;
+  top:105px;
+  left:50%;
+  transform:translateX(-50%);
 }
 
-/* 🎈 TEXT */
+/* 👋 waving hand */
+.hand{
+  position:absolute;
+  width:70px;
+  height:70px;
+  background:#c49a6c;
+  border-radius:50%;
+  top:140px;
+  right:-40px;
+  transform-origin:bottom left;
+  animation:wave 2s ease-in-out infinite;
+}
+
+/* TEXT SIDE */
 .content{
   width:45%;
 }
 
 h1 a{
   font-family:'Baloo 2',cursive;
-  font-size:110px;           /* BIGGER */
+  font-size:110px;
   line-height:0.9;
   text-decoration:none;
   color:#ff6f91;
@@ -105,12 +134,13 @@ h1 a:hover{
 
 .tap{
   margin-top:50px;
-  font-size:15px;
+  font-size:16px;
   background:#fff;
   display:inline-block;
-  padding:14px 28px;
-  border-radius:40px;
-  box-shadow:0 10px 0 #ff9aa2;
+  padding:16px 34px;
+  border-radius:50px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  color:#5c4a4a;
 }
 
 /* animations */
@@ -119,10 +149,17 @@ h1 a:hover{
   50%{transform:translateY(-25px)}
 }
 
+@keyframes wave{
+  0%{transform:rotate(0deg)}
+  50%{transform:rotate(20deg)}
+  100%{transform:rotate(0deg)}
+}
+
 @media(max-width:768px){
 .container{flex-direction:column;text-align:center}
 .art,.content{width:100%}
 h1 a{font-size:72px}
+.bear{left:50%;transform:translateX(-50%)}
 }
 </style>
 </head>
@@ -133,7 +170,13 @@ h1 a{font-size:72px}
 
   <div class="art">
     <div class="blob"></div>
-    <div class="kiwi"></div>
+
+    <div class="bear">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="nose"></div>
+      <div class="hand"></div>
+    </div>
   </div>
 
   <div class="content">
@@ -145,7 +188,7 @@ h1 a{font-size:72px}
       Luxury little looks for happy kids 🧸✨
     </div>
 
-    <div class="tap">👆 Tap the name</div>
+    <div class="tap">✨ Enter the world of Kit’n Kiwi</div>
   </div>
 
 </div>
