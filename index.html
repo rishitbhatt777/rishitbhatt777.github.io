@@ -133,9 +133,28 @@ h1 a{
 }
 
 .slogan{
-  margin-top:30px;
+  margin-top:25px;
   font-size:18px;
   letter-spacing:4px;
+}
+
+/* 🛒 STORE CTA */
+.store-cta{
+  margin-top:22px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:16px;
+  background:#fff;
+  padding:12px 22px;
+  border-radius:40px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  animation:bounceSoft 2s infinite;
+  cursor:pointer;
+}
+
+.store-cta span{
+  font-size:20px;
 }
 
 /* 🥝 KIWI SCROLL BUTTON */
@@ -167,7 +186,6 @@ h1 a{
   font-size:48px;
   color:#ff6f91;
   max-width:900px;
-  z-index:2;
 }
 
 /* 🍎🍌🍊 FRUITS */
@@ -177,7 +195,6 @@ h1 a{
   animation:float 5s ease-in-out infinite;
   opacity:.9;
 }
-
 .apple{width:130px;height:130px;background:#ff6f6f;top:22%;left:12%}
 .banana{width:180px;height:80px;background:#ffd966;border-radius:80px;bottom:28%;left:18%}
 .orange{width:140px;height:140px;background:#ffb703;top:30%;right:14%}
@@ -195,7 +212,7 @@ h1 a{
   justify-content:space-between;
 }
 
-/* 🥝 BIG KIWI BIRD */
+/* 🥝 KIWI */
 .kiwi{
   width:240px;
   height:180px;
@@ -227,11 +244,6 @@ h1 a{
   left:-20px;
 }
 
-/* CREDIT TEXT */
-.credit-text{
-  text-align:left;
-}
-
 .credit-text p{
   font-size:20px;
   margin:15px 0;
@@ -239,23 +251,21 @@ h1 a{
 }
 
 /* ---------- ANIMATIONS ---------- */
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
-}
-@keyframes wave{
-  50%{transform:rotate(20deg)}
-}
+@keyframes float{50%{transform:translateY(-20px)}}
+@keyframes wave{50%{transform:rotate(20deg)}}
 @keyframes bounce{
   0%,100%{transform:translate(-50%,0)}
   50%{transform:translate(-50%,-15px)}
+}
+@keyframes bounceSoft{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
 }
 
 /* MOBILE */
 @media(max-width:768px){
 .container,.credits-wrap{flex-direction:column;text-align:center}
 .art,.content{width:100%}
-.credit-text{text-align:center}
 h1 a{font-size:78px}
 }
 </style>
@@ -266,11 +276,13 @@ h1 a{font-size:78px}
 <!-- HERO -->
 <section class="hero">
   <div class="container">
+
     <div class="art">
       <div class="blob"></div>
       <div class="cat"></div>
       <div class="monkey"></div>
       <div class="elephant"></div>
+
       <div class="bear">
         <div class="eye left"></div>
         <div class="eye right"></div>
@@ -282,7 +294,13 @@ h1 a{font-size:78px}
     <div class="content">
       <h1><a href="coming-soon.html">Kit’n<br>Kiwi</a></h1>
       <div class="slogan">MADE FOR LITTLE HEARTS</div>
+
+      <!-- STORE CTA -->
+      <div class="store-cta">
+        <span>🛒</span> Tap to go store
+      </div>
     </div>
+
   </div>
 
   <a href="#donate" class="scroll-btn">🥝</a>
@@ -303,15 +321,12 @@ h1 a{font-size:78px}
 <!-- CREDITS -->
 <section class="credits">
   <div class="credits-wrap">
-
     <div class="kiwi"></div>
-
     <div class="credit-text">
       <p>OWNED BY <strong>RISHIT BHATT</strong></p>
       <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
       <p>MANAGED BY <strong>PARTH JOSHI</strong></p>
     </div>
-
   </div>
 </section>
 
