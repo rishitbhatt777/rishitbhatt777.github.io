@@ -171,10 +171,16 @@ h1{
 /* fruits */
 .fruit{position:absolute;border-radius:50%;opacity:.75}
 .apple{width:120px;height:120px;background:#ff6f6f;top:25%;left:10%}
-.banana{width:160px;height:65px;background:#ffd966;border-radius:65px;bottom:30%;left:20%}
+.banana{
+  width:160px;height:65px;
+  background:#ffd966;
+  border-radius:65px;
+  bottom:30%;left:20%;
+  opacity:.45; /* 🔽 reduced yellow opacity */
+}
 .orange{width:130px;height:130px;background:#ffb703;top:30%;right:12%}
 
-/* ---------- CREDITS (FIXED) ---------- */
+/* ---------- CREDITS ---------- */
 .credits{
   background:#fce1ec;
 }
@@ -189,12 +195,11 @@ h1{
 .tiger{width:140px;height:140px;background:#ff9f43;bottom:22%;left:16%}
 .dolphin{width:130px;height:130px;background:#74c0fc;bottom:25%;right:10%}
 
-/* CENTERED LAYOUT */
 .credits-wrap{
   max-width:1200px;
   width:100%;
   display:grid;
-  grid-template-columns:1fr 1.2fr 1fr;
+  grid-template-columns:1fr 1.3fr 1fr;
   align-items:center;
 }
 
@@ -203,6 +208,7 @@ h1{
   width:210px;height:150px;
   background:#9fd8b0;border-radius:50%;
   position:relative;
+  opacity:.45; /* 🔽 reduced kiwi opacity */
 }
 .kiwi::before{
   content:"";
@@ -217,12 +223,11 @@ h1{
   position:absolute;top:68px;left:-16px;
 }
 
-/* paragraph CENTER */
+/* paragraph */
 .brand-story{
   font-size:17px;
   line-height:1.9;
   color:#5a4a4a;
-  text-align:left;
 }
 
 /* ---------- ANIMATIONS ---------- */
@@ -259,6 +264,7 @@ h1{
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
     <div class="art">
@@ -284,6 +290,7 @@ h1{
   <a href="#donate" class="scroll-btn">🥝</a>
 </section>
 
+<!-- DONATION -->
 <section id="donate" class="donate">
   <div class="fruit apple"></div>
   <div class="fruit banana"></div>
@@ -291,6 +298,7 @@ h1{
   <h2>We proudly donate part of our profits to improve maternal and child nutrition 💛</h2>
 </section>
 
+<!-- CREDITS -->
 <section class="credits">
 
   <div class="bg-animal penguin"></div>
@@ -303,13 +311,16 @@ h1{
 
     <div class="brand-story">
       Every Kit’n Kiwi piece is crafted using premium cotton and soft wool,
-      chosen for breathability, comfort, and lasting quality.
-      Our designs are intentionally elegant yet playful,
-      created to move gently with a child’s world.
-      We use child-safe, non-toxic dyes that are kind to delicate skin
-      and durable enough for everyday adventures.
-      From fabric selection to final stitching,
-      every detail is thoughtfully designed with care, safety, and love.
+      carefully selected for softness, breathability, and long-lasting comfort.
+      Our designs balance timeless elegance with playful expression,
+      allowing children to feel free while looking effortlessly refined.
+      We use child-safe, non-toxic dyes that respect sensitive skin
+      and maintain their beauty through countless washes.
+      Each garment is thoughtfully constructed to support natural movement,
+      everyday adventures, and gentle moments alike.
+      From yarn selection to finishing touches,
+      quality, safety, and care guide every decision we make.
+      Because what children wear should feel as good as it looks.
     </div>
 
     <div></div>
