@@ -142,6 +142,7 @@ h1{
   color:#3a2f2f;
 }
 
+/* 🥝 SCROLL BUTTON */
 .scroll-btn{
   position:absolute;
   bottom:20px;
@@ -178,7 +179,6 @@ h1{
   opacity:.75;
 }
 
-/* 🍌 banana – slightly increased */
 .banana{
   width:160px;height:65px;
   background:#ffd966;
@@ -187,7 +187,6 @@ h1{
   opacity:.6;
 }
 
-/* 🍊 orange – decreased */
 .orange{
   width:130px;height:130px;
   background:#ffb703;
@@ -255,7 +254,7 @@ h1{
   *{animation:none!important}
 }
 
-/* ---------- MOBILE ---------- */
+/* ---------- MOBILE FIX (ONLY CHANGE) ---------- */
 @media(max-width:768px){
   section{padding:40px 6%}
   .container{flex-direction:column}
@@ -272,6 +271,11 @@ h1{
   .brand-story{
     font-size:16px;
     line-height:1.85;
+  }
+
+  /* 🥝 FIX: move scroll button down so it doesn't overlap CTA */
+  .scroll-btn{
+    bottom:10px;
   }
 }
 </style>
