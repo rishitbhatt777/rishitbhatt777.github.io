@@ -16,165 +16,143 @@ body{
   color:#3a2f2f;
 }
 
-/* ---------- SECTION BASE ---------- */
+/* ---------- BASE ---------- */
 section{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:60px 10%;
+  padding:60px 8%;
   position:relative;
   overflow:hidden;
 }
 
-/* ---------- HERO SECTION ---------- */
+/* ---------- HERO ---------- */
 .hero{
   background:linear-gradient(135deg,#fff6dc,#fce1ec);
 }
 
 .container{
-  width:100%;
   max-width:1200px;
+  width:100%;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-/* 🧸 ART */
+/* ---------- ART ---------- */
 .art{
   position:relative;
   width:45%;
-  height:500px;
+  height:460px;
 }
 
 .blob{
   position:absolute;
-  width:360px;
-  height:360px;
+  width:300px;
+  height:300px;
   background:#cceeff;
   border-radius:50% 45% 55% 50%;
   top:40px;
   left:40px;
-  animation:float 6s ease-in-out infinite;
+  transform:translateZ(0);
 }
 
 /* BEAR */
 .bear{
   position:absolute;
-  width:220px;
-  height:220px;
+  width:190px;
+  height:190px;
   background:#c49a6c;
   border-radius:50%;
-  top:160px;
+  top:150px;
   left:120px;
-  z-index:3;
 }
 
 .bear::before,.bear::after{
   content:"";
   position:absolute;
-  width:65px;
-  height:65px;
+  width:55px;
+  height:55px;
   background:#c49a6c;
   border-radius:50%;
-  top:-30px;
+  top:-25px;
 }
-.bear::before{left:15px}
-.bear::after{right:15px}
+.bear::before{left:10px}
+.bear::after{right:10px}
 
 .eye{
-  position:absolute;
-  width:12px;
-  height:12px;
-  background:#000;
-  border-radius:50%;
-  top:90px;
+  width:10px;height:10px;background:#000;border-radius:50%;
+  position:absolute;top:78px;
 }
-.eye.left{left:75px}
-.eye.right{right:75px}
+.eye.left{left:60px}
+.eye.right{right:60px}
 
 .nose{
-  position:absolute;
-  width:28px;
-  height:20px;
-  background:#5c3b23;
-  border-radius:50%;
-  top:120px;
-  left:50%;
-  transform:translateX(-50%);
+  width:22px;height:16px;background:#5c3b23;border-radius:50%;
+  position:absolute;top:102px;left:50%;transform:translateX(-50%);
 }
 
 .hand{
-  position:absolute;
-  width:70px;
-  height:70px;
-  background:#c49a6c;
-  border-radius:50%;
-  top:160px;
-  right:-40px;
+  width:55px;height:55px;background:#c49a6c;border-radius:50%;
+  position:absolute;top:135px;right:-32px;
   transform-origin:bottom left;
-  animation:wave 2s ease-in-out infinite;
+  animation:wave 3s ease-in-out infinite;
 }
 
-/* OTHER ANIMALS */
-.cat{width:90px;height:90px;background:#ffb3c6;position:absolute;top:90px;right:40px;border-radius:50%}
-.monkey{width:80px;height:80px;background:#d8a47f;position:absolute;bottom:80px;left:20px;border-radius:50%}
-.elephant{width:110px;height:110px;background:#b8c6e6;position:absolute;bottom:40px;right:60px;border-radius:50%}
+/* OTHER ANIMALS (STATIC FOR PERF) */
+.cat,.monkey,.elephant{
+  position:absolute;border-radius:50%;opacity:.65;
+}
+.cat{width:70px;height:70px;background:#ffb3c6;top:60px;right:30px}
+.monkey{width:65px;height:65px;background:#d8a47f;bottom:60px;left:20px}
+.elephant{width:85px;height:85px;background:#b8c6e6;bottom:40px;right:40px}
 
-/* TEXT */
+/* ---------- TEXT ---------- */
 .content{width:45%}
 
 h1{
   font-family:'Baloo 2',cursive;
-  font-size:120px;
-  line-height:0.9;
+  font-size:108px;
+  line-height:.9;
   color:#ff6f91;
 }
 
 .slogan{
-  margin-top:25px;
+  margin-top:18px;
   font-size:18px;
-  letter-spacing:4px;
+  letter-spacing:3px;
 }
 
-/* 🛒 STORE CTA */
+/* CTA */
 .store-cta{
-  margin-top:22px;
+  margin-top:20px;
   display:inline-flex;
-  align-items:center;
   gap:10px;
-  font-size:16px;
+  align-items:center;
   background:#fff;
   padding:12px 22px;
   border-radius:40px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-  animation:bounceSoft 2s infinite;
-  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
   text-decoration:none;
   color:#3a2f2f;
 }
 
-.store-cta span{font-size:20px}
-
-/* 🥝 KIWI SCROLL BUTTON */
+/* SCROLL BUTTON */
 .scroll-btn{
   position:absolute;
-  bottom:30px;
+  bottom:20px;
   left:50%;
   transform:translateX(-50%);
-  width:70px;
-  height:50px;
+  width:56px;height:42px;
   background:#9fd8b0;
   border-radius:50%;
-  text-align:center;
-  line-height:50px;
-  font-weight:600;
-  color:#2f4f3f;
-  cursor:pointer;
-  animation:bounce 2s infinite;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* ---------- DONATION SECTION ---------- */
+/* ---------- DONATION ---------- */
 .donate{
   background:#fff;
   text-align:center;
@@ -182,97 +160,77 @@ h1{
 
 .donate h2{
   font-family:'Baloo 2',cursive;
-  font-size:48px;
+  font-size:40px;
   color:#ff6f91;
-  max-width:900px;
+  max-width:880px;
 }
 
-/* 🍎🍌🍊 FRUITS */
-.fruit{
-  position:absolute;
-  border-radius:50%;
-  animation:float 5s ease-in-out infinite;
-  opacity:.9;
-}
-.apple{width:130px;height:130px;background:#ff6f6f;top:22%;left:12%}
-.banana{width:180px;height:80px;background:#ffd966;border-radius:80px;bottom:28%;left:18%}
-.orange{width:140px;height:140px;background:#ffb703;top:30%;right:14%}
+/* FRUITS (STATIC) */
+.fruit{position:absolute;border-radius:50%;opacity:.7}
+.apple{width:110px;height:110px;background:#ff6f6f;top:25%;left:10%}
+.banana{width:150px;height:65px;background:#ffd966;border-radius:65px;bottom:30%;left:20%}
+.orange{width:120px;height:120px;background:#ffb703;top:30%;right:12%}
 
-/* ---------- CREDITS SECTION ---------- */
-.credits{
-  background:#fce1ec;
-}
+/* ---------- CREDITS ---------- */
+.credits{background:#fce1ec}
 
 .credits-wrap{
-  width:100%;
   max-width:1200px;
+  width:100%;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
-/* 🥝 KIWI */
 .kiwi{
-  width:240px;
-  height:180px;
-  background:#9fd8b0;
-  border-radius:50%;
+  width:210px;height:150px;
+  background:#9fd8b0;border-radius:50%;
   position:relative;
-  animation:float 6s ease-in-out infinite;
 }
 
 .kiwi::before{
-  content:"";
-  position:absolute;
-  width:20px;
-  height:20px;
-  background:#000;
-  border-radius:50%;
-  top:55px;
-  left:70px;
+  content:"";width:16px;height:16px;background:#000;border-radius:50%;
+  position:absolute;top:48px;left:58px;
 }
-
 .kiwi::after{
-  content:"";
-  position:absolute;
-  width:40px;
-  height:14px;
-  background:#ffb703;
-  border-radius:10px;
-  top:75px;
-  left:-20px;
+  content:"";width:34px;height:12px;background:#ffb703;border-radius:10px;
+  position:absolute;top:68px;left:-16px;
 }
 
 .credit-text p{
-  font-size:20px;
-  margin:15px 0;
+  font-size:18px;
+  margin:12px 0;
   letter-spacing:2px;
 }
 
 /* ---------- ANIMATIONS ---------- */
-@keyframes float{50%{transform:translateY(-20px)}}
-@keyframes wave{50%{transform:rotate(20deg)}}
-@keyframes bounce{
-  0%,100%{transform:translate(-50%,0)}
-  50%{transform:translate(-50%,-15px)}
-}
-@keyframes bounceSoft{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
+@keyframes wave{
+  0%,100%{transform:rotate(0deg)}
+  50%{transform:rotate(15deg)}
 }
 
-/* MOBILE */
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important}
+}
+
+/* ---------- MOBILE ---------- */
 @media(max-width:768px){
-.container,.credits-wrap{flex-direction:column;text-align:center}
-.art,.content{width:100%}
-h1{font-size:78px}
+  section{padding:40px 6%}
+  .container,.credits-wrap{flex-direction:column}
+  .art,.content{width:100%}
+  .art{height:360px}
+  h1{font-size:72px;text-align:center}
+  .content{text-align:center}
+  .blob,.bear{left:50%;transform:translateX(-50%)}
+  .donate h2{font-size:28px}
+  .kiwi{margin-bottom:24px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container">
 
@@ -293,31 +251,20 @@ h1{font-size:78px}
     <div class="content">
       <h1>Kit’n<br>Kiwi</h1>
       <div class="slogan">MADE FOR LITTLE HEARTS</div>
-
-      <!-- STORE CTA -->
-      <a href="coming-soon.html" class="store-cta">
-        <span>🛒</span> Tap to go store
-      </a>
+      <a href="coming-soon.html" class="store-cta">🛒 Tap to go store</a>
     </div>
 
   </div>
-
   <a href="#donate" class="scroll-btn">🥝</a>
 </section>
 
-<!-- DONATION -->
 <section id="donate" class="donate">
   <div class="fruit apple"></div>
   <div class="fruit banana"></div>
   <div class="fruit orange"></div>
-
-  <h2>
-    We proudly donate part of our profits to improve  
-    maternal and child nutrition 💛
-  </h2>
+  <h2>We proudly donate part of our profits to improve maternal and child nutrition 💛</h2>
 </section>
 
-<!-- CREDITS -->
 <section class="credits">
   <div class="credits-wrap">
     <div class="kiwi"></div>
