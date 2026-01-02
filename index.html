@@ -18,6 +18,7 @@ body{
   align-items:center;
   justify-content:center;
   color:#3a2f2f;
+  overflow:hidden;
 }
 
 .container{
@@ -32,31 +33,31 @@ body{
 .art{
   position:relative;
   width:45%;
-  height:450px;
+  height:480px;
 }
 
 /* background blob */
 .blob{
   position:absolute;
-  width:320px;
-  height:320px;
+  width:340px;
+  height:340px;
   background:#cceeff;
   border-radius:50% 45% 55% 50%;
   animation:float 6s ease-in-out infinite;
 }
 
-/* 🧸 BEAR */
+/* 🧸 MAIN BEAR */
 .bear{
   position:absolute;
-  width:200px;
-  height:200px;
+  width:210px;
+  height:210px;
   background:#c49a6c;
   border-radius:50%;
-  top:120px;
+  top:140px;
   left:80px;
+  z-index:2;
 }
 
-/* ears */
 .bear::before,
 .bear::after{
   content:"";
@@ -67,29 +68,27 @@ body{
   border-radius:50%;
   top:-25px;
 }
-.bear::before{left:10px}
-.bear::after{right:10px}
+.bear::before{left:15px}
+.bear::after{right:15px}
 
-/* eyes */
 .eye{
   position:absolute;
   width:10px;
   height:10px;
   background:#000;
   border-radius:50%;
-  top:80px;
+  top:85px;
 }
-.eye.left{left:65px}
-.eye.right{right:65px}
+.eye.left{left:70px}
+.eye.right{right:70px}
 
-/* nose */
 .nose{
   position:absolute;
-  width:24px;
+  width:26px;
   height:18px;
   background:#5c3b23;
   border-radius:50%;
-  top:105px;
+  top:112px;
   left:50%;
   transform:translateX(-50%);
 }
@@ -101,13 +100,36 @@ body{
   height:70px;
   background:#c49a6c;
   border-radius:50%;
-  top:140px;
+  top:150px;
   right:-40px;
   transform-origin:bottom left;
   animation:wave 2s ease-in-out infinite;
 }
 
-/* TEXT SIDE */
+/* 🐰 BACKGROUND ANIMALS */
+.bunny,
+.cat{
+  position:absolute;
+  background:#ffd6e8;
+  border-radius:50%;
+  opacity:.7;
+}
+
+.bunny{
+  width:90px;
+  height:90px;
+  bottom:40px;
+  left:10px;
+}
+
+.cat{
+  width:70px;
+  height:70px;
+  top:60px;
+  right:40px;
+}
+
+/* TEXT */
 .content{
   width:45%;
 }
@@ -129,17 +151,6 @@ h1 a:hover{
 .tagline{
   font-size:20px;
   margin-top:25px;
-  color:#5c4a4a;
-}
-
-.tap{
-  margin-top:50px;
-  font-size:16px;
-  background:#fff;
-  display:inline-block;
-  padding:16px 34px;
-  border-radius:50px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.08);
   color:#5c4a4a;
 }
 
@@ -170,6 +181,8 @@ h1 a{font-size:72px}
 
   <div class="art">
     <div class="blob"></div>
+    <div class="bunny"></div>
+    <div class="cat"></div>
 
     <div class="bear">
       <div class="eye left"></div>
@@ -187,8 +200,6 @@ h1 a{font-size:72px}
     <div class="tagline">
       Luxury little looks for happy kids 🧸✨
     </div>
-
-    <div class="tap">✨ Enter the world of Kit’n Kiwi</div>
   </div>
 
 </div>
