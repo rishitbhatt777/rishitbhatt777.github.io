@@ -124,11 +124,10 @@ section{
 /* TEXT */
 .content{width:45%}
 
-h1 a{
+h1{
   font-family:'Baloo 2',cursive;
   font-size:120px;
   line-height:0.9;
-  text-decoration:none;
   color:#ff6f91;
 }
 
@@ -151,11 +150,11 @@ h1 a{
   box-shadow:0 10px 25px rgba(0,0,0,.08);
   animation:bounceSoft 2s infinite;
   cursor:pointer;
+  text-decoration:none;
+  color:#3a2f2f;
 }
 
-.store-cta span{
-  font-size:20px;
-}
+.store-cta span{font-size:20px}
 
 /* 🥝 KIWI SCROLL BUTTON */
 .scroll-btn{
@@ -266,7 +265,7 @@ h1 a{
 @media(max-width:768px){
 .container,.credits-wrap{flex-direction:column;text-align:center}
 .art,.content{width:100%}
-h1 a{font-size:78px}
+h1{font-size:78px}
 }
 </style>
 </head>
@@ -292,13 +291,13 @@ h1 a{font-size:78px}
     </div>
 
     <div class="content">
-      <h1><a href="coming-soon.html">Kit’n<br>Kiwi</a></h1>
+      <h1>Kit’n<br>Kiwi</h1>
       <div class="slogan">MADE FOR LITTLE HEARTS</div>
 
       <!-- STORE CTA -->
-      <div class="store-cta">
+      <a href="coming-soon.html" class="store-cta">
         <span>🛒</span> Tap to go store
-      </div>
+      </a>
     </div>
 
   </div>
