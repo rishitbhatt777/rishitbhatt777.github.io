@@ -23,12 +23,13 @@ section{
   align-items:center;
   justify-content:center;
   padding:60px 10%;
+  position:relative;
+  overflow:hidden;
 }
 
 /* ---------- HERO SECTION ---------- */
 .hero{
   background:linear-gradient(135deg,#fff6dc,#fce1ec);
-  overflow:hidden;
 }
 
 .container{
@@ -165,16 +166,73 @@ h1 a{
   font-family:'Baloo 2',cursive;
   font-size:48px;
   color:#ff6f91;
-  max-width:800px;
+  max-width:900px;
+  z-index:2;
 }
+
+/* 🍎🍌🍊 FRUITS */
+.fruit{
+  position:absolute;
+  border-radius:50%;
+  animation:float 5s ease-in-out infinite;
+  opacity:.9;
+}
+
+.apple{width:130px;height:130px;background:#ff6f6f;top:22%;left:12%}
+.banana{width:180px;height:80px;background:#ffd966;border-radius:80px;bottom:28%;left:18%}
+.orange{width:140px;height:140px;background:#ffb703;top:30%;right:14%}
 
 /* ---------- CREDITS SECTION ---------- */
 .credits{
   background:#fce1ec;
-  text-align:center;
 }
 
-.credits p{
+.credits-wrap{
+  width:100%;
+  max-width:1200px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* 🥝 BIG KIWI BIRD */
+.kiwi{
+  width:240px;
+  height:180px;
+  background:#9fd8b0;
+  border-radius:50%;
+  position:relative;
+  animation:float 6s ease-in-out infinite;
+}
+
+.kiwi::before{
+  content:"";
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#000;
+  border-radius:50%;
+  top:55px;
+  left:70px;
+}
+
+.kiwi::after{
+  content:"";
+  position:absolute;
+  width:40px;
+  height:14px;
+  background:#ffb703;
+  border-radius:10px;
+  top:75px;
+  left:-20px;
+}
+
+/* CREDIT TEXT */
+.credit-text{
+  text-align:left;
+}
+
+.credit-text p{
   font-size:20px;
   margin:15px 0;
   letter-spacing:2px;
@@ -182,7 +240,8 @@ h1 a{
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes float{
-  50%{transform:translateY(-25px)}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
 }
 @keyframes wave{
   50%{transform:rotate(20deg)}
@@ -194,8 +253,9 @@ h1 a{
 
 /* MOBILE */
 @media(max-width:768px){
-.container{flex-direction:column;text-align:center}
+.container,.credits-wrap{flex-direction:column;text-align:center}
 .art,.content{width:100%}
+.credit-text{text-align:center}
 h1 a{font-size:78px}
 }
 </style>
@@ -206,13 +266,11 @@ h1 a{font-size:78px}
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-
     <div class="art">
       <div class="blob"></div>
       <div class="cat"></div>
       <div class="monkey"></div>
       <div class="elephant"></div>
-
       <div class="bear">
         <div class="eye left"></div>
         <div class="eye right"></div>
@@ -225,7 +283,6 @@ h1 a{font-size:78px}
       <h1><a href="coming-soon.html">Kit’n<br>Kiwi</a></h1>
       <div class="slogan">MADE FOR LITTLE HEARTS</div>
     </div>
-
   </div>
 
   <a href="#donate" class="scroll-btn">🥝</a>
@@ -233,6 +290,10 @@ h1 a{font-size:78px}
 
 <!-- DONATION -->
 <section id="donate" class="donate">
+  <div class="fruit apple"></div>
+  <div class="fruit banana"></div>
+  <div class="fruit orange"></div>
+
   <h2>
     We proudly donate part of our profits to improve  
     maternal and child nutrition 💛
@@ -241,10 +302,16 @@ h1 a{font-size:78px}
 
 <!-- CREDITS -->
 <section class="credits">
-  <div>
-    <p>OWNED BY <strong>RISHIT BHATT</strong></p>
-    <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
-    <p>MANAGED BY <strong>PARTH JOSHI</strong></p>
+  <div class="credits-wrap">
+
+    <div class="kiwi"></div>
+
+    <div class="credit-text">
+      <p>OWNED BY <strong>RISHIT BHATT</strong></p>
+      <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
+      <p>MANAGED BY <strong>PARTH JOSHI</strong></p>
+    </div>
+
   </div>
 </section>
 
