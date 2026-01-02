@@ -47,7 +47,6 @@ section{
   height:500px;
 }
 
-/* BACKGROUND BLOB */
 .blob{
   position:absolute;
   width:360px;
@@ -121,42 +120,6 @@ section{
 .cat{width:90px;height:90px;background:#ffb3c6;position:absolute;top:90px;right:40px;border-radius:50%}
 .monkey{width:80px;height:80px;background:#d8a47f;position:absolute;bottom:80px;left:20px;border-radius:50%}
 .elephant{width:110px;height:110px;background:#b8c6e6;position:absolute;bottom:40px;right:60px;border-radius:50%}
-
-/* 🌴 PALM TREE */
-.palm{
-  position:absolute;
-  right:-120px;
-  bottom:0;
-  width:180px;
-  height:420px;
-}
-
-.trunk{
-  position:absolute;
-  bottom:0;
-  left:80px;
-  width:24px;
-  height:300px;
-  background:#c68642;
-  border-radius:12px;
-}
-
-.leaf{
-  position:absolute;
-  width:160px;
-  height:20px;
-  background:#6bcf9c;
-  border-radius:20px;
-  top:40px;
-  left:20px;
-  transform-origin:left center;
-  animation:sway 4s ease-in-out infinite;
-}
-
-.leaf:nth-child(2){transform:rotate(30deg);top:60px}
-.leaf:nth-child(3){transform:rotate(-30deg);top:60px}
-.leaf:nth-child(4){transform:rotate(60deg);top:80px}
-.leaf:nth-child(5){transform:rotate(-60deg);top:80px}
 
 /* TEXT */
 .content{width:45%}
@@ -232,7 +195,7 @@ h1 a{
   justify-content:space-between;
 }
 
-/* 🥝 KIWI BIRD */
+/* 🥝 BIG KIWI BIRD */
 .kiwi{
   width:240px;
   height:180px;
@@ -264,6 +227,11 @@ h1 a{
   left:-20px;
 }
 
+/* CREDIT TEXT */
+.credit-text{
+  text-align:left;
+}
+
 .credit-text p{
   font-size:20px;
   margin:15px 0;
@@ -278,9 +246,6 @@ h1 a{
 @keyframes wave{
   50%{transform:rotate(20deg)}
 }
-@keyframes sway{
-  50%{transform:rotate(5deg)}
-}
 @keyframes bounce{
   0%,100%{transform:translate(-50%,0)}
   50%{transform:translate(-50%,-15px)}
@@ -290,8 +255,8 @@ h1 a{
 @media(max-width:768px){
 .container,.credits-wrap{flex-direction:column;text-align:center}
 .art,.content{width:100%}
+.credit-text{text-align:center}
 h1 a{font-size:78px}
-.palm{display:none}
 }
 </style>
 </head>
@@ -301,27 +266,16 @@ h1 a{font-size:78px}
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-
     <div class="art">
       <div class="blob"></div>
       <div class="cat"></div>
       <div class="monkey"></div>
       <div class="elephant"></div>
-
       <div class="bear">
         <div class="eye left"></div>
         <div class="eye right"></div>
         <div class="nose"></div>
         <div class="hand"></div>
-      </div>
-
-      <!-- 🌴 PALM TREE -->
-      <div class="palm">
-        <div class="trunk"></div>
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-        <div class="leaf"></div>
-        <div class="leaf"></div>
       </div>
     </div>
 
@@ -329,7 +283,6 @@ h1 a{font-size:78px}
       <h1><a href="coming-soon.html">Kit’n<br>Kiwi</a></h1>
       <div class="slogan">MADE FOR LITTLE HEARTS</div>
     </div>
-
   </div>
 
   <a href="#donate" class="scroll-btn">🥝</a>
