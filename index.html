@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kit’n Kiwi</title>
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
@@ -19,7 +18,7 @@ body{
   color:#3a2f2f;
 }
 
-/* ---------- BASE SECTION ---------- */
+/* ---------- BASE ---------- */
 section{
   min-height:100vh;
   display:flex;
@@ -50,7 +49,6 @@ section{
   height:460px;
 }
 
-/* blob */
 .blob{
   position:absolute;
   width:300px;
@@ -131,7 +129,6 @@ h1{
   letter-spacing:3px;
 }
 
-/* CTA */
 .store-cta{
   margin-top:20px;
   display:inline-flex;
@@ -145,7 +142,6 @@ h1{
   color:#3a2f2f;
 }
 
-/* scroll button */
 .scroll-btn{
   position:absolute;
   bottom:20px;
@@ -178,14 +174,11 @@ h1{
 .banana{width:160px;height:65px;background:#ffd966;border-radius:65px;bottom:30%;left:20%}
 .orange{width:130px;height:130px;background:#ffb703;top:30%;right:12%}
 
-/* ---------- CREDITS ---------- */
+/* ---------- CREDITS (FIXED) ---------- */
 .credits{
   background:#fce1ec;
-  align-items:flex-end;
-  padding-bottom:50px;
 }
 
-/* background animals */
 .bg-animal{
   position:absolute;
   border-radius:50%;
@@ -196,13 +189,13 @@ h1{
 .tiger{width:140px;height:140px;background:#ff9f43;bottom:22%;left:16%}
 .dolphin{width:130px;height:130px;background:#74c0fc;bottom:25%;right:10%}
 
+/* CENTERED LAYOUT */
 .credits-wrap{
   max-width:1200px;
   width:100%;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:60px;
+  display:grid;
+  grid-template-columns:1fr 1.2fr 1fr;
+  align-items:center;
 }
 
 /* kiwi */
@@ -224,12 +217,12 @@ h1{
   position:absolute;top:68px;left:-16px;
 }
 
-/* 🔥 PREMIUM PARAGRAPH (UPDATED SIZE) */
+/* paragraph CENTER */
 .brand-story{
-  max-width:440px;
-  font-size:17px;      /* increased */
-  line-height:1.9;     /* more breathable */
+  font-size:17px;
+  line-height:1.9;
   color:#5a4a4a;
+  text-align:left;
 }
 
 /* ---------- ANIMATIONS ---------- */
@@ -238,7 +231,6 @@ h1{
   50%{transform:rotate(15deg)}
 }
 
-/* reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important}
 }
@@ -246,21 +238,20 @@ h1{
 /* ---------- MOBILE ---------- */
 @media(max-width:768px){
   section{padding:40px 6%}
-  .container,.credits-wrap{flex-direction:column}
+  .container{flex-direction:column}
   .art,.content{width:100%}
-  .art{height:360px}
   h1{font-size:72px;text-align:center}
   .content{text-align:center}
   .blob,.bear{left:50%;transform:translateX(-50%)}
   .donate h2{font-size:28px}
-  .bg-animal{opacity:.06}
-  .kiwi{margin-bottom:20px}
-
-  /* paragraph mobile size */
+  .credits-wrap{
+    grid-template-columns:1fr;
+    gap:30px;
+    text-align:center;
+  }
   .brand-story{
     font-size:16px;
     line-height:1.85;
-    text-align:center;
   }
 }
 </style>
@@ -268,10 +259,8 @@ h1{
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container">
-
     <div class="art">
       <div class="blob"></div>
       <div class="cat"></div>
@@ -290,12 +279,11 @@ h1{
       <div class="slogan">MADE FOR LITTLE HEARTS</div>
       <a href="coming-soon.html" class="store-cta">🛒 Tap to go store</a>
     </div>
-
   </div>
+
   <a href="#donate" class="scroll-btn">🥝</a>
 </section>
 
-<!-- DONATION -->
 <section id="donate" class="donate">
   <div class="fruit apple"></div>
   <div class="fruit banana"></div>
@@ -303,7 +291,6 @@ h1{
   <h2>We proudly donate part of our profits to improve maternal and child nutrition 💛</h2>
 </section>
 
-<!-- CREDITS -->
 <section class="credits">
 
   <div class="bg-animal penguin"></div>
@@ -312,7 +299,6 @@ h1{
   <div class="bg-animal dolphin"></div>
 
   <div class="credits-wrap">
-
     <div class="kiwi"></div>
 
     <div class="brand-story">
@@ -326,6 +312,7 @@ h1{
       every detail is thoughtfully designed with care, safety, and love.
     </div>
 
+    <div></div>
   </div>
 
 </section>
