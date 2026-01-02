@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kit’n Kiwi — Coming Soon</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -17,22 +19,26 @@ body{
   color:#3a2f2f;
 }
 
-/* HERO */
-.hero{
+/* SECTION */
+section{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
+  padding:60px 8%;
 }
 
+/* CARD */
 .card{
   background:#fff;
   padding:70px 60px;
   border-radius:45px;
-  max-width:540px;
+  box-shadow:0 18px 0 #ff9aa2;
+  max-width:560px;
 }
 
+/* COMING SOON */
 .badge{
   font-family:'Baloo 2',cursive;
   font-size:56px;
@@ -40,42 +46,89 @@ body{
   color:#fff;
   padding:22px 48px;
   border-radius:60px;
+  margin-bottom:30px;
+  display:inline-block;
 }
 
 h1{
-  margin-top:25px;
   font-family:'Baloo 2',cursive;
   font-size:66px;
   color:#ff6f91;
 }
 
-/* FOOTER */
-.footer{
-  min-height:100vh;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  padding-bottom:50px;
+.message{
+  font-size:18px;
+  margin:25px 0 40px;
 }
 
-.footer p{
+/* CONTACT */
+.contact{
   font-size:16px;
+  line-height:2;
+}
+
+.contact a{
+  color:#ff6f91;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* SCROLL DOWN */
+.scroll-down{
+  margin-top:50px;
+  font-size:14px;
+  opacity:.6;
+}
+
+/* ---------- CREDITS FOOTER ---------- */
+.credits{
+  background:#fff;
+  text-align:center;
+}
+
+.credits p{
+  font-size:15px;
   letter-spacing:2px;
-  margin:10px 0;
+  margin:14px 0;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .badge{font-size:42px}
+  h1{font-size:52px}
 }
 </style>
 </head>
 
 <body>
 
-<section class="hero">
+<!-- MAIN -->
+<section>
   <div class="card">
+
     <div class="badge">COMING SOON</div>
+
     <h1>Kit’n Kiwi</h1>
+
+    <div class="message">
+      We’re crafting something magical for little ones.  
+      Our luxury kidswear collection is almost here ✨
+    </div>
+
+    <div class="contact">
+      📷 Instagram:
+      <a href="https://instagram.com/rishit_bhxtt" target="_blank">@rishit_bhxtt</a><br>
+      📧 Email:
+      <a href="mailto:rishitbhatt777@gmail.com">rishitbhatt777@gmail.com</a>
+    </div>
+
+    <div class="scroll-down">Scroll ↓</div>
+
   </div>
 </section>
 
-<section class="footer">
+<!-- CREDITS -->
+<section class="credits">
   <div>
     <p>OWNED BY <strong>RISHIT BHATT</strong></p>
     <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
