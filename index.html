@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kit’n Kiwi</title>
 
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -16,7 +19,7 @@ body{
   color:#3a2f2f;
 }
 
-/* ---------- BASE ---------- */
+/* ---------- BASE SECTION ---------- */
 section{
   min-height:100vh;
   display:flex;
@@ -47,6 +50,7 @@ section{
   height:460px;
 }
 
+/* blob */
 .blob{
   position:absolute;
   width:300px;
@@ -55,7 +59,6 @@ section{
   border-radius:50% 45% 55% 50%;
   top:40px;
   left:40px;
-  transform:translateZ(0);
 }
 
 /* BEAR */
@@ -82,27 +85,31 @@ section{
 .bear::after{right:10px}
 
 .eye{
-  width:10px;height:10px;background:#000;border-radius:50%;
+  width:10px;height:10px;
+  background:#000;border-radius:50%;
   position:absolute;top:78px;
 }
 .eye.left{left:60px}
 .eye.right{right:60px}
 
 .nose{
-  width:22px;height:16px;background:#5c3b23;border-radius:50%;
-  position:absolute;top:102px;left:50%;transform:translateX(-50%);
+  width:22px;height:16px;
+  background:#5c3b23;border-radius:50%;
+  position:absolute;top:102px;left:50%;
+  transform:translateX(-50%);
 }
 
 .hand{
-  width:55px;height:55px;background:#c49a6c;border-radius:50%;
+  width:55px;height:55px;
+  background:#c49a6c;border-radius:50%;
   position:absolute;top:135px;right:-32px;
   transform-origin:bottom left;
   animation:wave 3s ease-in-out infinite;
 }
 
-/* OTHER ANIMALS (STATIC FOR PERF) */
+/* small animals */
 .cat,.monkey,.elephant{
-  position:absolute;border-radius:50%;opacity:.65;
+  position:absolute;border-radius:50%;opacity:.6;
 }
 .cat{width:70px;height:70px;background:#ffb3c6;top:60px;right:30px}
 .monkey{width:65px;height:65px;background:#d8a47f;bottom:60px;left:20px}
@@ -128,8 +135,8 @@ h1{
 .store-cta{
   margin-top:20px;
   display:inline-flex;
-  gap:10px;
   align-items:center;
+  gap:10px;
   background:#fff;
   padding:12px 22px;
   border-radius:40px;
@@ -138,7 +145,7 @@ h1{
   color:#3a2f2f;
 }
 
-/* SCROLL BUTTON */
+/* scroll button */
 .scroll-btn{
   position:absolute;
   bottom:20px;
@@ -165,41 +172,74 @@ h1{
   max-width:880px;
 }
 
-/* FRUITS (STATIC) */
-.fruit{position:absolute;border-radius:50%;opacity:.7}
-.apple{width:110px;height:110px;background:#ff6f6f;top:25%;left:10%}
-.banana{width:150px;height:65px;background:#ffd966;border-radius:65px;bottom:30%;left:20%}
-.orange{width:120px;height:120px;background:#ffb703;top:30%;right:12%}
+/* fruits */
+.fruit{position:absolute;border-radius:50%;opacity:.75}
+.apple{width:120px;height:120px;background:#ff6f6f;top:25%;left:10%}
+.banana{width:160px;height:65px;background:#ffd966;border-radius:65px;bottom:30%;left:20%}
+.orange{width:130px;height:130px;background:#ffb703;top:30%;right:12%}
 
 /* ---------- CREDITS ---------- */
-.credits{background:#fce1ec}
+.credits{
+  background:#fce1ec;
+  align-items:flex-end;
+  padding-bottom:50px;
+}
+
+/* background animals */
+.bg-animal{
+  position:absolute;
+  border-radius:50%;
+  opacity:.12;
+}
+.penguin{width:100px;height:100px;background:#2f2f2f;top:20%;left:8%}
+.giraffe{width:120px;height:120px;background:#e6b566;top:15%;right:12%}
+.tiger{width:140px;height:140px;background:#ff9f43;bottom:22%;left:16%}
+.dolphin{width:130px;height:130px;background:#74c0fc;bottom:25%;right:10%}
 
 .credits-wrap{
   max-width:1200px;
   width:100%;
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
+  gap:60px;
 }
 
+/* kiwi */
 .kiwi{
   width:210px;height:150px;
   background:#9fd8b0;border-radius:50%;
   position:relative;
 }
-
 .kiwi::before{
-  content:"";width:16px;height:16px;background:#000;border-radius:50%;
+  content:"";
+  width:16px;height:16px;
+  background:#000;border-radius:50%;
   position:absolute;top:48px;left:58px;
 }
 .kiwi::after{
-  content:"";width:34px;height:12px;background:#ffb703;border-radius:10px;
+  content:"";
+  width:34px;height:12px;
+  background:#ffb703;border-radius:10px;
   position:absolute;top:68px;left:-16px;
 }
 
+/* premium paragraph */
+.brand-story{
+  max-width:420px;
+  font-size:15px;
+  line-height:1.8;
+  color:#5a4a4a;
+}
+
+/* credits text */
+.credit-text{
+  align-self:flex-end;
+}
+
 .credit-text p{
-  font-size:18px;
-  margin:12px 0;
+  font-size:16px;
+  margin:10px 0;
   letter-spacing:2px;
 }
 
@@ -209,7 +249,7 @@ h1{
   50%{transform:rotate(15deg)}
 }
 
-/* ---------- REDUCED MOTION ---------- */
+/* reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important}
 }
@@ -224,13 +264,16 @@ h1{
   .content{text-align:center}
   .blob,.bear{left:50%;transform:translateX(-50%)}
   .donate h2{font-size:28px}
-  .kiwi{margin-bottom:24px}
+  .bg-animal{opacity:.06}
+  .kiwi{margin-bottom:20px}
+  .brand-story{text-align:center}
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
 
@@ -239,7 +282,6 @@ h1{
       <div class="cat"></div>
       <div class="monkey"></div>
       <div class="elephant"></div>
-
       <div class="bear">
         <div class="eye left"></div>
         <div class="eye right"></div>
@@ -258,6 +300,7 @@ h1{
   <a href="#donate" class="scroll-btn">🥝</a>
 </section>
 
+<!-- DONATION -->
 <section id="donate" class="donate">
   <div class="fruit apple"></div>
   <div class="fruit banana"></div>
@@ -265,15 +308,37 @@ h1{
   <h2>We proudly donate part of our profits to improve maternal and child nutrition 💛</h2>
 </section>
 
+<!-- CREDITS -->
 <section class="credits">
+
+  <div class="bg-animal penguin"></div>
+  <div class="bg-animal giraffe"></div>
+  <div class="bg-animal tiger"></div>
+  <div class="bg-animal dolphin"></div>
+
   <div class="credits-wrap">
+
     <div class="kiwi"></div>
+
+    <div class="brand-story">
+      Every Kit’n Kiwi piece is crafted using premium cotton and soft wool,
+      chosen for breathability, comfort, and lasting quality.
+      Our designs are intentionally elegant yet playful,
+      created to move gently with a child’s world.
+      We use child-safe, non-toxic dyes that are kind to delicate skin
+      and durable enough for everyday adventures.
+      From fabric selection to final stitching,
+      every detail is thoughtfully designed with care, safety, and love.
+    </div>
+
     <div class="credit-text">
       <p>OWNED BY <strong>RISHIT BHATT</strong></p>
       <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
       <p>MANAGED BY <strong>PARTH JOSHI</strong></p>
     </div>
+
   </div>
+
 </section>
 
 </body>
