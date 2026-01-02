@@ -9,34 +9,43 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 
 body{
-  background:linear-gradient(135deg,#fff6dc,#fce1ec);
   font-family:'Fredoka',sans-serif;
-  height:100vh;
+  color:#3a2f2f;
+}
+
+/* ---------- SECTION BASE ---------- */
+section{
+  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#3a2f2f;
+  padding:60px 10%;
+}
+
+/* ---------- HERO SECTION ---------- */
+.hero{
+  background:linear-gradient(135deg,#fff6dc,#fce1ec);
   overflow:hidden;
 }
 
 .container{
-  width:90%;
+  width:100%;
   max-width:1200px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
-/* 🧸 ART AREA */
+/* 🧸 ART */
 .art{
   position:relative;
   width:45%;
   height:500px;
 }
 
-/* background blob */
 .blob{
   position:absolute;
   width:360px;
@@ -48,7 +57,7 @@ body{
   animation:float 6s ease-in-out infinite;
 }
 
-/* 🧸 MAIN BEAR */
+/* BEAR */
 .bear{
   position:absolute;
   width:220px;
@@ -60,8 +69,7 @@ body{
   z-index:3;
 }
 
-.bear::before,
-.bear::after{
+.bear::before,.bear::after{
   content:"";
   position:absolute;
   width:65px;
@@ -95,7 +103,6 @@ body{
   transform:translateX(-50%);
 }
 
-/* waving hand */
 .hand{
   position:absolute;
   width:70px;
@@ -108,46 +115,13 @@ body{
   animation:wave 2s ease-in-out infinite;
 }
 
-/* 🐱 CAT */
-.cat{
-  position:absolute;
-  width:90px;
-  height:90px;
-  background:#ffb3c6;
-  border-radius:50%;
-  top:90px;
-  right:40px;
-  opacity:.85;
-}
-
-/* 🐵 MONKEY */
-.monkey{
-  position:absolute;
-  width:80px;
-  height:80px;
-  background:#d8a47f;
-  border-radius:50%;
-  bottom:80px;
-  left:20px;
-  opacity:.85;
-}
-
-/* 🐘 ELEPHANT */
-.elephant{
-  position:absolute;
-  width:110px;
-  height:110px;
-  background:#b8c6e6;
-  border-radius:50%;
-  bottom:40px;
-  right:60px;
-  opacity:.85;
-}
+/* OTHER ANIMALS */
+.cat{width:90px;height:90px;background:#ffb3c6;position:absolute;top:90px;right:40px;border-radius:50%}
+.monkey{width:80px;height:80px;background:#d8a47f;position:absolute;bottom:80px;left:20px;border-radius:50%}
+.elephant{width:110px;height:110px;background:#b8c6e6;position:absolute;bottom:40px;right:60px;border-radius:50%}
 
 /* TEXT */
-.content{
-  width:45%;
-}
+.content{width:45%}
 
 h1 a{
   font-family:'Baloo 2',cursive;
@@ -155,65 +129,124 @@ h1 a{
   line-height:0.9;
   text-decoration:none;
   color:#ff6f91;
-  display:inline-block;
 }
 
 .slogan{
   margin-top:30px;
   font-size:18px;
   letter-spacing:4px;
-  color:#6b5a5a;
 }
 
-/* animations */
+/* 🥝 KIWI SCROLL BUTTON */
+.scroll-btn{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:70px;
+  height:50px;
+  background:#9fd8b0;
+  border-radius:50%;
+  text-align:center;
+  line-height:50px;
+  font-weight:600;
+  color:#2f4f3f;
+  cursor:pointer;
+  animation:bounce 2s infinite;
+}
+
+/* ---------- DONATION SECTION ---------- */
+.donate{
+  background:#fff;
+  text-align:center;
+}
+
+.donate h2{
+  font-family:'Baloo 2',cursive;
+  font-size:48px;
+  color:#ff6f91;
+  max-width:800px;
+}
+
+/* ---------- CREDITS SECTION ---------- */
+.credits{
+  background:#fce1ec;
+  text-align:center;
+}
+
+.credits p{
+  font-size:20px;
+  margin:15px 0;
+  letter-spacing:2px;
+}
+
+/* ---------- ANIMATIONS ---------- */
 @keyframes float{
-  0%,100%{transform:translateY(0)}
   50%{transform:translateY(-25px)}
 }
-
 @keyframes wave{
-  0%{transform:rotate(0deg)}
   50%{transform:rotate(20deg)}
-  100%{transform:rotate(0deg)}
+}
+@keyframes bounce{
+  0%,100%{transform:translate(-50%,0)}
+  50%{transform:translate(-50%,-15px)}
 }
 
+/* MOBILE */
 @media(max-width:768px){
 .container{flex-direction:column;text-align:center}
 .art,.content{width:100%}
 h1 a{font-size:78px}
-.bear{left:50%;transform:translateX(-50%)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
 
-  <div class="art">
-    <div class="blob"></div>
+    <div class="art">
+      <div class="blob"></div>
+      <div class="cat"></div>
+      <div class="monkey"></div>
+      <div class="elephant"></div>
 
-    <div class="cat"></div>
-    <div class="monkey"></div>
-    <div class="elephant"></div>
-
-    <div class="bear">
-      <div class="eye left"></div>
-      <div class="eye right"></div>
-      <div class="nose"></div>
-      <div class="hand"></div>
+      <div class="bear">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="nose"></div>
+        <div class="hand"></div>
+      </div>
     </div>
+
+    <div class="content">
+      <h1><a href="coming-soon.html">Kit’n<br>Kiwi</a></h1>
+      <div class="slogan">MADE FOR LITTLE HEARTS</div>
+    </div>
+
   </div>
 
-  <div class="content">
-    <h1>
-      <a href="coming-soon.html">Kit’n<br>Kiwi</a>
-    </h1>
+  <a href="#donate" class="scroll-btn">🥝</a>
+</section>
 
-    <div class="slogan">MADE FOR LITTLE HEARTS</div>
+<!-- DONATION -->
+<section id="donate" class="donate">
+  <h2>
+    We proudly donate part of our profits to improve  
+    maternal and child nutrition 💛
+  </h2>
+</section>
+
+<!-- CREDITS -->
+<section class="credits">
+  <div>
+    <p>OWNED BY <strong>RISHIT BHATT</strong></p>
+    <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
+    <p>MANAGED BY <strong>PARTH JOSHI</strong></p>
   </div>
-
-</div>
+</section>
 
 </body>
 </html>
