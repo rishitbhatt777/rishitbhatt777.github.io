@@ -142,20 +142,6 @@ h1{
   color:#3a2f2f;
 }
 
-/* 🥝 SCROLL BUTTON */
-.scroll-btn{
-  position:absolute;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:56px;height:42px;
-  background:#9fd8b0;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
 /* ---------- DONATION ---------- */
 .donate{
   background:#fff;
@@ -254,7 +240,7 @@ h1{
   *{animation:none!important}
 }
 
-/* ---------- MOBILE FIX (ONLY CHANGE) ---------- */
+/* ---------- MOBILE ---------- */
 @media(max-width:768px){
   section{padding:40px 6%}
   .container{flex-direction:column}
@@ -271,11 +257,6 @@ h1{
   .brand-story{
     font-size:16px;
     line-height:1.85;
-  }
-
-  /* 🥝 FIX: move scroll button down so it doesn't overlap CTA */
-  .scroll-btn{
-    bottom:10px;
   }
 }
 </style>
@@ -305,8 +286,6 @@ h1{
       <a href="coming-soon.html" class="store-cta">🛒 Tap to go store</a>
     </div>
   </div>
-
-  <a href="#donate" class="scroll-btn">🥝</a>
 </section>
 
 <!-- DONATION -->
