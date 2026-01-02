@@ -9,66 +9,30 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 
 body{
-  background:linear-gradient(135deg,#fce1ec,#fff6dc);
   font-family:'Fredoka',sans-serif;
-  height:100vh;
+  background:linear-gradient(135deg,#fce1ec,#fff6dc);
+  color:#3a2f2f;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:#3a2f2f;
-  overflow:hidden;
 }
 
-/* 🐾 BACKGROUND ANIMALS */
-.animal{
-  position:absolute;
-  border-radius:50%;
-  opacity:.85;
-  animation:float 6s ease-in-out infinite;
-}
-
-.cat{
-  width:80px;height:80px;
-  background:#ffb3c6;
-  top:50px;left:60px;
-}
-
-.monkey{
-  width:90px;height:90px;
-  background:#d8a47f;
-  bottom:80px;left:120px;
-  animation-delay:1s;
-}
-
-.elephant{
-  width:120px;height:120px;
-  background:#b8c6e6;
-  top:90px;right:70px;
-  animation-delay:2s;
-}
-
-.bear-bg{
-  width:140px;height:140px;
-  background:#c49a6c;
-  bottom:60px;right:60px;
-  animation-delay:3s;
-}
-
-/* 🧸 CARD */
 .card{
   background:#fff;
   padding:70px 60px;
   border-radius:45px;
-  box-shadow:0 20px 0 #ff9aa2;
-  max-width:560px;
-  position:relative;
-  z-index:2;
+  max-width:540px;
 }
 
-/* BIG COMING SOON */
 .badge{
   font-family:'Baloo 2',cursive;
   font-size:56px;
@@ -76,138 +40,48 @@ body{
   color:#fff;
   padding:22px 48px;
   border-radius:60px;
-  display:inline-block;
-  margin-bottom:30px;
-  letter-spacing:4px;
 }
 
 h1{
+  margin-top:25px;
   font-family:'Baloo 2',cursive;
-  font-size:68px;
+  font-size:66px;
   color:#ff6f91;
-  cursor:pointer;
 }
 
-.message{
-  font-size:18px;
-  margin:25px 0 35px;
+/* FOOTER */
+.footer{
+  min-height:100vh;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:50px;
 }
 
-.contact{
+.footer p{
   font-size:16px;
-  line-height:2;
-  margin-bottom:30px;
-}
-
-.contact a{
-  color:#ff6f91;
-  text-decoration:none;
-  font-weight:600;
-}
-
-/* 🔙 BACK BUTTON */
-.back{
-  display:inline-block;
-  padding:14px 32px;
-  border-radius:40px;
-  background:#fff;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-  text-decoration:none;
-  color:#5c4a4a;
-  font-size:15px;
-  transition:.3s;
-}
-.back:hover{
-  transform:translateY(-3px);
-}
-
-/* ✨ SPARKLES */
-.sparkle{
-  position:absolute;
-  width:8px;
-  height:8px;
-  background:#ffd700;
-  border-radius:50%;
-  animation:sparkle 1s ease-out forwards;
-  pointer-events:none;
-}
-
-@keyframes sparkle{
-  from{opacity:1;transform:translate(0,0) scale(1)}
-  to{opacity:0;transform:translate(var(--x),var(--y)) scale(0)}
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
+  letter-spacing:2px;
+  margin:10px 0;
 }
 </style>
 </head>
 
 <body>
 
-<!-- background animals -->
-<div class="animal cat"></div>
-<div class="animal monkey"></div>
-<div class="animal elephant"></div>
-<div class="animal bear-bg"></div>
-
-<div class="card">
-
-  <div class="badge">COMING SOON</div>
-
-  <h1 id="logo">Kit’n Kiwi</h1>
-
-  <div class="message">
-    🧵 We’re crafting something magical for little ones.  
-    Our luxury kidswear collection is almost here ✨
+<section class="hero">
+  <div class="card">
+    <div class="badge">COMING SOON</div>
+    <h1>Kit’n Kiwi</h1>
   </div>
+</section>
 
-  <div class="contact">
-    📷 Instagram:
-    <a href="https://instagram.com/rishit_bhxtt" target="_blank">@rishit_bhxtt</a><br>
-    📧 Email:
-    <a href="mailto:rishitbhatt777@gmail.com">rishitbhatt777@gmail.com</a>
+<section class="footer">
+  <div>
+    <p>OWNED BY <strong>RISHIT BHATT</strong></p>
+    <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
+    <p>MANAGED BY <strong>PARTH JOSHI</strong></p>
   </div>
-
-  <a class="back" href="index.html">← Back to Home</a>
-</div>
-
-<!-- soft sparkle sound -->
-<audio id="sparkSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-902.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-const logo = document.getElementById("logo");
-const sound = document.getElementById("sparkSound");
-
-function createSparkles(x,y,count=20){
-  for(let i=0;i<count;i++){
-    const s=document.createElement("div");
-    s.className="sparkle";
-    s.style.left=x+"px";
-    s.style.top=y+"px";
-    s.style.setProperty("--x",(Math.random()*240-120)+"px");
-    s.style.setProperty("--y",(Math.random()*-240)+"px");
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),1000);
-  }
-}
-
-/* auto celebration on load */
-window.onload=()=>{
-  const r=logo.getBoundingClientRect();
-  createSparkles(r.left+r.width/2,r.top+r.height/2,30);
-};
-
-/* click celebration + sound */
-logo.addEventListener("click",e=>{
-  createSparkles(e.clientX,e.clientY,25);
-  sound.volume=0.2;
-  sound.play().catch(()=>{});
-});
-</script>
+</section>
 
 </body>
 </html>
