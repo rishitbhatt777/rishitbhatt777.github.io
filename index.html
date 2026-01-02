@@ -33,100 +33,115 @@ body{
 .art{
   position:relative;
   width:45%;
-  height:480px;
+  height:500px;
 }
 
 /* background blob */
 .blob{
   position:absolute;
-  width:340px;
-  height:340px;
+  width:360px;
+  height:360px;
   background:#cceeff;
   border-radius:50% 45% 55% 50%;
+  top:40px;
+  left:40px;
   animation:float 6s ease-in-out infinite;
 }
 
 /* 🧸 MAIN BEAR */
 .bear{
   position:absolute;
-  width:210px;
-  height:210px;
+  width:220px;
+  height:220px;
   background:#c49a6c;
   border-radius:50%;
-  top:140px;
-  left:80px;
-  z-index:2;
+  top:160px;
+  left:120px;
+  z-index:3;
 }
 
 .bear::before,
 .bear::after{
   content:"";
   position:absolute;
-  width:60px;
-  height:60px;
+  width:65px;
+  height:65px;
   background:#c49a6c;
   border-radius:50%;
-  top:-25px;
+  top:-30px;
 }
 .bear::before{left:15px}
 .bear::after{right:15px}
 
 .eye{
   position:absolute;
-  width:10px;
-  height:10px;
+  width:12px;
+  height:12px;
   background:#000;
   border-radius:50%;
-  top:85px;
+  top:90px;
 }
-.eye.left{left:70px}
-.eye.right{right:70px}
+.eye.left{left:75px}
+.eye.right{right:75px}
 
 .nose{
   position:absolute;
-  width:26px;
-  height:18px;
+  width:28px;
+  height:20px;
   background:#5c3b23;
   border-radius:50%;
-  top:112px;
+  top:120px;
   left:50%;
   transform:translateX(-50%);
 }
 
-/* 👋 waving hand */
+/* waving hand */
 .hand{
   position:absolute;
   width:70px;
   height:70px;
   background:#c49a6c;
   border-radius:50%;
-  top:150px;
+  top:160px;
   right:-40px;
   transform-origin:bottom left;
   animation:wave 2s ease-in-out infinite;
 }
 
-/* 🐰 BACKGROUND ANIMALS */
-.bunny,
+/* 🐱 CAT */
 .cat{
   position:absolute;
-  background:#ffd6e8;
-  border-radius:50%;
-  opacity:.7;
-}
-
-.bunny{
   width:90px;
   height:90px;
-  bottom:40px;
-  left:10px;
+  background:#ffb3c6;
+  border-radius:50%;
+  top:90px;
+  right:40px;
+  opacity:.85;
 }
 
-.cat{
-  width:70px;
-  height:70px;
-  top:60px;
-  right:40px;
+/* 🐵 MONKEY */
+.monkey{
+  position:absolute;
+  width:80px;
+  height:80px;
+  background:#d8a47f;
+  border-radius:50%;
+  bottom:80px;
+  left:20px;
+  opacity:.85;
+}
+
+/* 🐘 ELEPHANT */
+.elephant{
+  position:absolute;
+  width:110px;
+  height:110px;
+  background:#b8c6e6;
+  border-radius:50%;
+  bottom:40px;
+  right:60px;
+  opacity:.85;
 }
 
 /* TEXT */
@@ -136,22 +151,18 @@ body{
 
 h1 a{
   font-family:'Baloo 2',cursive;
-  font-size:110px;
+  font-size:120px;
   line-height:0.9;
   text-decoration:none;
   color:#ff6f91;
   display:inline-block;
-  transition:transform .3s ease;
 }
 
-h1 a:hover{
-  transform:scale(1.05);
-}
-
-.tagline{
-  font-size:20px;
-  margin-top:25px;
-  color:#5c4a4a;
+.slogan{
+  margin-top:30px;
+  font-size:18px;
+  letter-spacing:4px;
+  color:#6b5a5a;
 }
 
 /* animations */
@@ -169,7 +180,7 @@ h1 a:hover{
 @media(max-width:768px){
 .container{flex-direction:column;text-align:center}
 .art,.content{width:100%}
-h1 a{font-size:72px}
+h1 a{font-size:78px}
 .bear{left:50%;transform:translateX(-50%)}
 }
 </style>
@@ -181,8 +192,10 @@ h1 a{font-size:72px}
 
   <div class="art">
     <div class="blob"></div>
-    <div class="bunny"></div>
+
     <div class="cat"></div>
+    <div class="monkey"></div>
+    <div class="elephant"></div>
 
     <div class="bear">
       <div class="eye left"></div>
@@ -197,9 +210,7 @@ h1 a{font-size:72px}
       <a href="coming-soon.html">Kit’n<br>Kiwi</a>
     </h1>
 
-    <div class="tagline">
-      Luxury little looks for happy kids 🧸✨
-    </div>
+    <div class="slogan">MADE FOR LITTLE HEARTS</div>
   </div>
 
 </div>
