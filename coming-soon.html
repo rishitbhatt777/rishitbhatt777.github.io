@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kit’n Kiwi — Coming Soon</title>
+<title>Kit’n Kiwi — Launching Soon</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@ section{
   width:100%;
 }
 
-/* BADGE */
+/* BADGE — SAME BRAND FONT AS INDEX */
 .badge{
   font-family:'Baloo 2',cursive;
   font-size:56px;
@@ -62,7 +62,7 @@ h1{
   margin:25px 0;
 }
 
-/* PREVIEW */
+/* SWIPE PREVIEW */
 .preview-label{
   font-size:14px;
   letter-spacing:2px;
@@ -70,20 +70,17 @@ h1{
   margin-bottom:12px;
 }
 
-/* SWIPE CONTAINER */
 .product-preview{
   display:flex;
   gap:18px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   padding-bottom:10px;
-  margin-bottom:40px;
+  margin-bottom:35px;
   -webkit-overflow-scrolling:touch;
 }
 
-.product-preview::-webkit-scrollbar{
-  display:none;
-}
+.product-preview::-webkit-scrollbar{display:none}
 
 .product-preview img{
   flex:0 0 auto;
@@ -93,11 +90,33 @@ h1{
   border-radius:24px;
   scroll-snap-align:center;
   box-shadow:0 10px 20px rgba(0,0,0,.08);
-  transition:transform .25s ease;
 }
 
-.product-preview img:hover{
-  transform:translateY(-4px);
+/* NOTIFY FORM */
+.notify{
+  margin-bottom:30px;
+}
+
+.notify input{
+  width:100%;
+  max-width:320px;
+  padding:14px 18px;
+  border-radius:30px;
+  border:1px solid #eee;
+  font-family:'Fredoka',sans-serif;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.notify button{
+  padding:12px 34px;
+  border-radius:30px;
+  border:none;
+  background:#ff6f91;
+  color:#fff;
+  font-family:'Baloo 2',cursive;
+  font-size:16px;
+  cursor:pointer;
 }
 
 /* CONTACT */
@@ -164,7 +183,9 @@ h1{
 <section>
   <div class="card">
 
-    <div class="badge">COMING SOON</div>
+    <!-- CHANGED TEXT -->
+    <div class="badge">LAUNCHING SOON</div>
+
     <h1>Kit’n Kiwi</h1>
 
     <div class="message">
@@ -174,16 +195,22 @@ h1{
 
     <div class="preview-label">Swipe to explore 👆</div>
 
-    <!-- SWIPE GALLERY -->
     <div class="product-preview">
-      <img src="images/product1.png" alt="Kit’n Kiwi kidswear">
-      <img src="images/product2.png" alt="Kit’n Kiwi kidswear">
-      <img src="images/product3.png" alt="Kit’n Kiwi kidswear">
-      <img src="images/product4.png" alt="Kit’n Kiwi kidswear">
-      <img src="images/product5.png" alt="Kit’n Kiwi kidswear">
-      <img src="images/product6.png" alt="Kit’n Kiwi kidswear">
-      <img src="images/product7.png" alt="Kit’n Kiwi kidswear">
-      <img src="images/product8.png" alt="Kit’n Kiwi kidswear">
+      <img src="images/product1.png">
+      <img src="images/product2.png">
+      <img src="images/product3.png">
+      <img src="images/product4.png">
+      <img src="images/product5.png">
+      <img src="images/product6.png">
+      <img src="images/product7.png">
+      <img src="images/product8.png">
+    </div>
+
+    <!-- NOTIFY ME -->
+    <div class="notify">
+      <input type="email" placeholder="Enter your email">
+      <br>
+      <button>Notify Me</button>
     </div>
 
     <div class="contact">
