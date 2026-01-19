@@ -17,6 +17,7 @@ body{
   font-family:'Fredoka',sans-serif;
   background:linear-gradient(135deg,#fce1ec,#fff6dc);
   color:#3a2f2f;
+  overflow-x:hidden; /* safety */
 }
 
 /* SECTION */
@@ -49,15 +50,17 @@ section{
   border-radius:60px;
   margin-bottom:30px;
   display:inline-block;
-  white-space:nowrap; /* FIX: keeps text same on mobile */
+  white-space:nowrap;
+  max-width:100%;
 }
 
+/* TEXT */
 .message{
   font-size:18px;
   margin:25px 0;
 }
 
-/* SWIPE PREVIEW */
+/* PREVIEW */
 .preview-label{
   font-size:14px;
   letter-spacing:2px;
@@ -87,7 +90,7 @@ section{
   box-shadow:0 10px 20px rgba(0,0,0,.08);
 }
 
-/* NOTIFY FORM */
+/* NOTIFY */
 .notify{
   margin-bottom:30px;
 }
@@ -126,44 +129,7 @@ section{
   font-weight:600;
 }
 
-/* CREDITS */
-.credits{
-  background:#fff;
-  text-align:center;
-}
-
-.credits p{
-  font-size:15px;
-  letter-spacing:2px;
-  margin:14px 0;
-}
-
-/* BACK BUTTON */
-.back-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  margin-top:40px;
-  padding:10px 26px;
-  border-radius:30px;
-  background:#ff6f91;
-  color:#fff;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:600;
-}
-
-.back-btn::before{
-  content:"";
-  width:8px;
-  height:8px;
-  border-left:2px solid #fff;
-  border-bottom:2px solid #fff;
-  transform:rotate(45deg);
-  display:inline-block;
-}
-
-/* ===== POPUP + BLUR ===== */
+/* POPUP OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
@@ -215,17 +181,27 @@ section{
 }
 
 /* MOBILE */
-@media(max-width:768px){
-  .badge{font-size:42px}
+@media (max-width:768px){
+  .badge{
+    font-size:42px;
+    padding:18px 32px;
+  }
   .card{padding:50px 25px}
   .popup-text{font-size:26px}
+}
+
+/* VERY SMALL SCREENS (Chrome / Instagram) */
+@media (max-width:420px){
+  .badge{
+    font-size:34px;
+    padding:14px 24px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- MAIN -->
 <section>
   <div class="card">
 
@@ -265,24 +241,12 @@ section{
   </div>
 </section>
 
-<!-- POPUP -->
 <div class="overlay" id="overlay">
   <div class="popup">
     <div class="popup-text">Welcome to the Kiwi World 🥝</div>
     <button id="closePopup">Close</button>
   </div>
 </div>
-
-<!-- CREDITS -->
-<section class="credits">
-  <div>
-    <p>OWNED BY <strong>RISHIT BHATT</strong></p>
-    <p>DESIGNED BY <strong>CHARUDATT GOSWAMI</strong></p>
-    <p>MANAGED BY <strong>PARTH JOSHI</strong></p>
-
-    <a href="index.html" class="back-btn">Back</a>
-  </div>
-</section>
 
 <script>
   const btn = document.getElementById('notifyBtn');
