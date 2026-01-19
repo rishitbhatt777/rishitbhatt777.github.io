@@ -35,7 +35,8 @@ section{
   padding:70px 60px;
   border-radius:45px;
   box-shadow:0 18px 0 #ff9aa2;
-  max-width:640px;
+  max-width:720px;
+  width:100%;
 }
 
 /* BADGE */
@@ -58,29 +59,39 @@ h1{
 
 .message{
   font-size:18px;
-  margin:25px 0 25px;
+  margin:25px 0;
 }
 
-/* PRODUCT PREVIEW */
+/* PREVIEW */
 .preview-label{
   font-size:14px;
   letter-spacing:2px;
   opacity:.6;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 
+/* SWIPE CONTAINER */
 .product-preview{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  display:flex;
   gap:18px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:10px;
   margin-bottom:40px;
+  -webkit-overflow-scrolling:touch;
+}
+
+.product-preview::-webkit-scrollbar{
+  display:none;
 }
 
 .product-preview img{
-  width:100%;
-  height:170px;
+  flex:0 0 auto;
+  width:180px;
+  height:220px;
   object-fit:cover;
-  border-radius:22px;
+  border-radius:24px;
+  scroll-snap-align:center;
   box-shadow:0 10px 20px rgba(0,0,0,.08);
   transition:transform .25s ease;
 }
@@ -142,7 +153,7 @@ h1{
 @media(max-width:768px){
   .badge{font-size:42px}
   h1{font-size:52px}
-  .card{padding:50px 30px}
+  .card{padding:50px 25px}
 }
 </style>
 </head>
@@ -154,7 +165,6 @@ h1{
   <div class="card">
 
     <div class="badge">COMING SOON</div>
-
     <h1>Kit’n Kiwi</h1>
 
     <div class="message">
@@ -162,9 +172,9 @@ h1{
       Our luxury kidswear collection is almost here ✨
     </div>
 
-    <!-- PRODUCT PHOTOS -->
-    <div class="preview-label">A little peek 👀</div>
+    <div class="preview-label">Swipe to explore 👆</div>
 
+    <!-- SWIPE GALLERY -->
     <div class="product-preview">
       <img src="images/product1.png" alt="Kit’n Kiwi kidswear">
       <img src="images/product2.png" alt="Kit’n Kiwi kidswear">
