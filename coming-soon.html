@@ -199,7 +199,7 @@ section{
     <div class="notify">
       <input type="email" placeholder="Enter your email">
       <br>
-      <button>Notify Me</button>
+      <button id="notifyBtn">Notify Me</button>
     </div>
 
     <div class="contact">
@@ -222,6 +222,15 @@ section{
     <a href="index.html" class="back-btn">Back</a>
   </div>
 </section>
+
+<script>
+  const btn = document.getElementById('notifyBtn');
+  btn.addEventListener('click', () => {
+    btn.textContent = "Welcome to the Kiwi World 🥝";
+    btn.disabled = true;
+    btn.style.opacity = "0.75";
+  });
+</script>
 
 </body>
 </html>
