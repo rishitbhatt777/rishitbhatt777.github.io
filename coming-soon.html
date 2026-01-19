@@ -162,10 +162,47 @@ section{
   display:inline-block;
 }
 
+/* POPUP OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+.popup{
+  background:#fff;
+  padding:50px 40px;
+  border-radius:40px;
+  font-family:'Baloo 2',cursive;
+  color:#ff6f91;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.popup-text{
+  font-size:34px;
+  margin-bottom:24px;
+}
+
+.popup button{
+  padding:10px 28px;
+  border-radius:30px;
+  border:none;
+  background:#ff6f91;
+  color:#fff;
+  font-family:'Baloo 2',cursive;
+  font-size:16px;
+  cursor:pointer;
+}
+
 /* MOBILE */
 @media(max-width:768px){
   .badge{font-size:42px}
   .card{padding:50px 25px}
+  .popup-text{font-size:26px}
 }
 </style>
 </head>
@@ -212,6 +249,14 @@ section{
   </div>
 </section>
 
+<!-- POPUP -->
+<div class="overlay" id="overlay">
+  <div class="popup">
+    <div class="popup-text">Welcome to the Kiwi World 🥝</div>
+    <button id="closePopup">Close</button>
+  </div>
+</div>
+
 <!-- CREDITS -->
 <section class="credits">
   <div>
@@ -225,10 +270,15 @@ section{
 
 <script>
   const btn = document.getElementById('notifyBtn');
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('closePopup');
+
   btn.addEventListener('click', () => {
-    btn.textContent = "Welcome to the Kiwi World 🥝";
-    btn.disabled = true;
-    btn.style.opacity = "0.75";
+    overlay.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    overlay.style.display = 'none';
   });
 </script>
 
