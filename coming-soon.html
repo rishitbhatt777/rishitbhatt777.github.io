@@ -11,13 +11,12 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html,body{overflow-x:hidden}
 
 body{
   font-family:'Fredoka',sans-serif;
   background:linear-gradient(135deg,#fce1ec,#fff6dc);
   color:#3a2f2f;
-  overflow-x:hidden;
 }
 
 /* SECTION */
@@ -26,8 +25,8 @@ section{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:60px 8%;
   text-align:center;
+  padding:60px 8%;
 }
 
 /* CARD */
@@ -38,38 +37,33 @@ section{
   box-shadow:0 18px 0 #ff9aa2;
   max-width:720px;
   width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
 }
 
-/* BADGE */
+/* ✅ FIXED BADGE */
 .badge{
   font-family:'Baloo 2',cursive;
+  font-weight:800;
+  font-size:clamp(30px, 7vw, 56px);
   background:#ff6f91;
   color:#fff;
+  padding:clamp(14px, 3vw, 22px) clamp(26px, 6vw, 48px);
   border-radius:60px;
-  margin-bottom:30px;
-
-  display:flex;
+  margin:0 auto 30px;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-
-  width:100%;
-  max-width:320px;
-
-  padding:18px 24px;
-  font-size:clamp(28px,7vw,42px);
-  white-space:nowrap;
+  max-width:100%;
+  text-align:center;
+  line-height:1;
 }
 
-/* MESSAGE */
+/* TEXT */
 .message{
   font-size:18px;
   margin:25px 0;
 }
 
-/* PREVIEW LABEL */
+/* PREVIEW */
 .preview-label{
   font-size:14px;
   letter-spacing:2px;
@@ -77,7 +71,6 @@ section{
   margin-bottom:12px;
 }
 
-/* PRODUCT SWIPE */
 .product-preview{
   display:flex;
   gap:18px;
@@ -86,9 +79,6 @@ section{
   padding-bottom:10px;
   margin-bottom:35px;
   -webkit-overflow-scrolling:touch;
-
-  /* ✅ FIX: forces horizontal swipe */
-  touch-action: pan-x;
 }
 
 .product-preview::-webkit-scrollbar{display:none}
@@ -104,17 +94,12 @@ section{
 }
 
 /* NOTIFY */
-.notify{
-  margin-bottom:30px;
-}
-
 .notify input{
   width:100%;
   max-width:320px;
   padding:14px 18px;
   border-radius:30px;
   border:1px solid #eee;
-  font-family:'Fredoka',sans-serif;
   font-size:14px;
   margin-bottom:12px;
 }
@@ -141,63 +126,6 @@ section{
   text-decoration:none;
   font-weight:600;
 }
-
-/* POPUP */
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.25);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:1000;
-}
-
-.popup{
-  background:#fff;
-  padding:50px 45px;
-  border-radius:40px;
-  text-align:center;
-  font-family:'Baloo 2',cursive;
-  color:#ff6f91;
-  box-shadow:0 25px 50px rgba(0,0,0,.2);
-  transform:scale(.9);
-  opacity:0;
-  animation:popupIn .35s ease forwards;
-}
-
-.popup-text{
-  font-size:34px;
-  margin-bottom:26px;
-}
-
-.popup button{
-  display:block;
-  margin:0 auto;
-  padding:10px 34px;
-  border-radius:30px;
-  border:none;
-  background:#ff6f91;
-  color:#fff;
-  font-family:'Baloo 2',cursive;
-  font-size:16px;
-  cursor:pointer;
-}
-
-@keyframes popupIn{
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .card{padding:50px 25px}
-  .popup-text{font-size:26px}
-}
 </style>
 </head>
 
@@ -213,7 +141,7 @@ section{
       Our luxury kidswear collection is almost here ✨
     </div>
 
-    <div class="preview-label">Swipe to explore</div>
+    <div class="preview-label">Swipe to explore 👆</div>
 
     <div class="product-preview">
       <img src="images/product1.png">
@@ -229,7 +157,7 @@ section{
     <div class="notify">
       <input type="email" placeholder="Enter your email">
       <br>
-      <button id="notifyBtn">Notify Me</button>
+      <button>Notify Me</button>
     </div>
 
     <div class="contact">
@@ -241,27 +169,6 @@ section{
 
   </div>
 </section>
-
-<div class="overlay" id="overlay">
-  <div class="popup">
-    <div class="popup-text">Welcome to the Kiwi World 🥝</div>
-    <button id="closePopup">Close</button>
-  </div>
-</div>
-
-<script>
-  const btn = document.getElementById('notifyBtn');
-  const overlay = document.getElementById('overlay');
-  const closeBtn = document.getElementById('closePopup');
-
-  btn.addEventListener('click', () => {
-    overlay.style.display = 'flex';
-  });
-
-  closeBtn.addEventListener('click', () => {
-    overlay.style.display = 'none';
-  });
-</script>
 
 </body>
 </html>
