@@ -49,6 +49,7 @@ section{
   border-radius:60px;
   margin-bottom:30px;
   display:inline-block;
+  white-space:nowrap; /* FIX: keeps text same on mobile */
 }
 
 .message{
@@ -193,7 +194,6 @@ section{
   margin-bottom:26px;
 }
 
-/* CENTERED CLOSE BUTTON */
 .popup button{
   display:block;
   margin:0 auto;
@@ -207,7 +207,6 @@ section{
   cursor:pointer;
 }
 
-/* POPUP ANIMATION */
 @keyframes popupIn{
   to{
     transform:scale(1);
