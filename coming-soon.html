@@ -17,7 +17,7 @@ body{
   font-family:'Fredoka',sans-serif;
   background:linear-gradient(135deg,#fce1ec,#fff6dc);
   color:#3a2f2f;
-  overflow-x:hidden; /* safety */
+  overflow-x:hidden;
 }
 
 /* SECTION */
@@ -26,8 +26,8 @@ section{
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
   padding:60px 8%;
+  text-align:center;
 }
 
 /* CARD */
@@ -38,23 +38,32 @@ section{
   box-shadow:0 18px 0 #ff9aa2;
   max-width:720px;
   width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-/* BADGE */
+/* BADGE — FIXED */
 .badge{
   font-family:'Baloo 2',cursive;
-  font-size:56px;
   background:#ff6f91;
   color:#fff;
-  padding:22px 48px;
   border-radius:60px;
   margin-bottom:30px;
-  display:inline-block;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  width:100%;
+  max-width:320px;
+
+  padding:18px 24px;
+  font-size:clamp(28px,7vw,42px);
   white-space:nowrap;
-  max-width:100%;
 }
 
-/* TEXT */
+/* MESSAGE */
 .message{
   font-size:18px;
   margin:25px 0;
@@ -129,7 +138,7 @@ section{
   font-weight:600;
 }
 
-/* POPUP OVERLAY */
+/* POPUP */
 .overlay{
   position:fixed;
   inset:0;
@@ -181,21 +190,9 @@ section{
 }
 
 /* MOBILE */
-@media (max-width:768px){
-  .badge{
-    font-size:42px;
-    padding:18px 32px;
-  }
+@media(max-width:768px){
   .card{padding:50px 25px}
   .popup-text{font-size:26px}
-}
-
-/* VERY SMALL SCREENS (Chrome / Instagram) */
-@media (max-width:420px){
-  .badge{
-    font-size:34px;
-    padding:14px 24px;
-  }
 }
 </style>
 </head>
@@ -212,7 +209,7 @@ section{
       Our luxury kidswear collection is almost here ✨
     </div>
 
-    <div class="preview-label">Swipe to explore 👆</div>
+    <div class="preview-label">Swipe to explore</div>
 
     <div class="product-preview">
       <img src="images/product1.png">
