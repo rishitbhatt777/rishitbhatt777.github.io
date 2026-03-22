@@ -1,1182 +1,2020 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kit'n Kiwi — Made for Little Hearts</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit n Kiwi — Premium Children's Clothing</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #F5C842;
+  --gold-light: #FDE68A;
+  --gold-dark: #C9A227;
+  --cream: #FFFDF5;
+  --ivory: #FAF6EC;
+  --forest: #2C5F2E;
+  --forest-light: #4A8C4D;
+  --berry: #C0392B;
+  --blush: #FF8FA3;
+  --tangerine: #FF6B2C;
+  --kiwi: #76C442;
+  --mango: #FFB347;
+  --grape: #9B59B6;
+  --sky: #5DADE2;
+  --charcoal: #1C1C1E;
+  --warm-white: #FFFEF9;
+  --sidebar-w: 88px;
+  --sidebar-open: 280px;
+}
 
-    :root {
-      --cream: #faf6f0;
-      --blush: #f2e0d5;
-      --sage: #b8c9b0;
-      --warm-sage: #8faa84;
-      --gold: #c9a96e;
-      --deep: #3a3228;
-      --mid: #7a6e62;
-      --light-mid: #b0a898;
-      --white: #fffdf9;
-    }
+- { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
-    html { scroll-behavior: smooth; }
+body {
+font-family: ‘Nunito’, sans-serif;
+background: var(–cream);
+color: var(–charcoal);
+overflow-x: hidden;
+}
 
-    body {
-      background: var(--cream);
-      color: var(--deep);
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-      cursor: none;
-    }
+/* ═══════════════════════════════════
+SIDEBAR
+═══════════════════════════════════ */
+.sidebar {
+position: fixed;
+top: 0; left: 0;
+width: var(–sidebar-w);
+height: 100vh;
+background: var(–charcoal);
+z-index: 1000;
+transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+overflow: hidden;
+display: flex;
+flex-direction: column;
+border-right: 3px solid var(–gold);
+box-shadow: 6px 0 40px rgba(0,0,0,0.25);
+}
+.sidebar.open { width: var(–sidebar-open); }
 
-    /* CUSTOM CURSOR */
-    .cursor {
-      position: fixed;
-      width: 10px; height: 10px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
-    }
-    .cursor-ring {
-      position: fixed;
-      width: 36px; height: 36px;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.35s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-      opacity: 0.5;
-    }
-    body:has(a:hover) .cursor { width: 18px; height: 18px; background: var(--warm-sage); }
-    body:has(a:hover) .cursor-ring { width: 50px; height: 50px; opacity: 0.3; }
+/* Gold texture overlay */
+.sidebar::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background:
+radial-gradient(ellipse at 20% 20%, rgba(245,200,66,0.08) 0%, transparent 60%),
+radial-gradient(ellipse at 80% 80%, rgba(245,200,66,0.05) 0%, transparent 60%);
+pointer-events: none;
+}
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.6rem 4rem;
-      background: transparent;
-      transition: background 0.5s ease, padding 0.4s ease;
-    }
-    nav.scrolled {
-      background: rgba(250,246,240,0.92);
-      backdrop-filter: blur(12px);
-      padding: 1rem 4rem;
-      border-bottom: 1px solid rgba(201,169,110,0.15);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--deep);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--deep); }
-    .nav-cta {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: var(--deep);
-      padding: 0.65rem 1.5rem;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .nav-cta:hover { background: var(--gold); transform: translateY(-1px); }
+.sidebar-toggle {
+position: absolute;
+top: 22px; right: -18px;
+width: 36px; height: 36px;
+background: var(–gold);
+border: none;
+border-radius: 50%;
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
+font-size: 1rem;
+box-shadow: 0 4px 15px rgba(245,200,66,0.5);
+transition: all 0.3s;
+z-index: 10;
+color: var(–charcoal);
+font-weight: 900;
+}
+.sidebar-toggle:hover { transform: scale(1.15); background: var(–gold-dark); }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-left {
-      background: var(--blush);
-      display: flex;
-      align-items: flex-end;
-      padding: 8rem 4rem 6rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-left::before {
-      content: '';
-      position: absolute;
-      top: -10%; right: -10%;
-      width: 55%; aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .hero-left::after {
-      content: '';
-      position: absolute;
-      bottom: 10%; left: -5%;
-      width: 35%; aspect-ratio: 1;
-      background: radial-gradient(circle, rgba(143,170,132,0.22) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .hero-text { position: relative; z-index: 2; }
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.3s ease forwards;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 28px; height: 1px;
-      background: var(--gold);
-      display: inline-block;
-    }
-    .hero-heading {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.2rem, 5.5vw, 5.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      color: var(--deep);
-      margin-bottom: 1.8rem;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.5s ease forwards;
-    }
-    .hero-heading em {
-      font-style: italic;
-      color: var(--warm-sage);
-    }
-    .hero-sub {
-      font-size: 0.9rem;
-      line-height: 1.85;
-      color: var(--mid);
-      max-width: 360px;
-      margin-bottom: 2.8rem;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.7s ease forwards;
-    }
-    .hero-btns {
-      display: flex;
-      gap: 1.2rem;
-      align-items: center;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.9s ease forwards;
-    }
-    .btn-primary {
-      padding: 0.95rem 2.4rem;
-      background: var(--deep);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      transition: background 0.3s, transform 0.25s;
-      display: inline-block;
-    }
-    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
-    .btn-ghost {
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      display: flex; align-items: center; gap: 0.5rem;
-      transition: color 0.3s, gap 0.3s;
-    }
-    .btn-ghost:hover { color: var(--deep); gap: 0.8rem; }
-    .btn-ghost::after { content: '→'; font-size: 1rem; }
+/* Logo area */
+.sidebar-logo {
+padding: 24px 0 20px;
+display: flex;
+align-items: center;
+gap: 14px;
+padding-left: 20px;
+border-bottom: 1px solid rgba(245,200,66,0.15);
+min-height: 90px;
+text-decoration: none;
+overflow: hidden;
+white-space: nowrap;
+}
+.logo-emblem {
+width: 48px; height: 48px;
+flex-shrink: 0;
+background: linear-gradient(135deg, var(–gold), var(–gold-dark));
+border-radius: 16px;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.6rem;
+box-shadow: 0 4px 18px rgba(245,200,66,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+position: relative;
+}
+.logo-emblem::after {
+content: ‘’;
+position: absolute;
+inset: 2px;
+border-radius: 13px;
+border: 1px solid rgba(255,255,255,0.2);
+}
+.logo-name {
+opacity: 0;
+transition: opacity 0.3s 0.1s;
+}
+.sidebar.open .logo-name { opacity: 1; }
+.logo-name-main {
+font-family: ‘Fredoka One’, cursive;
+font-size: 1.4rem;
+color: var(–gold);
+display: block;
+line-height: 1.1;
+letter-spacing: 0.5px;
+}
+.logo-name-sub {
+font-size: 0.7rem;
+color: rgba(255,255,255,0.4);
+letter-spacing: 2px;
+text-transform: uppercase;
+font-weight: 700;
+}
 
-    .hero-right {
-      background: var(--sage);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-illustration {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .big-circle {
-      width: 72%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.22);
-      position: absolute;
-      animation: float 6s ease-in-out infinite;
-    }
-    .med-circle {
-      width: 48%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      position: absolute;
-      top: 15%; right: 10%;
-      animation: float 8s 1s ease-in-out infinite reverse;
-    }
-    .kiwi-icon {
-      font-size: 8rem;
-      position: relative;
-      z-index: 2;
-      animation: float 5s 0.5s ease-in-out infinite;
-      filter: drop-shadow(0 20px 40px rgba(58,50,40,0.2));
-    }
-    .hero-badge {
-      position: absolute;
-      bottom: 2.5rem; right: 2.5rem;
-      width: 110px; height: 110px;
-      border-radius: 50%;
-      background: var(--deep);
-      color: var(--white);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      animation: spin-slow 20s linear infinite;
-      z-index: 3;
-    }
-    .hero-badge span {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      line-height: 1.6;
-    }
-    .hero-badge .badge-star { font-size: 1.1rem; margin-bottom: 0.3rem; }
+/* Nav items */
+.sidebar-nav {
+flex: 1;
+padding: 20px 0;
+overflow-y: auto;
+overflow-x: hidden;
+}
+.sidebar-nav::-webkit-scrollbar { display: none; }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: none;
-    }
-    .scroll-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--mid);
-    }
-    .scroll-line {
-      width: 1px; height: 50px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scroll-drop 2s ease-in-out infinite;
-    }
+.nav-section-title {
+font-size: 0.62rem;
+letter-spacing: 2.5px;
+text-transform: uppercase;
+color: rgba(245,200,66,0.5);
+font-weight: 800;
+padding: 12px 20px 6px;
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.sidebar.open .nav-section-title { opacity: 1; }
 
-    /* MARQUEE */
-    .marquee-wrap {
-      background: var(--deep);
-      padding: 1.1rem 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    .marquee-inner {
-      display: inline-block;
-      animation: marquee 22s linear infinite;
-    }
-    .marquee-inner span {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin: 0 2.5rem;
-    }
-    .marquee-inner .dot { color: var(--gold); font-size: 1rem; vertical-align: middle; margin: 0 0.8rem; }
+.nav-item {
+display: flex;
+align-items: center;
+gap: 14px;
+padding: 13px 20px;
+cursor: pointer;
+transition: all 0.25s;
+border-left: 3px solid transparent;
+white-space: nowrap;
+overflow: hidden;
+text-decoration: none;
+position: relative;
+}
+.nav-item:hover, .nav-item.active {
+background: rgba(245,200,66,0.08);
+border-left-color: var(–gold);
+}
+.nav-item.active .nav-icon-wrap { background: var(–gold); }
+.nav-item.active .nav-icon-wrap svg, .nav-item:hover .nav-label { color: var(–gold); }
 
-    /* FEATURES */
-    .features {
-      padding: 8rem 4rem;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4rem;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-    .feature-card {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .feature-card.visible { opacity: 1; transform: translateY(0); }
-    .feature-icon {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: var(--blush);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
-    }
-    .feature-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
-      font-weight: 500;
-      margin-bottom: 0.8rem;
-      color: var(--deep);
-    }
-    .feature-text {
-      font-size: 0.88rem;
-      line-height: 1.9;
-      color: var(--mid);
-    }
+.nav-icon-wrap {
+width: 44px; height: 44px;
+flex-shrink: 0;
+border-radius: 13px;
+background: rgba(255,255,255,0.07);
+display: flex; align-items: center; justify-content: center;
+font-size: 1.3rem;
+transition: all 0.3s;
+border: 1px solid rgba(255,255,255,0.05);
+}
+.nav-item:hover .nav-icon-wrap {
+background: rgba(245,200,66,0.15);
+border-color: rgba(245,200,66,0.3);
+transform: scale(1.05);
+}
+.nav-label {
+font-size: 0.9rem;
+font-weight: 700;
+color: rgba(255,255,255,0.75);
+transition: color 0.2s;
+opacity: 0;
+transition: opacity 0.3s 0.05s, color 0.2s;
+}
+.sidebar.open .nav-label { opacity: 1; }
 
-    /* COLLECTION */
-    .collection {
-      padding: 6rem 4rem 8rem;
-      background: var(--white);
-    }
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 4rem;
-      max-width: 1300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .section-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.8rem;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 300;
-      color: var(--deep);
-      line-height: 1.15;
-    }
-    .section-title em { font-style: italic; color: var(--warm-sage); }
-    .see-all {
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      display: flex; align-items: center; gap: 0.5rem;
-      transition: color 0.3s, gap 0.3s;
-      white-space: nowrap;
-      padding-bottom: 0.2rem;
-      border-bottom: 1px solid var(--light-mid);
-    }
-    .see-all:hover { color: var(--deep); gap: 0.8rem; }
-    .see-all::after { content: '→'; }
+.nav-badge {
+margin-left: auto;
+background: var(–gold);
+color: var(–charcoal);
+font-size: 0.6rem;
+font-weight: 900;
+padding: 2px 7px;
+border-radius: 50px;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.sidebar.open .nav-badge { opacity: 1; }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-    .product-card {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .product-card.visible { opacity: 1; transform: translateY(0); }
-    .product-img {
-      aspect-ratio: 3/4;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 1.2rem;
-      position: relative;
-    }
-    .product-bg {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
-      transition: transform 0.5s ease;
-    }
-    .product-card:hover .product-bg { transform: scale(1.05); }
-    .bg-1 { background: linear-gradient(135deg, #f5e6da, #edd5c5); }
-    .bg-2 { background: linear-gradient(135deg, #d5e5d0, #c1d9ba); }
-    .bg-3 { background: linear-gradient(135deg, #dde5ef, #c8d8ec); }
-    .bg-4 { background: linear-gradient(135deg, #f0e8d5, #e8d9bb); }
-    .product-tag {
-      position: absolute;
-      top: 0.8rem; left: 0.8rem;
-      background: var(--deep);
-      color: var(--white);
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border-radius: 2px;
-    }
-    .tag-new { background: var(--warm-sage); }
-    .product-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--deep);
-      margin-bottom: 0.3rem;
-    }
-    .product-sub {
-      font-size: 0.78rem;
-      color: var(--light-mid);
-      margin-bottom: 0.6rem;
-    }
-    .product-price {
-      font-size: 0.88rem;
-      color: var(--gold);
-      font-weight: 400;
-    }
+.nav-divider {
+height: 1px;
+background: rgba(255,255,255,0.05);
+margin: 8px 16px;
+}
 
-    /* STORY */
-    .story {
-      padding: 8rem 4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: center;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-    .story-visual {
-      position: relative;
-      height: 560px;
-    }
-    .story-img-main {
-      position: absolute;
-      top: 0; left: 0;
-      width: 72%; height: 82%;
-      border-radius: 6px;
-      background: linear-gradient(135deg, var(--blush), #e8cfc0);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 7rem;
-      overflow: hidden;
-    }
-    .story-img-accent {
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 52%; height: 50%;
-      border-radius: 6px;
-      background: linear-gradient(135deg, var(--sage), var(--warm-sage));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 4rem;
-      border: 4px solid var(--cream);
-    }
-    .story-float-badge {
-      position: absolute;
-      top: 42%; left: -24px;
-      background: var(--white);
-      border-radius: 8px;
-      padding: 1rem 1.2rem;
-      box-shadow: 0 12px 40px rgba(58,50,40,0.12);
-      z-index: 3;
-      min-width: 160px;
-    }
-    .badge-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 500;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .badge-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-top: 0.3rem;
-    }
-    .story-content { opacity: 0; transform: translateX(30px); transition: opacity 0.8s, transform 0.8s; }
-    .story-content.visible { opacity: 1; transform: translateX(0); }
-    .story-content .section-eyebrow { margin-bottom: 1rem; }
-    .story-content .section-title { margin-bottom: 1.8rem; }
-    .story-body {
-      font-size: 0.9rem;
-      line-height: 2;
-      color: var(--mid);
-      margin-bottom: 2.5rem;
-    }
-    .story-stats {
-      display: flex;
-      gap: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(58,50,40,0.1);
-    }
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      font-weight: 400;
-      color: var(--deep);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--light-mid);
-      margin-top: 0.4rem;
-    }
+/* Sidebar bottom */
+.sidebar-bottom {
+padding: 16px;
+border-top: 1px solid rgba(245,200,66,0.15);
+overflow: hidden;
+}
+.sidebar-bottom-card {
+background: linear-gradient(135deg, rgba(245,200,66,0.15), rgba(245,200,66,0.05));
+border: 1px solid rgba(245,200,66,0.2);
+border-radius: 16px;
+padding: 14px;
+text-align: center;
+opacity: 0;
+transition: opacity 0.3s;
+overflow: hidden;
+}
+.sidebar.open .sidebar-bottom-card { opacity: 1; }
+.sidebar-bottom-emoji { font-size: 1.8rem; }
+.sidebar-bottom-text { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 6px; line-height: 1.4; }
+.sidebar-bottom-btn {
+display: block;
+margin-top: 10px;
+background: var(–gold);
+color: var(–charcoal);
+border: none;
+border-radius: 50px;
+padding: 7px 16px;
+font-family: ‘Nunito’, sans-serif;
+font-size: 0.75rem;
+font-weight: 800;
+cursor: pointer;
+width: 100%;
+transition: all 0.2s;
+}
+.sidebar-bottom-btn:hover { background: var(–gold-dark); }
 
-    /* VALUES */
-    .values {
-      background: var(--deep);
-      padding: 8rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .values::before {
-      content: '';
-      position: absolute;
-      top: -20%; right: -10%;
-      width: 50%; aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
-    }
-    .values-inner { max-width: 1300px; margin: 0 auto; }
-    .values .section-eyebrow { color: var(--gold); }
-    .values .section-title { color: var(--white); margin-bottom: 4rem; }
-    .values .section-title em { color: var(--sage); }
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 3rem;
-    }
-    .value-item {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .value-item.visible { opacity: 1; transform: translateY(0); }
-    .value-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 300;
-      color: rgba(201,169,110,0.25);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .value-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 0.8rem;
-    }
-    .value-text {
-      font-size: 0.83rem;
-      line-height: 1.9;
-      color: rgba(255,255,255,0.45);
-    }
+/* Sidebar collapsed bottom icons */
+.sidebar-mini-icons {
+display: flex;
+flex-direction: column;
+gap: 8px;
+align-items: center;
+padding-bottom: 12px;
+}
+.sidebar.open .sidebar-mini-icons { display: none; }
 
-    /* CHARITY BANNER */
-    .charity {
-      background: var(--blush);
-      padding: 5rem 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .charity::before, .charity::after {
-      content: '♡';
-      position: absolute;
-      font-size: 18rem;
-      color: rgba(201,169,110,0.08);
-      top: -2rem;
-      font-family: serif;
-    }
-    .charity::before { left: -3rem; }
-    .charity::after { right: -3rem; }
-    .charity-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 2; }
-    .charity-icon { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; }
-    .charity-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 300;
-      color: var(--deep);
-      margin-bottom: 1.2rem;
-      line-height: 1.2;
-    }
-    .charity-title em { font-style: italic; color: var(--gold); }
-    .charity-text {
-      font-size: 0.9rem;
-      line-height: 1.9;
-      color: var(--mid);
-      margin-bottom: 2.2rem;
-    }
+/* ═══════════════════════════════════
+MAIN LAYOUT
+═══════════════════════════════════ */
+.main-wrap {
+margin-left: var(–sidebar-w);
+transition: margin-left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+min-height: 100vh;
+}
+.sidebar.open ~ .main-wrap { margin-left: var(–sidebar-open); }
 
-    /* TESTIMONIALS */
-    .testimonials {
-      padding: 8rem 4rem;
-      background: var(--white);
-    }
-    .testimonials-inner { max-width: 1300px; margin: 0 auto; }
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
-      margin-top: 4rem;
-    }
-    .testi-card {
-      background: var(--cream);
-      border-radius: 6px;
-      padding: 2.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .testi-card.visible { opacity: 1; transform: translateY(0); }
-    .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; }
-    .testi-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--deep);
-      line-height: 1.65;
-      margin-bottom: 1.5rem;
-    }
-    .testi-author {
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .testi-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--blush);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-    }
-    .testi-name { font-size: 0.8rem; font-weight: 500; color: var(--deep); }
-    .testi-location { font-size: 0.72rem; color: var(--light-mid); }
+/* ═══════════════════════════════════
+TOP CORNER HEADER
+═══════════════════════════════════ */
+.topbar {
+position: sticky;
+top: 0;
+z-index: 900;
+background: rgba(255,253,245,0.92);
+backdrop-filter: blur(16px);
+border-bottom: 1px solid rgba(245,200,66,0.2);
+padding: 0 36px;
+height: 70px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
 
-    /* NEWSLETTER */
-    .newsletter {
-      padding: 7rem 4rem;
-      text-align: center;
-      background: var(--cream);
-    }
-    .newsletter-inner { max-width: 560px; margin: 0 auto; }
-    .newsletter .section-title { margin-bottom: 0.8rem; }
-    .newsletter-sub {
-      font-size: 0.88rem;
-      color: var(--mid);
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-    .newsletter-form {
-      display: flex;
-      gap: 0;
-      max-width: 440px;
-      margin: 0 auto;
-      border: 1px solid rgba(58,50,40,0.15);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .newsletter-input {
-      flex: 1;
-      padding: 1rem 1.3rem;
-      border: none;
-      background: var(--white);
-      font-family: 'Jost', sans-serif;
-      font-size: 0.85rem;
-      color: var(--deep);
-      outline: none;
-    }
-    .newsletter-input::placeholder { color: var(--light-mid); }
-    .newsletter-btn {
-      padding: 1rem 1.8rem;
-      background: var(--deep);
-      color: var(--white);
-      border: none;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      cursor: none;
-      transition: background 0.3s;
-    }
-    .newsletter-btn:hover { background: var(--gold); }
+/* Corner decoration */
+.topbar::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: linear-gradient(90deg, var(–gold), var(–tangerine), var(–kiwi), var(–sky), var(–gold));
+background-size: 200%;
+animation: shimmerBar 3s linear infinite;
+}
+@keyframes shimmerBar {
+0% { background-position: 0% 50%; }
+100% { background-position: 200% 50%; }
+}
 
-    /* FOOTER */
-    footer {
-      background: var(--deep);
-      padding: 5rem 4rem 2.5rem;
-      color: rgba(255,255,255,0.5);
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 4rem;
-      margin-bottom: 4rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .footer-brand-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 0.8rem;
-    }
-    .footer-brand-name span { color: var(--gold); }
-    .footer-desc {
-      font-size: 0.82rem;
-      line-height: 1.9;
-      margin-bottom: 1.8rem;
-    }
-    .footer-socials { display: flex; gap: 1rem; }
-    .social-btn {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem;
-      text-decoration: none;
-      color: rgba(255,255,255,0.5);
-      transition: border-color 0.3s, color 0.3s;
-    }
-    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .footer-col-title {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-    }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
-    .footer-links a {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .footer-links a:hover { color: rgba(255,255,255,0.8); }
-    .footer-bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.72rem;
-    }
-    .footer-bottom a { color: var(--gold); text-decoration: none; }
+.topbar-left {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+.topbar-crumb {
+font-size: 0.8rem;
+color: rgba(0,0,0,0.35);
+font-weight: 600;
+display: flex; align-items: center; gap: 6px;
+}
+.topbar-crumb span { color: var(–charcoal); font-weight: 800; }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-16px); }
-    }
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-    @keyframes scroll-drop {
-      0%, 100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
-      50% { opacity: 0.4; transform: scaleY(0.6); transform-origin: bottom; }
-    }
+.topbar-search {
+display: flex;
+align-items: center;
+gap: 10px;
+background: rgba(0,0,0,0.04);
+border: 1.5px solid rgba(0,0,0,0.07);
+border-radius: 50px;
+padding: 8px 18px;
+transition: all 0.2s;
+width: 260px;
+}
+.topbar-search:focus-within {
+border-color: var(–gold);
+background: white;
+box-shadow: 0 0 0 4px rgba(245,200,66,0.12);
+}
+.topbar-search input {
+border: none; background: transparent;
+font-family: ‘Nunito’, sans-serif;
+font-size: 0.88rem;
+font-weight: 600;
+outline: none;
+width: 100%;
+color: var(–charcoal);
+}
+.topbar-search input::placeholder { color: #bbb; font-weight: 500; }
 
-    @media (max-width: 1100px) {
-      .product-grid { grid-template-columns: repeat(2, 1fr); }
-      .values-grid { grid-template-columns: repeat(2, 1fr); }
-      nav { padding: 1.5rem 2rem; }
-    }
-    @media (max-width: 768px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-right { height: 50vw; }
-      .story { grid-template-columns: 1fr; }
-      .story-visual { height: 320px; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .testi-grid { grid-template-columns: 1fr; }
-      .features { grid-template-columns: 1fr; padding: 4rem 2rem; }
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .hero-left { padding: 7rem 2rem 4rem; }
-    }
-  </style>
+.topbar-right {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.animal-fruits-strip {
+display: flex;
+gap: 6px;
+align-items: center;
+background: rgba(245,200,66,0.1);
+border: 1px solid rgba(245,200,66,0.25);
+border-radius: 50px;
+padding: 5px 14px;
+}
+.animal-fruits-strip span {
+font-size: 1.2rem;
+animation: wobble 3s ease-in-out infinite;
+}
+.animal-fruits-strip span:nth-child(1) { animation-delay: 0s; }
+.animal-fruits-strip span:nth-child(2) { animation-delay: 0.4s; }
+.animal-fruits-strip span:nth-child(3) { animation-delay: 0.8s; }
+.animal-fruits-strip span:nth-child(4) { animation-delay: 1.2s; }
+.animal-fruits-strip span:nth-child(5) { animation-delay: 1.6s; }
+@keyframes wobble {
+0%, 100% { transform: rotate(0deg) scale(1); }
+25% { transform: rotate(-8deg) scale(1.1); }
+75% { transform: rotate(8deg) scale(1.1); }
+}
+
+.topbar-icon {
+width: 42px; height: 42px;
+border-radius: 13px;
+background: white;
+border: 1.5px solid rgba(0,0,0,0.07);
+display: flex; align-items: center; justify-content: center;
+font-size: 1.05rem;
+cursor: pointer;
+transition: all 0.2s;
+position: relative;
+}
+.topbar-icon:hover { border-color: var(–gold); background: rgba(245,200,66,0.08); transform: scale(1.05); }
+.topbar-icon .badge {
+position: absolute;
+top: -5px; right: -5px;
+width: 18px; height: 18px;
+background: var(–tangerine);
+color: white;
+border-radius: 50%;
+font-size: 0.62rem;
+font-weight: 900;
+display: flex; align-items: center; justify-content: center;
+border: 2px solid var(–cream);
+}
+
+.topbar-profile {
+display: flex; align-items: center; gap: 10px;
+cursor: pointer;
+padding: 6px 14px 6px 6px;
+border-radius: 50px;
+border: 1.5px solid rgba(0,0,0,0.07);
+background: white;
+transition: all 0.2s;
+}
+.topbar-profile:hover { border-color: var(–gold); }
+.profile-ava {
+width: 32px; height: 32px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(–blush), var(–tangerine));
+display: flex; align-items: center; justify-content: center;
+font-size: 1rem;
+}
+.profile-name { font-size: 0.82rem; font-weight: 800; color: var(–charcoal); }
+
+/* ═══════════════════════════════════
+PAGE CONTENT
+═══════════════════════════════════ */
+.page { padding: 0; }
+
+/* ═══════════════════════════════════
+HERO
+═══════════════════════════════════ */
+.hero {
+min-height: calc(100vh - 70px);
+display: grid;
+grid-template-columns: 1fr 1fr;
+position: relative;
+overflow: hidden;
+}
+
+/* Left panel */
+.hero-left {
+background: linear-gradient(160deg, #1C1C1E 0%, #2C2C2E 60%, #1a2e1a 100%);
+padding: 60px 56px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+position: relative;
+overflow: hidden;
+}
+
+/* Luxury pattern overlay */
+.hero-left::before {
+content: ‘’;
+position: absolute; inset: 0;
+background-image:
+radial-gradient(circle at 10% 20%, rgba(245,200,66,0.08) 0%, transparent 40%),
+radial-gradient(circle at 90% 80%, rgba(118,196,66,0.06) 0%, transparent 40%);
+pointer-events: none;
+}
+
+/* Floating fruit/animal decorations */
+.hero-deco {
+position: absolute;
+font-size: 2rem;
+animation: floatDeco 6s ease-in-out infinite;
+pointer-events: none;
+filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+.hero-deco:nth-child(1) { top: 8%; left: 8%; animation-delay: 0s; font-size: 2.5rem; }
+.hero-deco:nth-child(2) { top: 15%; right: 10%; animation-delay: -1.5s; font-size: 1.8rem; }
+.hero-deco:nth-child(3) { bottom: 20%; left: 5%; animation-delay: -3s; font-size: 2rem; }
+.hero-deco:nth-child(4) { bottom: 10%; right: 8%; animation-delay: -4.5s; font-size: 1.6rem; }
+.hero-deco:nth-child(5) { top: 50%; left: 3%; animation-delay: -2s; font-size: 1.4rem; }
+@keyframes floatDeco {
+0%, 100% { transform: translateY(0) rotate(-5deg); opacity: 0.7; }
+50% { transform: translateY(-18px) rotate(5deg); opacity: 1; }
+}
+
+.hero-tag {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: rgba(245,200,66,0.12);
+border: 1px solid rgba(245,200,66,0.35);
+color: var(–gold);
+padding: 7px 18px;
+border-radius: 50px;
+font-size: 0.75rem;
+font-weight: 800;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 28px;
+width: fit-content;
+animation: fadeSlideUp 0.7s ease 0.2s both;
+}
+.tag-dot { width: 8px; height: 8px; background: var(–gold); border-radius: 50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+
+.hero-title {
+font-family: ‘Fredoka One’, cursive;
+font-size: clamp(3rem, 5vw, 5.5rem);
+line-height: 1.05;
+margin-bottom: 28px;
+animation: fadeSlideUp 0.7s ease 0.35s both;
+}
+.hero-title .t1 { color: white; display: block; }
+.hero-title .t2 {
+display: block;
+background: linear-gradient(135deg, var(–gold), var(–mango), var(–tangerine));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 2px 8px rgba(245,200,66,0.3));
+}
+.hero-title .t3 { color: var(–kiwi); display: block; }
+
+.hero-desc {
+color: rgba(255,255,255,0.55);
+font-size: 1rem;
+line-height: 1.8;
+max-width: 400px;
+margin-bottom: 40px;
+animation: fadeSlideUp 0.7s ease 0.5s both;
+font-weight: 500;
+}
+
+.hero-ctas {
+display: flex;
+gap: 14px;
+align-items: center;
+flex-wrap: wrap;
+margin-bottom: 50px;
+animation: fadeSlideUp 0.7s ease 0.65s both;
+}
+
+.btn-gold {
+background: linear-gradient(135deg, var(–gold), var(–gold-dark));
+color: var(–charcoal);
+padding: 15px 34px;
+border-radius: 50px;
+border: none;
+font-family: ‘Nunito’, sans-serif;
+font-size: 0.95rem;
+font-weight: 900;
+cursor: pointer;
+box-shadow: 0 6px 25px rgba(245,200,66,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+transition: all 0.3s;
+display: inline-flex; align-items: center; gap: 8px;
+letter-spacing: 0.2px;
+}
+.btn-gold:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 35px rgba(245,200,66,0.6); }
+
+.btn-ghost {
+background: transparent;
+color: rgba(255,255,255,0.8);
+padding: 14px 30px;
+border-radius: 50px;
+border: 1.5px solid rgba(255,255,255,0.2);
+font-family: ‘Nunito’, sans-serif;
+font-size: 0.95rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.3s;
+display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-ghost:hover { border-color: var(–gold); color: var(–gold); background: rgba(245,200,66,0.05); }
+
+/* Stats row */
+.hero-stats {
+display: flex;
+gap: 0;
+animation: fadeSlideUp 0.7s ease 0.8s both;
+}
+.hstat {
+text-align: left;
+padding-right: 30px;
+border-right: 1px solid rgba(255,255,255,0.1);
+margin-right: 30px;
+}
+.hstat:last-child { border: none; }
+.hstat-num {
+font-family: ‘Fredoka One’, cursive;
+font-size: 2rem;
+color: var(–gold);
+line-height: 1;
+}
+.hstat-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.4); font-weight: 700; letter-spacing: 0.5px; margin-top: 3px; text-transform: uppercase; }
+
+@keyframes fadeSlideUp {
+from { opacity: 0; transform: translateY(24px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Right panel */
+.hero-right {
+background: linear-gradient(145deg, var(–ivory) 0%, #FFF5E0 50%, #FFF9EE 100%);
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+}
+
+/* Luxury dot pattern */
+.hero-right::before {
+content: ‘’;
+position: absolute; inset: 0;
+background-image: radial-gradient(circle, rgba(245,200,66,0.12) 1px, transparent 1px);
+background-size: 28px 28px;
+}
+
+/* Big circular showcase */
+.hero-showcase {
+position: relative;
+width: 420px;
+height: 420px;
+z-index: 2;
+animation: fadeSlideUp 0.8s ease 0.4s both;
+}
+
+.showcase-ring {
+position: absolute;
+inset: 0;
+border-radius: 50%;
+border: 2px dashed rgba(245,200,66,0.3);
+animation: rotateSlow 20s linear infinite;
+}
+.showcase-ring-2 {
+position: absolute;
+inset: 30px;
+border-radius: 50%;
+border: 1.5px dashed rgba(118,196,66,0.2);
+animation: rotateSlow 15s linear infinite reverse;
+}
+@keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Orbiting items on the ring */
+.orbit-item {
+position: absolute;
+width: 54px; height: 54px;
+border-radius: 50%;
+background: white;
+box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+display: flex; align-items: center; justify-content: center;
+font-size: 1.5rem;
+border: 2px solid rgba(245,200,66,0.3);
+animation: counterRotate 20s linear infinite;
+}
+@keyframes counterRotate { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+/* Position orbit items on the circle (ring radius ~185px from center=210,210) */
+.orbit-item:nth-child(1) { top: 7px; left: calc(50% - 27px); }
+.orbit-item:nth-child(2) { top: calc(50% - 27px); right: 7px; }
+.orbit-item:nth-child(3) { bottom: 7px; left: calc(50% - 27px); }
+.orbit-item:nth-child(4) { top: calc(50% - 27px); left: 7px; }
+
+/* Center card */
+.showcase-center {
+position: absolute;
+inset: 60px;
+border-radius: 50%;
+background: linear-gradient(145deg, #FFF8EC, #FFF0D6);
+display: flex; flex-direction: column; align-items: center; justify-content: center;
+box-shadow: 0 20px 60px rgba(245,200,66,0.25), 0 0 0 6px white, 0 0 0 8px rgba(245,200,66,0.15);
+z-index: 3;
+overflow: hidden;
+}
+.showcase-main-emoji { font-size: 7rem; animation: heroFloat 4s ease-in-out infinite; }
+@keyframes heroFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-12px) scale(1.05); } }
+.showcase-label {
+font-family: ‘Fredoka One’, cursive;
+font-size: 0.9rem;
+color: var(–gold-dark);
+letter-spacing: 0.5px;
+}
+
+/* Floating product mini cards around hero right */
+.hero-product-float {
+position: absolute;
+background: white;
+border-radius: 18px;
+padding: 12px 15px;
+box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+border: 1.5px solid rgba(245,200,66,0.2);
+z-index: 5;
+animation: floatCard 5s ease-in-out infinite;
+white-space: nowrap;
+}
+.hero-product-float:nth-child(7) { top: 12%; right: 5%; animation-delay: 0s; }
+.hero-product-float:nth-child(8) { bottom: 18%; right: 5%; animation-delay: -2s; }
+.hero-product-float:nth-child(9) { bottom: 35%; left: 3%; animation-delay: -1s; }
+@keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.hpf-emoji { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+.hpf-name { font-size: 0.75rem; font-weight: 800; color: var(–charcoal); }
+.hpf-price { font-family: ‘Fredoka One’, cursive; font-size: 1rem; color: var(–gold-dark); }
+
+/* ═══════════════════════════════════
+MARQUEE
+═══════════════════════════════════ */
+.marquee-wrap {
+background: linear-gradient(90deg, var(–charcoal), #2a2a2a, var(–charcoal));
+padding: 14px 0;
+overflow: hidden;
+border-top: 2px solid rgba(245,200,66,0.3);
+border-bottom: 2px solid rgba(245,200,66,0.3);
+}
+.marquee-track {
+display: flex;
+animation: marquee 25s linear infinite;
+width: max-content;
+}
+.mq-item {
+display: flex; align-items: center; gap: 10px;
+padding: 0 28px;
+color: rgba(255,255,255,0.6);
+font-size: 0.8rem;
+font-weight: 800;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+white-space: nowrap;
+}
+.mq-sep { color: var(–gold); font-size: 0.7rem; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ═══════════════════════════════════
+SECTIONS COMMON
+═══════════════════════════════════ */
+.section { padding: 80px 48px; }
+.section-alt { background: white; }
+.sec-header { margin-bottom: 50px; }
+.sec-eyebrow {
+display: inline-flex; align-items: center; gap: 8px;
+font-size: 0.7rem;
+font-weight: 900;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–gold-dark);
+margin-bottom: 12px;
+}
+.sec-eyebrow::before, .sec-eyebrow::after { content: ‘✦’; font-size: 0.55rem; color: var(–gold); }
+.sec-title {
+font-family: ‘Fredoka One’, cursive;
+font-size: clamp(2rem, 3.5vw, 3rem);
+color: var(–charcoal);
+line-height: 1.15;
+margin-bottom: 12px;
+}
+.sec-title em { color: var(–gold-dark); font-style: normal; }
+.sec-sub { font-size: 0.95rem; color: #888; max-width: 480px; line-height: 1.7; font-weight: 500; }
+
+/* ═══════════════════════════════════
+ANIMAL THEME CATEGORIES
+═══════════════════════════════════ */
+.animal-cats-grid {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+gap: 16px;
+}
+.acat {
+position: relative;
+border-radius: 22px;
+padding: 28px 16px 22px;
+text-align: center;
+cursor: pointer;
+overflow: hidden;
+transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+border: 2px solid rgba(0,0,0,0.04);
+}
+.acat::before {
+content: ‘’;
+position: absolute; inset: 0;
+border-radius: 20px;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.acat:hover { transform: translateY(-10px) scale(1.03); }
+.acat:hover::before { opacity: 1; }
+
+.acat:nth-child(1) { background: linear-gradient(145deg, #FFF8EC, #FFE9BC); }
+.acat:nth-child(1)::before { background: linear-gradient(145deg, rgba(245,200,66,0.15), transparent); border: 2px solid var(–gold); }
+.acat:nth-child(2) { background: linear-gradient(145deg, #FFF0F5, #FFD6E7); }
+.acat:nth-child(2)::before { border: 2px solid var(–blush); }
+.acat:nth-child(3) { background: linear-gradient(145deg, #F0FFF4, #C8F7D5); }
+.acat:nth-child(3)::before { border: 2px solid var(–kiwi); }
+.acat:nth-child(4) { background: linear-gradient(145deg, #F0F8FF, #C8E8FF); }
+.acat:nth-child(4)::before { border: 2px solid var(–sky); }
+.acat:nth-child(5) { background: linear-gradient(145deg, #FFF5F0, #FFD8C8); }
+.acat:nth-child(5)::before { border: 2px solid var(–tangerine); }
+
+.acat-mascot {
+font-size: 3.5rem;
+display: block;
+margin-bottom: 10px;
+filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+animation: animalBounce 2.5s ease-in-out infinite;
+}
+.acat:nth-child(1) .acat-mascot { animation-delay: 0s; }
+.acat:nth-child(2) .acat-mascot { animation-delay: 0.5s; }
+.acat:nth-child(3) .acat-mascot { animation-delay: 1s; }
+.acat:nth-child(4) .acat-mascot { animation-delay: 1.5s; }
+.acat:nth-child(5) .acat-mascot { animation-delay: 2s; }
+@keyframes animalBounce {
+0%, 100% { transform: translateY(0) rotate(-3deg); }
+50% { transform: translateY(-8px) rotate(3deg); }
+}
+.acat-name { font-family: ‘Fredoka One’, cursive; font-size: 1rem; color: var(–charcoal); margin-bottom: 4px; }
+.acat-count { font-size: 0.72rem; color: #aaa; font-weight: 700; }
+.acat-fruit {
+position: absolute;
+top: 10px; right: 12px;
+font-size: 1rem;
+animation: fruitSpin 4s ease-in-out infinite;
+}
+@keyframes fruitSpin {
+0%, 100% { transform: rotate(-15deg) scale(1); }
+50% { transform: rotate(15deg) scale(1.2); }
+}
+
+/* ═══════════════════════════════════
+PRODUCT GRID — LUXURY STYLE
+═══════════════════════════════════ */
+.product-filters {
+display: flex; gap: 10px;
+margin-bottom: 36px;
+flex-wrap: wrap;
+}
+.pf-btn {
+display: flex; align-items: center; gap: 6px;
+padding: 8px 20px;
+border-radius: 50px;
+border: 1.5px solid rgba(0,0,0,0.08);
+background: white;
+font-family: ‘Nunito’, sans-serif;
+font-weight: 800;
+font-size: 0.83rem;
+cursor: pointer;
+transition: all 0.2s;
+color: #777;
+}
+.pf-btn.active, .pf-btn:hover {
+background: var(–charcoal);
+color: var(–gold);
+border-color: var(–charcoal);
+}
+
+.products-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 22px;
+}
+
+.pcard {
+background: white;
+border-radius: 24px;
+overflow: hidden;
+cursor: pointer;
+transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+border: 1.5px solid rgba(0,0,0,0.04);
+position: relative;
+}
+.pcard:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); border-color: rgba(245,200,66,0.3); }
+
+.pcard-img {
+height: 220px;
+display: flex; align-items: center; justify-content: center;
+position: relative;
+overflow: hidden;
+transition: transform 0.4s ease;
+}
+.pcard:hover .pcard-img { transform: scale(1.04); }
+
+/* Individual product backgrounds with luxury gradient */
+.pcard:nth-child(1) .pcard-img { background: linear-gradient(145deg, #FFF8EC, #FDEAC0); }
+.pcard:nth-child(2) .pcard-img { background: linear-gradient(145deg, #FFF0F7, #FFD6EA); }
+.pcard:nth-child(3) .pcard-img { background: linear-gradient(145deg, #F0FFF4, #C8F7D5); }
+.pcard:nth-child(4) .pcard-img { background: linear-gradient(145deg, #F0F8FF, #C8E4FF); }
+.pcard:nth-child(5) .pcard-img { background: linear-gradient(145deg, #FFF5F0, #FFD8C8); }
+.pcard:nth-child(6) .pcard-img { background: linear-gradient(145deg, #FDF0FF, #ECC8FF); }
+.pcard:nth-child(7) .pcard-img { background: linear-gradient(145deg, #FFFBF0, #FFF0C0); }
+.pcard:nth-child(8) .pcard-img { background: linear-gradient(145deg, #F0FFFC, #C0FFF0); }
+
+/* Cartoon clothing emoji */
+.pcard-emoji {
+font-size: 5.5rem;
+animation: clothesBounce 3s ease-in-out infinite;
+filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
+z-index: 1;
+}
+@keyframes clothesBounce { 0%, 100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.08) rotate(2deg); } }
+
+/* Animal mascot on each card */
+.pcard-mascot {
+position: absolute;
+bottom: 8px; right: 10px;
+font-size: 1.6rem;
+filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+animation: mascotWiggle 2.5s ease-in-out infinite;
+}
+@keyframes mascotWiggle { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+.pcard-badge {
+position: absolute;
+top: 12px; left: 12px;
+font-size: 0.65rem;
+font-weight: 900;
+padding: 4px 11px;
+border-radius: 50px;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+z-index: 2;
+}
+.pcard-badge.new { background: var(–forest); color: var(–gold); }
+.pcard-badge.hot { background: var(–tangerine); color: white; }
+.pcard-badge.sale { background: var(–berry); color: white; }
+
+.pcard-wish {
+position: absolute;
+top: 10px; right: 10px;
+width: 32px; height: 32px;
+background: white;
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 0.9rem;
+box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+opacity: 0;
+transform: scale(0.7);
+transition: all 0.2s;
+cursor: pointer;
+z-index: 2;
+}
+.pcard:hover .pcard-wish { opacity: 1; transform: scale(1); }
+
+.pcard-body { padding: 16px 18px 18px; }
+.pcard-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
+.pcard-name { font-family: ‘Fredoka One’, cursive; font-size: 1rem; color: var(–charcoal); line-height: 1.3; }
+.pcard-fruit-icon { font-size: 1.1rem; }
+.pcard-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.pcard-age { font-size: 0.7rem; background: rgba(245,200,66,0.12); color: var(–gold-dark); font-weight: 800; padding: 2px 8px; border-radius: 50px; border: 1px solid rgba(245,200,66,0.25); }
+.pcard-stars { font-size: 0.75rem; color: var(–gold); }
+.pcard-colors { display: flex; gap: 5px; margin-bottom: 12px; }
+.cdot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 1.5px rgba(0,0,0,0.1); transition: transform 0.2s; cursor: pointer; }
+.cdot:hover { transform: scale(1.4); }
+.pcard-foot { display: flex; align-items: center; justify-content: space-between; }
+.pcard-price .old { font-size: 0.72rem; color: #ccc; text-decoration: line-through; display: block; line-height: 1; }
+.pcard-price .now { font-family: ‘Fredoka One’, cursive; font-size: 1.3rem; color: var(–charcoal); }
+.cart-btn {
+width: 40px; height: 40px;
+border-radius: 13px;
+background: linear-gradient(135deg, var(–gold), var(–gold-dark));
+border: none;
+color: var(–charcoal);
+font-size: 1.1rem;
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
+box-shadow: 0 4px 14px rgba(245,200,66,0.4);
+transition: all 0.2s;
+font-weight: 900;
+}
+.cart-btn:hover { transform: scale(1.15) rotate(-8deg); box-shadow: 0 7px 20px rgba(245,200,66,0.6); }
+
+/* ═══════════════════════════════════
+LUXURY BANNER
+═══════════════════════════════════ */
+.lux-banner {
+margin: 0 48px 80px;
+border-radius: 30px;
+background: linear-gradient(135deg, var(–charcoal) 0%, #1a2a1a 40%, #0d1a0d 100%);
+padding: 60px 56px;
+display: flex;
+align-items: center;
+gap: 60px;
+overflow: hidden;
+position: relative;
+border: 1.5px solid rgba(245,200,66,0.2);
+}
+.lux-banner::before {
+content: ‘’;
+position: absolute; inset: 0;
+background:
+radial-gradient(circle at 15% 50%, rgba(245,200,66,0.12), transparent 50%),
+radial-gradient(circle at 80% 20%, rgba(118,196,66,0.08), transparent 40%);
+}
+.lux-banner-animals {
+position: absolute;
+bottom: 0; right: 0;
+display: flex;
+gap: -10px;
+font-size: 5rem;
+line-height: 1;
+opacity: 0.15;
+filter: grayscale(0.3);
+}
+.lux-banner-animals span { display: block; }
+
+.lux-banner-left { flex: 1; position: relative; z-index: 1; }
+.lux-pretitle { color: var(–gold); font-size: 0.7rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+.lux-title { font-family: ‘Fredoka One’, cursive; font-size: 2.8rem; color: white; line-height: 1.15; margin-bottom: 16px; }
+.lux-title span { color: var(–gold); }
+.lux-desc { color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.7; margin-bottom: 28px; max-width: 400px; }
+
+.lux-banner-right {
+display: flex;
+gap: 14px;
+position: relative;
+z-index: 1;
+flex-shrink: 0;
+}
+.lux-card {
+width: 120px;
+background: rgba(255,255,255,0.06);
+border: 1px solid rgba(245,200,66,0.2);
+border-radius: 20px;
+padding: 20px 12px;
+text-align: center;
+transition: all 0.3s;
+}
+.lux-card:hover { background: rgba(245,200,66,0.1); transform: translateY(-5px); border-color: var(–gold); }
+.lux-card-fruit { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+.lux-card-pct { font-family: ‘Fredoka One’, cursive; font-size: 1.6rem; color: var(–gold); }
+.lux-card-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.45); margin-top: 4px; font-weight: 700; }
+
+/* ═══════════════════════════════════
+WHY US — ICON CARDS
+═══════════════════════════════════ */
+.why-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+}
+.why-card {
+border-radius: 24px;
+padding: 32px 24px;
+text-align: center;
+position: relative;
+overflow: hidden;
+transition: all 0.3s;
+border: 1.5px solid rgba(0,0,0,0.04);
+}
+.why-card::after {
+content: ‘’;
+position: absolute;
+bottom: -40px; right: -40px;
+width: 100px; height: 100px;
+border-radius: 50%;
+opacity: 0.08;
+transition: transform 0.4s;
+}
+.why-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.07); }
+.why-card:hover::after { transform: scale(2.5); }
+.why-card:nth-child(1) { background: linear-gradient(145deg, #FFFBF0, #FFF5DC); }
+.why-card:nth-child(1)::after { background: var(–gold); }
+.why-card:nth-child(2) { background: linear-gradient(145deg, #F0FFF5, #DCFFEC); }
+.why-card:nth-child(2)::after { background: var(–kiwi); }
+.why-card:nth-child(3) { background: linear-gradient(145deg, #FFF0F5, #FFD6E7); }
+.why-card:nth-child(3)::after { background: var(–blush); }
+.why-card:nth-child(4) { background: linear-gradient(145deg, #F0F8FF, #D6EEFF); }
+.why-card:nth-child(4)::after { background: var(–sky); }
+
+.why-icon { font-size: 3rem; display: block; margin-bottom: 14px; animation: animalBounce 3s ease-in-out infinite; }
+.why-card:nth-child(1) .why-icon { animation-delay: 0s; }
+.why-card:nth-child(2) .why-icon { animation-delay: 0.75s; }
+.why-card:nth-child(3) .why-icon { animation-delay: 1.5s; }
+.why-card:nth-child(4) .why-icon { animation-delay: 2.25s; }
+
+.why-title { font-family: ‘Fredoka One’, cursive; font-size: 1.1rem; color: var(–charcoal); margin-bottom: 8px; }
+.why-desc { font-size: 0.83rem; color: #999; line-height: 1.65; font-weight: 500; }
+
+/* ═══════════════════════════════════
+TESTIMONIALS
+═══════════════════════════════════ */
+.testi-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 22px;
+}
+.tcard {
+background: white;
+border-radius: 24px;
+padding: 28px;
+box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+border: 1.5px solid rgba(0,0,0,0.04);
+transition: all 0.3s;
+position: relative;
+overflow: hidden;
+}
+.tcard::before {
+content: ‘”’;
+position: absolute;
+top: -10px; right: 20px;
+font-size: 8rem;
+font-family: ‘Playfair Display’, serif;
+color: rgba(245,200,66,0.08);
+line-height: 1;
+pointer-events: none;
+}
+.tcard:hover { transform: translateY(-6px); box-shadow: 0 16px 45px rgba(0,0,0,0.1); border-color: rgba(245,200,66,0.25); }
+.tcard-stars { color: var(–gold); font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 14px; }
+.tcard-text { font-size: 0.9rem; color: #555; line-height: 1.75; margin-bottom: 20px; font-style: italic; font-weight: 500; }
+.tcard-author { display: flex; align-items: center; gap: 12px; }
+.tcard-ava {
+width: 46px; height: 46px;
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.4rem;
+flex-shrink: 0;
+position: relative;
+}
+.tcard:nth-child(1) .tcard-ava { background: linear-gradient(135deg, #FDEAC0, #FBD36A); }
+.tcard:nth-child(2) .tcard-ava { background: linear-gradient(135deg, #C8F7D5, #76C442); }
+.tcard:nth-child(3) .tcard-ava { background: linear-gradient(135deg, #FFD6EA, #FF8FA3); }
+.tcard-fruit-badge {
+position: absolute;
+bottom: -3px; right: -3px;
+font-size: 0.7rem;
+background: white;
+border-radius: 50%;
+width: 18px; height: 18px;
+display: flex; align-items: center; justify-content: center;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.tcard-name { font-weight: 900; font-size: 0.9rem; color: var(–charcoal); }
+.tcard-loc { font-size: 0.72rem; color: #bbb; font-weight: 600; }
+
+/* ═══════════════════════════════════
+NEWSLETTER
+═══════════════════════════════════ */
+.nl-section {
+margin: 0 48px 80px;
+border-radius: 30px;
+background: linear-gradient(135deg, #FFF8EC 0%, #FFF0D0 50%, #FFF8EC 100%);
+border: 2px solid rgba(245,200,66,0.3);
+padding: 60px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.nl-section::before {
+content: ‘’;
+position: absolute; inset: 0;
+background-image: radial-gradient(circle, rgba(245,200,66,0.15) 1px, transparent 1px);
+background-size: 24px 24px;
+}
+.nl-animals {
+display: flex; justify-content: center; gap: 8px;
+font-size: 2.2rem;
+margin-bottom: 20px;
+position: relative; z-index: 1;
+}
+.nl-animals span { animation: animalBounce 2s ease-in-out infinite; display: block; }
+.nl-animals span:nth-child(1) { animation-delay: 0s; }
+.nl-animals span:nth-child(2) { animation-delay: 0.3s; }
+.nl-animals span:nth-child(3) { animation-delay: 0.6s; }
+.nl-animals span:nth-child(4) { animation-delay: 0.9s; }
+.nl-animals span:nth-child(5) { animation-delay: 1.2s; }
+.nl-title { font-family: ‘Fredoka One’, cursive; font-size: 2.4rem; color: var(–charcoal); margin-bottom: 10px; position: relative; z-index: 1; }
+.nl-title span { color: var(–gold-dark); }
+.nl-sub { color: #888; font-size: 0.95rem; margin-bottom: 30px; position: relative; z-index: 1; font-weight: 500; }
+.nl-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; position: relative; z-index: 1; }
+.nl-input {
+flex: 1;
+padding: 14px 22px;
+border-radius: 50px;
+border: 2px solid rgba(245,200,66,0.3);
+background: white;
+font-family: ‘Nunito’, sans-serif;
+font-size: 0.9rem;
+font-weight: 600;
+outline: none;
+transition: all 0.2s;
+}
+.nl-input:focus { border-color: var(–gold); box-shadow: 0 0 0 4px rgba(245,200,66,0.12); }
+.nl-input::placeholder { color: #ccc; }
+
+/* ═══════════════════════════════════
+FOOTER
+═══════════════════════════════════ */
+footer {
+background: var(–charcoal);
+padding: 60px 48px 28px;
+border-top: 2px solid rgba(245,200,66,0.15);
+}
+.footer-grid {
+display: grid;
+grid-template-columns: 2.2fr 1fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 40px;
+}
+.footer-logo-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-logo-mark { width: 44px; height: 44px; background: linear-gradient(135deg, var(–gold), var(–gold-dark)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+.footer-logo-text { font-family: ‘Fredoka One’, cursive; font-size: 1.5rem; color: var(–gold); }
+.footer-about { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.75; margin-bottom: 20px; font-weight: 500; }
+.footer-animal-strip { display: flex; gap: 8px; font-size: 1.3rem; margin-bottom: 20px; }
+.footer-socials { display: flex; flex-direction: column; gap: 10px; }
+.footer-social-link {
+display: flex; align-items: center; gap: 12px;
+text-decoration: none;
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.08);
+border-radius: 12px;
+padding: 10px 14px;
+transition: all 0.25s;
+}
+.footer-social-link:hover { background: rgba(245,200,66,0.1); border-color: rgba(245,200,66,0.3); transform: translateX(4px); }
+.fs-icon {
+width: 34px; height: 34px;
+border-radius: 10px;
+display: flex; align-items: center; justify-content: center;
+font-size: 1rem;
+flex-shrink: 0;
+}
+.fs-icon.gmail { background: linear-gradient(135deg, #EA4335, #FBBC04); }
+.fs-icon.insta { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.fs-text { flex: 1; }
+.fs-label { font-size: 0.65rem; color: rgba(255,255,255,0.35); font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1; margin-bottom: 2px; }
+.fs-handle { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 700; }
+.fs-arr { color: rgba(245,200,66,0.5); font-size: 0.9rem; }
+.footer-col-title { font-family: ‘Fredoka One’, cursive; font-size: 0.95rem; color: white; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+.footer-col-title span { font-size: 0.9rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { text-decoration: none; font-size: 0.84rem; color: rgba(255,255,255,0.4); transition: color 0.2s; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.footer-links a::before { content: ‘›’; color: var(–gold); font-size: 1rem; }
+.footer-links a:hover { color: var(–gold); }
+
+.footer-bottom {
+border-top: 1px solid rgba(255,255,255,0.06);
+padding-top: 24px;
+display: flex; align-items: center; justify-content: space-between;
+flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); font-weight: 600; }
+.footer-pays { display: flex; gap: 8px; }
+.pay-chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 5px 10px; font-size: 0.68rem; font-weight: 800; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+
+/* ═══════════════════════════════════
+SCROLL TO TOP
+═══════════════════════════════════ */
+.scroll-top {
+position: fixed;
+bottom: 28px; right: 28px;
+width: 48px; height: 48px;
+background: linear-gradient(135deg, var(–gold), var(–gold-dark));
+border: none;
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.2rem;
+cursor: pointer;
+box-shadow: 0 6px 20px rgba(245,200,66,0.45);
+z-index: 999;
+transition: all 0.3s;
+color: var(–charcoal);
+font-weight: 900;
+animation: floatCard 3s ease-in-out infinite;
+}
+.scroll-top:hover { transform: translateY(-4px) scale(1.1); box-shadow: 0 12px 30px rgba(245,200,66,0.6); }
+@keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* ═══════════════════════════════════
+SCROLL REVEAL
+═══════════════════════════════════ */
+.reveal {
+opacity: 0;
+transform: translateY(28px);
+transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════
+RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 1200px) {
+.products-grid { grid-template-columns: repeat(3, 1fr); }
+.animal-cats-grid { grid-template-columns: repeat(3, 1fr); }
+.hero { grid-template-columns: 1fr; min-height: auto; }
+.hero-right { min-height: 400px; }
+.footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+:root { –sidebar-w: 0px; }
+.sidebar { display: none; }
+.main-wrap { margin-left: 0 !important; }
+.section { padding: 50px 24px; }
+.products-grid { grid-template-columns: repeat(2, 1fr); }
+.animal-cats-grid { grid-template-columns: repeat(2, 1fr); }
+.why-grid { grid-template-columns: 1fr 1fr; }
+.testi-grid { grid-template-columns: 1fr; }
+.lux-banner { flex-direction: column; margin: 0 24px 50px; padding: 40px; }
+.nl-section { margin: 0 24px 50px; padding: 40px 24px; }
+.footer-grid { grid-template-columns: 1fr; }
+.nl-form { flex-direction: column; }
+.topbar { padding: 0 20px; }
+.topbar-search { width: 160px; }
+.animal-fruits-strip { display: none; }
+}
+</style>
+
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+<!-- ══════════ SIDEBAR ══════════ -->
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <a href="#" class="nav-logo">Kit'n<span>Kiwi</span></a>
-    <ul class="nav-links">
-      <li><a href="#collection">Collection</a></li>
-      <li><a href="#story">Our Story</a></li>
-      <li><a href="#values">Values</a></li>
-      <li><a href="#">Journal</a></li>
-    </ul>
-    <a href="#" class="nav-cta">Shop Now</a>
+<aside class="sidebar" id="sidebar">
+  <button class="sidebar-toggle" id="sidebarToggle">›</button>
+
+  <a class="sidebar-logo" href="#">
+    <div class="logo-emblem">🥝</div>
+    <div class="logo-name">
+      <span class="logo-name-main">Kit n Kiwi</span>
+      <span class="logo-name-sub">Premium Kids</span>
+    </div>
+  </a>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-title">Main</div>
+    <a class="nav-item active" href="#">
+      <div class="nav-icon-wrap">🏠</div>
+      <span class="nav-label">Home</span>
+    </a>
+    <a class="nav-item" href="#categories">
+      <div class="nav-icon-wrap">🐾</div>
+      <span class="nav-label">Collections</span>
+    </a>
+    <a class="nav-item" href="#products">
+      <div class="nav-icon-wrap">👗</div>
+      <span class="nav-label">Shop All</span>
+      <span class="nav-badge">New</span>
+    </a>
+
+```
+<div class="nav-divider"></div>
+<div class="nav-section-title">Categories</div>
+
+<a class="nav-item" href="#">
+  <div class="nav-icon-wrap">🐻</div>
+  <span class="nav-label">Baby (0–18M)</span>
+</a>
+<a class="nav-item" href="#">
+  <div class="nav-icon-wrap">🦊</div>
+  <span class="nav-label">Toddler (1–3Y)</span>
+</a>
+<a class="nav-item" href="#">
+  <div class="nav-icon-wrap">🦁</div>
+  <span class="nav-label">Kids (4–8Y)</span>
+</a>
+<a class="nav-item" href="#">
+  <div class="nav-icon-wrap">🐆</div>
+  <span class="nav-label">Big Kids (8–12Y)</span>
+</a>
+
+<div class="nav-divider"></div>
+<div class="nav-section-title">Themes</div>
+
+<a class="nav-item" href="#">
+  <div class="nav-icon-wrap">🍉</div>
+  <span class="nav-label">Fruit Collection</span>
+  <span class="nav-badge">Hot</span>
+</a>
+<a class="nav-item" href="#">
+  <div class="nav-icon-wrap">🦋</div>
+  <span class="nav-label">Animal Friends</span>
+</a>
+<a class="nav-item" href="#">
+  <div class="nav-icon-wrap">🌿</div>
+  <span class="nav-label">Nature Series</span>
+</a>
+
+<div class="nav-divider"></div>
+
+<a class="nav-item" href="#why-us">
+  <div class="nav-icon-wrap">🌟</div>
+  <span class="nav-label">About Us</span>
+</a>
+<a class="nav-item" href="#testimonials">
+  <div class="nav-icon-wrap">💬</div>
+  <span class="nav-label">Reviews</span>
+</a>
+<a class="nav-item" href="#newsletter">
+  <div class="nav-icon-wrap">🎁</div>
+  <span class="nav-label">Offers</span>
+</a>
+```
+
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-text">
-        <div class="hero-eyebrow">New Collection 2025</div>
-        <h1 class="hero-heading">
-          Dressed for<br>
-          <em>every little</em><br>
-          adventure
-        </h1>
-        <p class="hero-sub">
-          Premium children's clothing crafted with love — soft, safe, and beautifully made for the smallest hearts.
-        </p>
-        <div class="hero-btns">
-          <a href="#collection" class="btn-primary">Explore Collection</a>
-          <a href="#story" class="btn-ghost">Our Story</a>
-        </div>
-      </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-bottom-card">
+      <div class="sidebar-bottom-emoji">🎉</div>
+      <div class="sidebar-bottom-text">Summer Sale is live! Up to 40% off on all collections</div>
+      <button class="sidebar-bottom-btn">Shop Sale →</button>
     </div>
-    <div class="hero-right">
-      <div class="hero-illustration">
-        <div class="big-circle"></div>
-        <div class="med-circle"></div>
-        <div class="kiwi-icon">🥝</div>
-        <div class="hero-badge">
-          <span class="badge-star">✦</span>
-          <span>Premium<br>Quality<br>Certified</span>
-        </div>
-      </div>
+    <div class="sidebar-mini-icons">
+      <div style="font-size:1.4rem">🎉</div>
+      <div style="font-size:0.6rem;color:rgba(245,200,66,0.6);font-weight:800;letter-spacing:1px">SALE</div>
     </div>
-    <div class="hero-scroll">
-      <span class="scroll-label">Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+  </div>
+</aside>
 
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee-inner">
-      <span>Premium Cotton</span><span class="dot">·</span>
-      <span>Non-Toxic Dyes</span><span class="dot">·</span>
-      <span>Ethically Made</span><span class="dot">·</span>
-      <span>Made for Little Hearts</span><span class="dot">·</span>
-      <span>Soft & Breathable</span><span class="dot">·</span>
-      <span>Timeless Designs</span><span class="dot">·</span>
-      <span>Child-Safe Materials</span><span class="dot">·</span>
-      <span>Premium Cotton</span><span class="dot">·</span>
-      <span>Non-Toxic Dyes</span><span class="dot">·</span>
-      <span>Ethically Made</span><span class="dot">·</span>
-      <span>Made for Little Hearts</span><span class="dot">·</span>
-      <span>Soft & Breathable</span><span class="dot">·</span>
-      <span>Timeless Designs</span><span class="dot">·</span>
-      <span>Child-Safe Materials</span><span class="dot">·</span>
+<!-- ══════════ MAIN WRAP ══════════ -->
+
+<div class="main-wrap" id="mainWrap">
+
+  <!-- TOP BAR -->
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-crumb">
+        🥝 Kit n Kiwi &rsaquo; <span>Home</span>
+      </div>
+      <div class="topbar-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Search for jungle dresses, fruit tees…">
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="animal-fruits-strip">
+        <span>🦁</span><span>🍉</span><span>🐨</span><span>🍋</span><span>🦊</span>
+      </div>
+      <div class="topbar-icon">🤍</div>
+      <div class="topbar-icon">
+        🛒
+        <div class="badge">3</div>
+      </div>
+
+```
+</div>
+```
+
+  </header>
+
+  <div class="page">
+
+```
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <!-- Floating decorations -->
+    <div class="hero-deco">🦁</div>
+    <div class="hero-deco">🍋</div>
+    <div class="hero-deco">🐨</div>
+    <div class="hero-deco">🍉</div>
+    <div class="hero-deco">🦊</div>
+
+    <div class="hero-tag"><div class="tag-dot"></div>Summer 2025 Collection</div>
+    <h1 class="hero-title">
+      <span class="t1">Wild &amp; Wonderful</span>
+      <span class="t2">Little Jungle</span>
+      <span class="t3">Fashion 🌿</span>
+    </h1>
+    <p class="hero-desc">Luxuriously soft, cartoon-inspired children's clothing where animals roam free and fruits run wild. Designed to delight little imaginations every single day.</p>
+    <div class="hero-ctas">
+      <button class="btn-gold">Explore Collection 🛍️</button>
+      <button class="btn-ghost">View Lookbook 📸</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num">14K+</div>
+        <div class="hstat-lbl">Happy Kids</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">250+</div>
+        <div class="hstat-lbl">Jungle Styles</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">100%</div>
+        <div class="hstat-lbl">Organic</div>
+      </div>
     </div>
   </div>
 
-  <!-- FEATURES -->
-  <section>
-    <div class="features">
-      <div class="feature-card">
-        <div class="feature-icon">🌿</div>
-        <div class="feature-title">Pure & Natural Fabrics</div>
-        <p class="feature-text">Every piece is crafted from premium cotton and soft wool, carefully chosen for breathability, softness, and enduring comfort against delicate skin.</p>
+  <div class="hero-right">
+    <div class="hero-showcase">
+      <div class="showcase-ring">
+        <div class="orbit-item">🍓</div>
+        <div class="orbit-item">🐯</div>
+        <div class="orbit-item">🥭</div>
+        <div class="orbit-item">🐸</div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
-        <div class="feature-title">Safe, Vibrant Colours</div>
-        <p class="feature-text">We use only child-safe, non-toxic dyes that stay brilliant through countless washes while respecting the sensitivity of young skin.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">✦</div>
-        <div class="feature-title">Timeless Craftsmanship</div>
-        <p class="feature-text">From yarn selection to final stitching, every detail is thoughtfully considered so each garment supports natural movement and gentle everyday moments.</p>
+      <div class="showcase-ring-2"></div>
+      <div class="showcase-center">
+        <div class="showcase-main-emoji">🦁</div>
+        <div class="showcase-label">Lion King Set</div>
       </div>
     </div>
-  </section>
 
-  <!-- COLLECTION -->
-  <section class="collection" id="collection">
-    <div class="section-header">
-      <div>
-        <div class="section-eyebrow">The Collection</div>
-        <div class="section-title">Crafted for <em>little ones</em></div>
-      </div>
-      <a href="#" class="see-all">View all pieces</a>
+    <!-- Floating product cards -->
+    <div class="hero-product-float">
+      <span class="hpf-emoji">🐻</span>
+      <div class="hpf-name">Bear Hug Onesie</div>
+      <div class="hpf-price">₹849</div>
     </div>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-img">
-          <div class="product-bg bg-1">🧸</div>
-          <div class="product-tag tag-new">New</div>
-        </div>
-        <div class="product-name">Cloud Romper</div>
-        <div class="product-sub">0–12 months · Blush Rose</div>
-        <div class="product-price">$48.00</div>
-      </div>
-      <div class="product-card">
-        <div class="product-img">
-          <div class="product-bg bg-2">🌿</div>
-          <div class="product-tag">Bestseller</div>
-        </div>
-        <div class="product-name">Meadow Dress</div>
-        <div class="product-sub">1–4 years · Sage Green</div>
-        <div class="product-price">$62.00</div>
-      </div>
-      <div class="product-card">
-        <div class="product-img">
-          <div class="product-bg bg-3">🌊</div>
-        </div>
-        <div class="product-name">Ocean Knit Set</div>
-        <div class="product-sub">2–5 years · Sky Blue</div>
-        <div class="product-price">$74.00</div>
-      </div>
-      <div class="product-card">
-        <div class="product-img">
-          <div class="product-bg bg-4">☀️</div>
-          <div class="product-tag tag-new">New</div>
-        </div>
-        <div class="product-name">Goldenrod Coord</div>
-        <div class="product-sub">3–6 years · Warm Sand</div>
-        <div class="product-price">$88.00</div>
-      </div>
+    <div class="hero-product-float">
+      <span class="hpf-emoji">🍑</span>
+      <div class="hpf-name">Peach Puff Dress</div>
+      <div class="hpf-price">₹1,299</div>
     </div>
-  </section>
+    <div class="hero-product-float">
+      <span class="hpf-emoji">🦊</span>
+      <div class="hpf-name">Foxy Tee + Shorts</div>
+      <div class="hpf-price">₹1,499</div>
+    </div>
+  </div>
+</section>
 
-  <!-- STORY -->
-  <section id="story">
-    <div class="story">
-      <div class="story-visual">
-        <div class="story-img-main">🥝</div>
-        <div class="story-img-accent">💛</div>
-        <div class="story-float-badge">
-          <div class="badge-num">100%</div>
-          <div class="badge-label">Natural Materials</div>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="mq-item"><span class="mq-sep">🦁</span> ANIMAL THEME COLLECTION</div>
+    <div class="mq-item"><span class="mq-sep">🍉</span> FRUIT PRINT SERIES</div>
+    <div class="mq-item"><span class="mq-sep">✦</span> FREE SHIPPING OVER ₹999</div>
+    <div class="mq-item"><span class="mq-sep">🌿</span> 100% ORGANIC COTTON</div>
+    <div class="mq-item"><span class="mq-sep">🐨</span> NEW ARRIVALS WEEKLY</div>
+    <div class="mq-item"><span class="mq-sep">🥝</span> KIT N KIWI PREMIUM</div>
+    <div class="mq-item"><span class="mq-sep">🍋</span> SIZES 0 – 12 YEARS</div>
+    <div class="mq-item"><span class="mq-sep">🦁</span> ANIMAL THEME COLLECTION</div>
+    <div class="mq-item"><span class="mq-sep">🍉</span> FRUIT PRINT SERIES</div>
+    <div class="mq-item"><span class="mq-sep">✦</span> FREE SHIPPING OVER ₹999</div>
+    <div class="mq-item"><span class="mq-sep">🌿</span> 100% ORGANIC COTTON</div>
+    <div class="mq-item"><span class="mq-sep">🐨</span> NEW ARRIVALS WEEKLY</div>
+    <div class="mq-item"><span class="mq-sep">🥝</span> KIT N KIWI PREMIUM</div>
+    <div class="mq-item"><span class="mq-sep">🍋</span> SIZES 0 – 12 YEARS</div>
+  </div>
+</div>
+
+<!-- ANIMAL CATEGORIES -->
+<section id="categories" class="section section-alt">
+  <div class="sec-header reveal">
+    <div class="sec-eyebrow">Shop by Theme</div>
+    <h2 class="sec-title">Our <em>Wild</em> Collections 🐾</h2>
+    <p class="sec-sub">Each collection is inspired by nature's most lovable characters — from lazy koalas to cheeky mangoes.</p>
+  </div>
+  <div class="animal-cats-grid">
+    <div class="acat reveal">
+      <span class="acat-fruit">🍋</span>
+      <span class="acat-mascot">🦁</span>
+      <div class="acat-name">Lion Jungle</div>
+      <div class="acat-count">48 Styles · 0–4 Yrs</div>
+    </div>
+    <div class="acat reveal">
+      <span class="acat-fruit">🍓</span>
+      <span class="acat-mascot">🐨</span>
+      <div class="acat-name">Koala Dreamer</div>
+      <div class="acat-count">62 Styles · 2–6 Yrs</div>
+    </div>
+    <div class="acat reveal">
+      <span class="acat-fruit">🍉</span>
+      <span class="acat-mascot">🐸</span>
+      <div class="acat-name">Froggy Pond</div>
+      <div class="acat-count">39 Styles · 0–3 Yrs</div>
+    </div>
+    <div class="acat reveal">
+      <span class="acat-fruit">🍊</span>
+      <span class="acat-mascot">🦊</span>
+      <div class="acat-name">Foxy Trail</div>
+      <div class="acat-count">55 Styles · 4–8 Yrs</div>
+    </div>
+    <div class="acat reveal">
+      <span class="acat-fruit">🥭</span>
+      <span class="acat-mascot">🐯</span>
+      <div class="acat-name">Tiger Mango</div>
+      <div class="acat-count">44 Styles · 6–12 Yrs</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="section">
+  <div class="sec-header reveal" style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:30px;">
+    <div>
+      <div class="sec-eyebrow">Best Sellers</div>
+      <h2 class="sec-title" style="margin-bottom:0">Top Picks <em>This Week</em> 🍃</h2>
+    </div>
+    <button class="btn-gold" style="flex-shrink:0">View All →</button>
+  </div>
+  <div class="product-filters reveal">
+    <button class="pf-btn active">🌿 All</button>
+    <button class="pf-btn">🦁 Animal Tees</button>
+    <button class="pf-btn">🍉 Fruit Prints</button>
+    <button class="pf-btn">👗 Dresses</button>
+    <button class="pf-btn">🐾 Sets</button>
+    <button class="pf-btn">🍼 Onesies</button>
+  </div>
+  <div class="products-grid">
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">👗</span>
+        <div class="pcard-mascot">🦁</div>
+        <div class="pcard-badge new">New</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Lion King Summer Dress</span><span class="pcard-fruit-icon">🍋</span></div>
+        <div class="pcard-meta"><span class="pcard-age">2–5 Yrs</span><span class="pcard-stars">★★★★★</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#F5C842"></div>
+          <div class="cdot" style="background:#FF8FA3"></div>
+          <div class="cdot" style="background:#76C442"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="now">₹1,349</span></div>
+          <button class="cart-btn">+</button>
         </div>
       </div>
-      <div class="story-content">
-        <div class="section-eyebrow">Our Story</div>
-        <div class="section-title">Born from <em>love</em><br>for children</div>
-        <p class="story-body">
-          Kit'n Kiwi was founded with one simple belief — what children wear should feel as good as it looks. We started small, selecting each fabric by hand, testing every dye for safety, and designing pieces that grow with your child.
-          <br><br>
-          Every collection reflects our commitment to timeless elegance and playful expression. We believe premium quality and genuine care aren't luxuries — they're the standard every child deserves.
-        </p>
-        <a href="#" class="btn-primary">Read Our Full Story</a>
-        <div class="story-stats">
-          <div>
-            <div class="stat-num">5k+</div>
-            <div class="stat-label">Happy Families</div>
+    </div>
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">👕</span>
+        <div class="pcard-mascot">🐨</div>
+        <div class="pcard-badge hot">Hot</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Koala Cuddle Tee</span><span class="pcard-fruit-icon">🍓</span></div>
+        <div class="pcard-meta"><span class="pcard-age">4–7 Yrs</span><span class="pcard-stars">★★★★★</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#5DADE2"></div>
+          <div class="cdot" style="background:#C5A3E8"></div>
+          <div class="cdot" style="background:#FFB347"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="now">₹899</span></div>
+          <button class="cart-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">🩱</span>
+        <div class="pcard-mascot">🐸</div>
+        <div class="pcard-badge sale">−25%</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Watermelon Frog Romper</span><span class="pcard-fruit-icon">🍉</span></div>
+        <div class="pcard-meta"><span class="pcard-age">0–18 Mths</span><span class="pcard-stars">★★★★☆</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#76C442"></div>
+          <div class="cdot" style="background:#C0392B"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="old">₹999</span><span class="now">₹749</span></div>
+          <button class="cart-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">🩳</span>
+        <div class="pcard-mascot">🦊</div>
+        <div class="pcard-badge new">New</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Foxy Orange Shorts Set</span><span class="pcard-fruit-icon">🍊</span></div>
+        <div class="pcard-meta"><span class="pcard-age">5–8 Yrs</span><span class="pcard-stars">★★★★★</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#FF6B2C"></div>
+          <div class="cdot" style="background:#F5C842"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="now">₹1,549</span></div>
+          <button class="cart-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">🧥</span>
+        <div class="pcard-mascot">🐯</div>
+        <div class="pcard-badge hot">Hot</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Tiger Mango Hoodie</span><span class="pcard-fruit-icon">🥭</span></div>
+        <div class="pcard-meta"><span class="pcard-age">6–10 Yrs</span><span class="pcard-stars">★★★★★</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#FFB347"></div>
+          <div class="cdot" style="background:#1C1C1E"></div>
+          <div class="cdot" style="background:#C0392B"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="now">₹1,899</span></div>
+          <button class="cart-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">👙</span>
+        <div class="pcard-mascot">🐻</div>
+        <div class="pcard-badge sale">−20%</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Teddy Berry Swimsuit</span><span class="pcard-fruit-icon">🫐</span></div>
+        <div class="pcard-meta"><span class="pcard-age">2–6 Yrs</span><span class="pcard-stars">★★★★★</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#9B59B6"></div>
+          <div class="cdot" style="background:#FF8FA3"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="old">₹1,199</span><span class="now">₹959</span></div>
+          <button class="cart-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">🎽</span>
+        <div class="pcard-mascot">🦋</div>
+        <div class="pcard-badge new">New</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Butterfly Lemon Vest</span><span class="pcard-fruit-icon">🍋</span></div>
+        <div class="pcard-meta"><span class="pcard-age">3–7 Yrs</span><span class="pcard-stars">★★★★★</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#F5C842"></div>
+          <div class="cdot" style="background:#76C442"></div>
+          <div class="cdot" style="background:#5DADE2"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="now">₹849</span></div>
+          <button class="cart-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard reveal">
+      <div class="pcard-img">
+        <span class="pcard-emoji">🩴</span>
+        <div class="pcard-mascot">🐧</div>
+        <div class="pcard-badge hot">Hot</div>
+        <div class="pcard-wish">🤍</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-top"><span class="pcard-name">Penguin Pineapple Sandals</span><span class="pcard-fruit-icon">🍍</span></div>
+        <div class="pcard-meta"><span class="pcard-age">2–8 Yrs</span><span class="pcard-stars">★★★★☆</span></div>
+        <div class="pcard-colors">
+          <div class="cdot" style="background:#F5C842"></div>
+          <div class="cdot" style="background:#1C1C1E"></div>
+        </div>
+        <div class="pcard-foot">
+          <div class="pcard-price"><span class="now">₹699</span></div>
+          <button class="cart-btn">+</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LUXURY BANNER -->
+<div class="lux-banner reveal">
+  <div style="position:absolute;bottom:0;right:60px;font-size:6rem;opacity:0.08;line-height:1;pointer-events:none">🦁🐯🦊🐨</div>
+  <div class="lux-banner-left">
+    <div class="lux-pretitle">✦ Limited Time Offer</div>
+    <h2 class="lux-title">Jungle Summer<br><span>Sale is Here!</span> 🌿</h2>
+    <p class="lux-desc">Up to 40% off on our most-loved animal and fruit themed collections. Little adventurers deserve the best — at the best price.</p>
+    <button class="btn-gold">Shop the Sale Now 🎉</button>
+  </div>
+  <div class="lux-banner-right">
+    <div class="lux-card">
+      <span class="lux-card-fruit">🍉</span>
+      <div class="lux-card-pct">40%</div>
+      <div class="lux-card-lbl">Dresses</div>
+    </div>
+    <div class="lux-card">
+      <span class="lux-card-fruit">🦁</span>
+      <div class="lux-card-pct">35%</div>
+      <div class="lux-card-lbl">Animal Tees</div>
+    </div>
+    <div class="lux-card">
+      <span class="lux-card-fruit">🥭</span>
+      <div class="lux-card-pct">25%</div>
+      <div class="lux-card-lbl">Sets & Packs</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section id="why-us" class="section section-alt">
+  <div class="sec-header text-center reveal" style="text-align:center">
+    <div class="sec-eyebrow">Our Promise</div>
+    <h2 class="sec-title">Why <em>Jungle Mamas</em> Love Us 🐾</h2>
+    <p class="sec-sub" style="margin:0 auto">Every stitch tells a story. Every print hides a character. Every garment is made with love.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon">🌿</span>
+      <div class="why-title">Pure Organic</div>
+      <p class="why-desc">GOTS certified 100% organic cotton — as gentle and natural as a forest morning on little skin.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">🎨</span>
+      <div class="why-title">Cartoon Artistry</div>
+      <p class="why-desc">Each animal and fruit character is designed by award-winning illustrators to spark pure joy.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">💎</span>
+      <div class="why-title">Luxury Quality</div>
+      <p class="why-desc">Premium fabrics, double-reinforced stitching, and fade-proof prints that survive every jungle adventure.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">🚀</span>
+      <div class="why-title">Swift Delivery</div>
+      <p class="why-desc">Express pan-India delivery. Free shipping over ₹999. Easy 7-day returns, no questions asked.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section">
+  <div class="sec-header reveal" style="text-align:center">
+    <div class="sec-eyebrow">Parent Stories</div>
+    <h2 class="sec-title">The <em>Jungle Speaks</em> 🗣️</h2>
+    <p class="sec-sub" style="margin:0 auto">What real parents say about Kit n Kiwi's animal & fruit magic.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-text">My son refused to take off his Lion King dress. He wore it to his birthday party AND to sleep. The fabric is buttery soft and the lion print is so adorable — we've ordered 4 more pieces!</p>
+      <div class="tcard-author">
+        <div class="tcard-ava">👩<div class="tcard-fruit-badge">🍋</div></div>
+        <div><div class="tcard-name">Priya Menon</div><div class="tcard-loc">Mom of 2 · Mumbai</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-text">The Watermelon Frog Romper is the cutest thing I've ever put on my baby. After 40+ washes, the colours are still vivid and the fabric hasn't shrunk a single bit. Absolute luxury!</p>
+      <div class="tcard-author">
+        <div class="tcard-ava">👨<div class="tcard-fruit-badge">🍉</div></div>
+        <div><div class="tcard-name">Arjun Kapoor</div><div class="tcard-loc">Dad of 1 · Bengaluru</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-text">My daughter's eczema flares with everything — except Kit n Kiwi. The organic certification is real. The Koala Tee has become her daily uniform. We are customers for life 🐨💕</p>
+      <div class="tcard-author">
+        <div class="tcard-ava">👩<div class="tcard-fruit-badge">🍓</div></div>
+        <div><div class="tcard-name">Sunita Rao</div><div class="tcard-loc">Mom of 3 · Hyderabad</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="nl-section reveal">
+  <div class="nl-animals">
+    <span>🦁</span><span>🍉</span><span>🐨</span><span>🍊</span><span>🦊</span>
+  </div>
+  <h2 class="nl-title">Join the <span>Jungle Club</span>!</h2>
+  <p class="nl-sub">Get ₹250 off your first order + early access to new animal drops and fruit collections.</p>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="Your email address…">
+    <button class="btn-gold">Join Now 🥝</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-wrap">
+        <div class="footer-logo-mark">🥝</div>
+        <div class="footer-logo-text">Kit n Kiwi</div>
+      </div>
+      <p class="footer-about">Premium, cartoon-inspired children's clothing where animals and fruits come alive. Crafted with organic love for little imaginations that run wild every day.</p>
+      <div class="footer-animal-strip">🦁 🍉 🐨 🍋 🦊 🐸 🥭 🦋</div>
+      <div class="footer-socials">
+        <a class="footer-social-link" href="mailto:kitnkiwi@gmail.com">
+          <div class="fs-icon gmail">✉️</div>
+          <div class="fs-text">
+            <div class="fs-label">Email Us</div>
+            <div class="fs-handle">kitnkiwi@gmail.com</div>
           </div>
-          <div>
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Natural Fabrics</div>
+          <span class="fs-arr">›</span>
+        </a>
+        <a class="footer-social-link" href="https://instagram.com/kitnkiwi" target="_blank">
+          <div class="fs-icon insta">📸</div>
+          <div class="fs-text">
+            <div class="fs-label">Instagram</div>
+            <div class="fs-handle">@kitnkiwi</div>
           </div>
-          <div>
-            <div class="stat-num">12+</div>
-            <div class="stat-label">Countries Shipped</div>
+          <span class="fs-arr">›</span>
+        </a>
+        <a class="footer-social-link" href="https://instagram.com/rishit_bhxtt" target="_blank">
+          <div class="fs-icon insta">📸</div>
+          <div class="fs-text">
+            <div class="fs-label">Instagram · Founder</div>
+            <div class="fs-handle">@rishit_bhxtt</div>
           </div>
-        </div>
+          <span class="fs-arr">›</span>
+        </a>
       </div>
     </div>
-  </section>
-
-  <!-- VALUES -->
-  <section class="values" id="values">
-    <div class="values-inner">
-      <div class="section-eyebrow">What We Stand For</div>
-      <div class="section-title">Our <em>values</em></div>
-      <div class="values-grid">
-        <div class="value-item">
-          <div class="value-num">01</div>
-          <div class="value-title">Child Safety First</div>
-          <p class="value-text">Every material and dye is rigorously tested to ensure it meets the highest safety standards for sensitive young skin.</p>
-        </div>
-        <div class="value-item">
-          <div class="value-num">02</div>
-          <div class="value-title">Sustainable Sourcing</div>
-          <p class="value-text">We partner with responsible suppliers who share our commitment to ethical labour practices and environmental stewardship.</p>
-        </div>
-        <div class="value-item">
-          <div class="value-num">03</div>
-          <div class="value-title">Lasting Quality</div>
-          <p class="value-text">Our garments are designed and constructed to last — because true sustainability means things that don't need replacing.</p>
-        </div>
-        <div class="value-item">
-          <div class="value-num">04</div>
-          <div class="value-title">Giving Back</div>
-          <p class="value-text">A portion of every purchase goes towards improving maternal and child nutrition globally. Because every child deserves a healthy start.</p>
-        </div>
-      </div>
+    <div>
+      <div class="footer-col-title"><span>🛍️</span> Shop</div>
+      <ul class="footer-links">
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Animal Collection</a></li>
+        <li><a href="#">Fruit Prints</a></li>
+        <li><a href="#">Sale Items</a></li>
+        <li><a href="#">Gift Sets</a></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- CHARITY BANNER -->
-  <section class="charity">
-    <div class="charity-inner">
-      <span class="charity-icon">💛</span>
-      <h2 class="charity-title">Every purchase helps a<br><em>child thrive</em></h2>
-      <p class="charity-text">
-        We proudly donate a portion of our profits to improve maternal and child nutrition. When you shop Kit'n Kiwi, you're not just dressing your little one beautifully — you're helping nourish another.
-      </p>
-      <a href="#" class="btn-primary">Learn About Our Mission</a>
+    <div>
+      <div class="footer-col-title"><span>🤝</span> Help</div>
+      <ul class="footer-links">
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="mailto:kitnkiwi@gmail.com">Contact Us</a></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials">
-    <div class="testimonials-inner">
-      <div class="section-eyebrow">What Parents Say</div>
-      <div class="section-title">Loved by <em>little families</em></div>
-      <div class="testi-grid">
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"The quality is beyond anything I've found at this price. My daughter wore her Cloud Romper every week for months and it still looks brand new."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">👩</div>
-            <div>
-              <div class="testi-name">Amara H.</div>
-              <div class="testi-location">London, UK</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"I love that they donate to child nutrition — it means so much to buy from a brand that genuinely cares. And the designs are absolutely gorgeous."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">👩‍🦱</div>
-            <div>
-              <div class="testi-name">Sophie M.</div>
-              <div class="testi-location">Paris, France</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"My son has eczema and we've struggled with so many brands. Kit'n Kiwi is the only one where he never has a reaction. Safe and beautiful."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">👨</div>
-            <div>
-              <div class="testi-name">Daniel K.</div>
-              <div class="testi-location">Toronto, Canada</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div>
+      <div class="footer-col-title"><span>🌿</span> Company</div>
+      <ul class="footer-links">
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Affiliates</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
     </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section class="newsletter">
-    <div class="newsletter-inner">
-      <div class="section-eyebrow">Stay Connected</div>
-      <div class="section-title">Join the <em>Kit'n Kiwi</em> family</div>
-      <p class="newsletter-sub">Be the first to know about new arrivals, exclusive offers, and the stories behind our collections.</p>
-      <div class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="Your email address"/>
-        <button class="newsletter-btn">Subscribe</button>
-      </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Kit n Kiwi. Made with 🥝 for wild little hearts everywhere.</div>
+    <div class="footer-pays">
+      <div class="pay-chip">VISA</div>
+      <div class="pay-chip">MC</div>
+      <div class="pay-chip">UPI</div>
+      <div class="pay-chip">PAYTM</div>
+      <div class="pay-chip">COD</div>
     </div>
-  </section>
+  </div>
+</footer>
+```
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand-name">Kit'n<span>Kiwi</span></div>
-        <p class="footer-desc">Premium children's clothing made for little hearts. Crafted with care, worn with joy.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn">𝕏</a>
-          <a href="#" class="social-btn">📸</a>
-          <a href="#" class="social-btn">📌</a>
-          <a href="#" class="social-btn">f</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title">Shop</div>
-        <ul class="footer-links">
-          <li><a href="#">New Arrivals</a></li>
-          <li><a href="#">Newborns (0–12m)</a></li>
-          <li><a href="#">Toddlers (1–4y)</a></li>
-          <li><a href="#">Kids (4–8y)</a></li>
-          <li><a href="#">Gift Sets</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-links">
-          <li><a href="#">Our Story</a></li>
-          <li><a href="#">Values & Mission</a></li>
-          <li><a href="#">Sustainability</a></li>
-          <li><a href="#">Journal</a></li>
-          <li><a href="#">Careers</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Help</div>
-        <ul class="footer-links">
-          <li><a href="#">Size Guide</a></li>
-          <li><a href="#">Shipping & Returns</a></li>
-          <li><a href="#">Care Instructions</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">FAQ</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>©️ 2025 Kit'n Kiwi. All rights reserved.</span>
-      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
-    </div>
-  </footer>
+  </div><!-- end .page -->
+</div><!-- end .main-wrap -->
 
-  <script>
-    // Cursor
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-    function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
-    animateRing();
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-    // Navbar scroll
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+<script>
+// Sidebar toggle
+const sidebar = document.getElementById('sidebar');
+const toggle = document.getElementById('sidebarToggle');
+let open = false;
+toggle.addEventListener('click', () => {
+  open = !open;
+  sidebar.classList.toggle('open', open);
+  toggle.textContent = open ? '‹' : '›';
+});
 
-    // Intersection Observer for animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = el.dataset.delay || 0;
-          setTimeout(() => el.classList.add('visible'), delay);
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.15 });
+// Nav active state
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
 
-    document.querySelectorAll('.feature-card, .product-card, .value-item, .testi-card, .story-content').forEach((el, i) => {
-      el.dataset.delay = (i % 4) * 120;
-      observer.observe(el);
-    });
-  </script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 70);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Filter buttons
+document.querySelectorAll('.pf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Add to cart
+document.querySelectorAll('.cart-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.textContent = '✓';
+    this.style.background = 'linear-gradient(135deg, #76C442, #4A8C4D)';
+    this.style.color = 'white';
+    setTimeout(() => {
+      this.textContent = '+';
+      this.style.background = '';
+      this.style.color = '';
+    }, 1800);
+  });
+});
+
+// Wishlist
+document.querySelectorAll('.pcard-wish').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+  });
+});
+</script>
+
 </body>
 </html>
