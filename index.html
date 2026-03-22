@@ -1,2091 +1,1182 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kit n Kiwi — Premium Children's Clothing</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --cream:     #FAF6EF;
-  --warm:      #F2EAD8;
-  --sage:      #8BAF8B;
-  --sage-lt:   #C4D9C4;
-  --blush:     #E8B4A0;
-  --blush-lt:  #F5D9CF;
-  --honey:     #D4956A;
-  --honey-lt:  #EDCFB5;
-  --ink:       #2C2417;
-  --ink-mid:   #5C4A32;
-  --ink-lt:    #9C8B72;
-  --sky:       #9FC4D4;
-  --sky-lt:    #D4E8F0;
-  --paper:     #FDFAF4;
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-font-family: ‘Quicksand’, sans-serif;
-background: var(–cream);
-color: var(–ink);
-overflow-x: hidden;
-}
-
-/* ── TEXTURE OVERLAY ── */
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘400’ height=‘400’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.65’ numOctaves=‘3’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘400’ height=‘400’ filter=‘url(%23n)’ opacity=‘0.04’/%3E%3C/svg%3E”);
-pointer-events: none;
-z-index: 9999;
-opacity: 0.5;
-}
-
-/* ════════════════════════ NAV ════════════════════════ */
-nav {
-position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-display: flex; align-items: center; justify-content: space-between;
-padding: 0 5%;
-height: 72px;
-background: rgba(250,246,239,0.88);
-backdrop-filter: blur(14px);
-border-bottom: 1.5px solid rgba(139,175,139,0.18);
-}
-
-.logo {
-display: flex; align-items: center; gap: 11px;
-text-decoration: none;
-}
-.logo-mark {
-width: 40px; height: 40px;
-}
-.logo-name {
-font-family: ‘Lora’, serif;
-font-size: 1.35rem;
-font-weight: 600;
-color: var(–ink);
-letter-spacing: 0.3px;
-}
-.logo-name span { color: var(–sage); }
-
-.nav-links {
-display: flex; gap: 2.2rem; list-style: none;
-}
-.nav-links a {
-font-size: 0.88rem; font-weight: 600;
-color: var(–ink-mid); text-decoration: none;
-letter-spacing: 0.4px;
-position: relative; padding-bottom: 3px;
-transition: color 0.25s;
-}
-.nav-links a::after {
-content: ‘’;
-position: absolute; bottom: 0; left: 0;
-height: 1.5px; width: 0;
-background: var(–honey);
-border-radius: 2px;
-transition: width 0.3s ease;
-}
-.nav-links a:hover { color: var(–ink); }
-.nav-links a:hover::after { width: 100%; }
-
-.nav-right { display: flex; align-items: center; gap: 0.8rem; }
-.nav-icon {
-width: 38px; height: 38px; border-radius: 50%;
-background: transparent; border: 1.5px solid rgba(92,74,50,0.15);
-display: flex; align-items: center; justify-content: center;
-cursor: pointer; transition: all 0.2s;
-color: var(–ink-mid);
-}
-.nav-icon:hover { background: var(–warm); border-color: var(–honey); color: var(–ink); }
-.nav-icon svg { width: 17px; height: 17px; }
-
-.nav-shop-btn {
-padding: 9px 22px;
-background: var(–ink);
-color: var(–cream);
-border: none; border-radius: 50px;
-font-family: ‘Quicksand’, sans-serif;
-font-size: 0.85rem; font-weight: 700;
-letter-spacing: 0.5px;
-cursor: pointer;
-transition: all 0.25s;
-}
-.nav-shop-btn:hover { background: var(–honey); transform: translateY(-1px); }
-
-/* ════════════════════════ HERO ════════════════════════ */
-.hero {
-min-height: 100vh;
-padding: 100px 5% 0;
-display: grid;
-grid-template-columns: 1fr 1fr;
-align-items: center;
-gap: 4rem;
-position: relative;
-overflow: hidden;
-}
-
-/* hand-drawn wavy divider at bottom */
-.hero::after {
-content: ‘’;
-position: absolute;
-bottom: -2px; left: 0; right: 0; height: 80px;
-background: white;
-clip-path: ellipse(55% 100% at 50% 100%);
-}
-
-/* scattered illustrated leaves */
-.hero-bg-leaves {
-position: absolute;
-inset: 0; pointer-events: none;
-overflow: hidden;
-}
-.hero-bg-leaves svg {
-position: absolute;
-opacity: 0.12;
-}
-
-.hero-text { position: relative; z-index: 2; }
-
-.hero-eyebrow {
-display: inline-flex; align-items: center; gap: 10px;
-font-size: 0.78rem; font-weight: 700;
-letter-spacing: 2px; text-transform: uppercase;
-color: var(–honey);
-margin-bottom: 1.6rem;
-}
-.eyebrow-line {
-width: 32px; height: 1.5px;
-background: var(–honey);
-border-radius: 2px;
-}
-
-.hero-title {
-font-family: ‘Lora’, serif;
-font-size: clamp(3rem, 5.5vw, 5rem);
-font-weight: 700;
-line-height: 1.12;
-color: var(–ink);
-margin-bottom: 1.8rem;
-}
-.hero-title em {
-font-style: italic;
-color: var(–sage);
-}
-.hero-title .underline-word {
-position: relative; display: inline-block;
-}
-.hero-title .underline-word::after {
-content: ‘’;
-position: absolute;
-bottom: 2px; left: 0; right: 0;
-height: 3px;
-background: var(–blush);
-border-radius: 2px;
-animation: drawLine 1.2s ease 0.8s both;
-transform-origin: left;
-}
-@keyframes drawLine {
-from { transform: scaleX(0); }
-to   { transform: scaleX(1); }
-}
-
-.hero-desc {
-font-size: 1.05rem; line-height: 1.8;
-color: var(–ink-lt);
-max-width: 420px;
-margin-bottom: 2.8rem;
-}
-
-.hero-actions { display: flex; align-items: center; gap: 1.2rem; }
-.btn-primary {
-padding: 14px 34px;
-background: var(–ink);
-color: var(–cream);
-border: none; border-radius: 4px;
-font-family: ‘Quicksand’, sans-serif;
-font-size: 0.92rem; font-weight: 700;
-letter-spacing: 0.5px;
-cursor: pointer; transition: all 0.3s ease;
-position: relative; overflow: hidden;
-}
-.btn-primary::before {
-content: ‘’;
-position: absolute; inset: 0;
-background: var(–honey);
-transform: translateX(-101%);
-transition: transform 0.35s ease;
-}
-.btn-primary span { position: relative; z-index: 1; }
-.btn-primary:hover::before { transform: translateX(0); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,36,23,0.18); }
-
-.btn-ghost {
-display: flex; align-items: center; gap: 8px;
-font-size: 0.88rem; font-weight: 600;
-color: var(–ink-mid);
-background: none; border: none; cursor: pointer;
-transition: color 0.2s;
-letter-spacing: 0.3px;
-}
-.btn-ghost svg { width: 15px; height: 15px; transition: transform 0.2s; }
-.btn-ghost:hover { color: var(–honey); }
-.btn-ghost:hover svg { transform: translateX(4px); }
-
-.hero-trust {
-display: flex; gap: 2rem;
-margin-top: 3.5rem;
-padding-top: 2.5rem;
-border-top: 1px solid rgba(92,74,50,0.1);
-}
-.trust-item { }
-.trust-num {
-font-family: ‘Lora’, serif;
-font-size: 1.8rem; font-weight: 700;
-color: var(–ink);
-}
-.trust-label { font-size: 0.78rem; color: var(–ink-lt); font-weight: 600; margin-top: 2px; }
-
-/* HERO ILLUSTRATION PANEL */
-.hero-visual {
-position: relative; z-index: 2;
-display: flex; justify-content: center; align-items: flex-end;
-height: 580px;
-}
-
-.hero-scene {
-position: relative; width: 100%; height: 100%;
-}
-
-/* Main illustrated card */
-.main-card {
-position: absolute;
-bottom: 0; left: 50%; transform: translateX(-50%);
-width: 300px; height: 400px;
-background: var(–blush-lt);
-border-radius: 120px 120px 60px 60px;
-display: flex; align-items: center; justify-content: center;
-box-shadow: 0 30px 80px rgba(212,149,106,0.2), 0 0 0 10px rgba(245,217,207,0.4);
-animation: floatMain 5s ease-in-out infinite;
-overflow: hidden;
-}
-@keyframes floatMain {
-0%,100% { transform: translateX(-50%) translateY(0); }
-50%      { transform: translateX(-50%) translateY(-18px); }
-}
-
-.main-card svg { width: 220px; height: 280px; }
-
-/* Secondary cards */
-.side-card {
-position: absolute;
-background: var(–paper);
-border-radius: 20px;
-padding: 14px 16px;
-box-shadow: 0 8px 32px rgba(44,36,23,0.08);
-animation: floatSide 6s ease-in-out infinite;
-}
-.side-card-a { top: 80px; left: 0; animation-delay: -1s; }
-.side-card-b { top: 55%; right: 0; animation-delay: -3s; }
-.side-card-c { bottom: 60px; left: 10px; animation-delay: -2s; }
-@keyframes floatSide {
-0%,100% { transform: translateY(0); }
-50%      { transform: translateY(-10px); }
-}
-
-.side-card-label { font-size: 0.7rem; font-weight: 700; color: var(–ink-lt); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-.side-card-value { font-family: ‘Lora’, serif; font-size: 1rem; font-weight: 600; color: var(–ink); }
-
-.rating-stars { color: var(–honey); font-size: 0.85rem; letter-spacing: 2px; }
-
-/* Floating illustrated leaves around hero */
-.leaf { position: absolute; animation: spinLeaf 12s linear infinite; }
-.leaf-a { top: 10%; right: 12%; animation-delay: 0s; }
-.leaf-b { top: 30%; left: 5%; animation-delay: -4s; }
-.leaf-c { bottom: 15%; right: 18%; animation-delay: -8s; }
-@keyframes spinLeaf {
-0%   { transform: rotate(0deg) translateY(0); }
-50%  { transform: rotate(10deg) translateY(-15px); }
-100% { transform: rotate(0deg) translateY(0); }
-}
-
-/* ════════════════════════ MARQUEE ════════════════════════ */
-.marquee-bar {
-background: var(–ink);
-padding: 13px 0;
-overflow: hidden;
-}
-.marquee-track {
-display: flex; gap: 0;
-animation: ticker 28s linear infinite;
-width: max-content;
-}
-.marquee-item {
-display: flex; align-items: center; gap: 14px;
-padding: 0 36px;
-color: var(–cream);
-font-size: 0.78rem; font-weight: 700;
-letter-spacing: 1.5px; text-transform: uppercase;
-white-space: nowrap;
-opacity: 0.85;
-}
-.marquee-dot {
-width: 4px; height: 4px;
-background: var(–honey);
-border-radius: 50%;
-flex-shrink: 0;
-}
-@keyframes ticker {
-from { transform: translateX(0); }
-to   { transform: translateX(-50%); }
-}
-
-/* ════════════════════════ CATEGORIES ════════════════════════ */
-.categories {
-padding: 100px 5%;
-background: white;
-}
-
-.section-label {
-display: flex; align-items: center; gap: 14px;
-font-size: 0.75rem; font-weight: 700;
-letter-spacing: 2.5px; text-transform: uppercase;
-color: var(–honey);
-margin-bottom: 1.2rem;
-}
-.section-label::before {
-content: ‘’;
-width: 28px; height: 1.5px;
-background: var(–honey);
-border-radius: 2px;
-}
-
-.section-title {
-font-family: ‘Lora’, serif;
-font-size: clamp(2rem, 3.5vw, 2.8rem);
-font-weight: 700; line-height: 1.2;
-color: var(–ink);
-margin-bottom: 0.7rem;
-}
-.section-sub {
-font-size: 0.95rem; color: var(–ink-lt);
-line-height: 1.7; max-width: 460px;
-}
-
-.cat-layout {
-display: grid;
-grid-template-columns: 1.3fr 1fr 1fr;
-grid-template-rows: auto auto;
-gap: 1.4rem;
-margin-top: 3.5rem;
-}
-.cat-card {
-border-radius: 20px;
-overflow: hidden;
-position: relative;
-cursor: pointer;
-transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
-}
-.cat-card:hover { transform: translateY(-6px); }
-
-.cat-card-inner {
-position: relative;
-height: 280px;
-display: flex; flex-direction: column;
-justify-content: flex-end;
-padding: 1.6rem 1.8rem;
-}
-.cat-card:nth-child(1) .cat-card-inner { height: 360px; background: var(–blush-lt); }
-.cat-card:nth-child(2) .cat-card-inner { background: var(–sky-lt); }
-.cat-card:nth-child(3) .cat-card-inner { background: var(–sage-lt); }
-.cat-card:nth-child(4) .cat-card-inner { background: var(–honey-lt); }
-.cat-card:nth-child(5) .cat-card-inner { background: var(–warm); }
-
-.cat-card:nth-child(1) { grid-row: 1 / 3; }
-
-.cat-illustration {
-position: absolute;
-top: 0; right: 0; bottom: 0; left: 0;
-display: flex; align-items: center; justify-content: center;
-pointer-events: none;
-}
-.cat-illustration svg {
-width: 65%; height: 65%;
-opacity: 0.7;
-transition: transform 0.4s ease, opacity 0.3s;
-}
-.cat-card:hover .cat-illustration svg { transform: scale(1.07) rotate(-2deg); opacity: 0.9; }
-
-.cat-info { position: relative; z-index: 2; }
-.cat-tag {
-display: inline-block;
-background: rgba(44,36,23,0.08);
-backdrop-filter: blur(4px);
-border-radius: 50px;
-padding: 3px 12px;
-font-size: 0.72rem; font-weight: 700;
-color: var(–ink-mid);
-letter-spacing: 0.5px;
-margin-bottom: 6px;
-}
-.cat-name {
-font-family: ‘Lora’, serif;
-font-size: 1.25rem; font-weight: 700;
-color: var(–ink);
-}
-.cat-count { font-size: 0.8rem; color: var(–ink-lt); margin-top: 2px; }
-
-.cat-arrow-btn {
-position: absolute; top: 1.2rem; right: 1.2rem;
-width: 36px; height: 36px; border-radius: 50%;
-background: white;
-display: flex; align-items: center; justify-content: center;
-box-shadow: 0 3px 12px rgba(44,36,23,0.1);
-opacity: 0;
-transform: scale(0.8) rotate(-45deg);
-transition: all 0.3s ease;
-z-index: 3;
-}
-.cat-arrow-btn svg { width: 14px; height: 14px; color: var(–ink); }
-.cat-card:hover .cat-arrow-btn { opacity: 1; transform: scale(1) rotate(0deg); }
-
-/* ════════════════════════ PRODUCTS ════════════════════════ */
-.products {
-padding: 100px 5%;
-background: var(–cream);
-}
-
-.products-header {
-display: flex; align-items: flex-end; justify-content: space-between;
-margin-bottom: 3.5rem;
-flex-wrap: wrap; gap: 1.5rem;
-}
-
-.filter-row {
-display: flex; gap: 0.6rem; flex-wrap: wrap;
-margin-top: 1.4rem;
-}
-.filter-pill {
-padding: 7px 18px;
-border-radius: 50px;
-border: 1.5px solid rgba(92,74,50,0.15);
-background: transparent;
-font-family: ‘Quicksand’, sans-serif;
-font-size: 0.82rem; font-weight: 600;
-color: var(–ink-lt);
-cursor: pointer; transition: all 0.2s;
-}
-.filter-pill.active, .filter-pill:hover {
-background: var(–ink);
-color: var(–cream);
-border-color: var(–ink);
-}
-
-.view-all-link {
-display: flex; align-items: center; gap: 7px;
-font-size: 0.86rem; font-weight: 700;
-color: var(–ink-mid);
-text-decoration: none;
-letter-spacing: 0.3px;
-transition: color 0.2s;
-}
-.view-all-link svg { width: 14px; height: 14px; transition: transform 0.2s; }
-.view-all-link:hover { color: var(–honey); }
-.view-all-link:hover svg { transform: translateX(4px); }
-
-.products-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 1.6rem;
-}
-
-.product-card {
-background: white;
-border-radius: 18px;
-overflow: hidden;
-transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
-cursor: pointer;
-position: relative;
-}
-.product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(44,36,23,0.1); }
-
-.product-img-wrap {
-height: 230px;
-display: flex; align-items: center; justify-content: center;
-position: relative; overflow: hidden;
-transition: transform 0.4s ease;
-}
-.product-card:hover .product-img-wrap { transform: scale(1.03); }
-
-.product-card:nth-child(1) .product-img-wrap { background: var(–blush-lt); }
-.product-card:nth-child(2) .product-img-wrap { background: var(–sky-lt); }
-.product-card:nth-child(3) .product-img-wrap { background: var(–sage-lt); }
-.product-card:nth-child(4) .product-img-wrap { background: var(–honey-lt); }
-.product-card:nth-child(5) .product-img-wrap { background: #EDE8F5; }
-.product-card:nth-child(6) .product-img-wrap { background: var(–warm); }
-.product-card:nth-child(7) .product-img-wrap { background: #D4EDE4; }
-.product-card:nth-child(8) .product-img-wrap { background: var(–sky-lt); }
-
-.product-img-wrap svg { width: 140px; height: 170px; }
-
-.product-badge-wrap {
-position: absolute; top: 12px; left: 12px;
-display: flex; gap: 5px;
-}
-.p-badge {
-padding: 3px 10px;
-border-radius: 50px;
-font-size: 0.68rem; font-weight: 700;
-letter-spacing: 0.4px; text-transform: uppercase;
-}
-.p-badge-new { background: var(–sage); color: white; }
-.p-badge-sale { background: var(–blush); color: white; }
-
-.p-wish {
-position: absolute; top: 10px; right: 10px;
-width: 32px; height: 32px;
-background: rgba(255,255,255,0.85);
-backdrop-filter: blur(4px);
-border-radius: 50%;
-border: none;
-display: flex; align-items: center; justify-content: center;
-cursor: pointer;
-opacity: 0; transform: scale(0.8);
-transition: all 0.2s ease;
-}
-.p-wish svg { width: 15px; height: 15px; color: var(–blush); }
-.product-card:hover .p-wish { opacity: 1; transform: scale(1); }
-
-.product-body { padding: 1.1rem 1.2rem 1.3rem; }
-.product-meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
-.product-age-tag { font-size: 0.72rem; font-weight: 700; color: var(–ink-lt); letter-spacing: 0.5px; text-transform: uppercase; }
-.product-rating { font-size: 0.75rem; color: var(–honey); letter-spacing: 1px; }
-
-.product-name {
-font-family: ‘Lora’, serif;
-font-size: 1rem; font-weight: 600;
-color: var(–ink);
-margin-bottom: 0.6rem;
-line-height: 1.3;
-}
-
-.product-swatches { display: flex; gap: 5px; margin-bottom: 0.9rem; }
-.swatch {
-width: 13px; height: 13px; border-radius: 50%;
-box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(92,74,50,0.12);
-transition: transform 0.15s;
-cursor: pointer;
-}
-.swatch:hover { transform: scale(1.3); }
-
-.product-footer-row { display: flex; align-items: center; justify-content: space-between; }
-.product-price { }
-.price-old { font-size: 0.75rem; color: #bbb; text-decoration: line-through; line-height: 1; }
-.price-now {
-font-family: ‘Lora’, serif;
-font-size: 1.2rem; font-weight: 700;
-color: var(–ink);
-}
-
-.add-btn {
-width: 36px; height: 36px; border-radius: 50%;
-background: var(–ink);
-border: none; color: var(–cream);
-font-size: 1.1rem;
-display: flex; align-items: center; justify-content: center;
-cursor: pointer;
-transition: all 0.25s;
-}
-.add-btn:hover { background: var(–honey); transform: scale(1.12) rotate(90deg); }
-
-/* ════════════════════════ BANNER ════════════════════════ */
-.promo {
-margin: 0 5% 100px;
-border-radius: 28px;
-overflow: hidden;
-display: grid;
-grid-template-columns: 1fr 1fr;
-min-height: 420px;
-position: relative;
-}
-
-.promo-art {
-background: var(–ink);
-position: relative;
-overflow: hidden;
-display: flex; align-items: center; justify-content: center;
-padding: 3rem;
-}
-.promo-art-bg {
-position: absolute; inset: 0;
-background: radial-gradient(ellipse at 30% 60%, rgba(212,149,106,0.25) 0%, transparent 65%),
-radial-gradient(ellipse at 80% 20%, rgba(139,175,139,0.2) 0%, transparent 55%);
-}
-.promo-art svg { position: relative; z-index: 1; width: 260px; opacity: 0.9; }
-
-.promo-content {
-background: var(–warm);
-padding: 3.5rem 3rem;
-display: flex; flex-direction: column; justify-content: center;
-}
-.promo-eyebrow {
-font-size: 0.72rem; font-weight: 700;
-letter-spacing: 2.5px; text-transform: uppercase;
-color: var(–honey);
-margin-bottom: 1rem;
-}
-.promo-title {
-font-family: ‘Lora’, serif;
-font-size: clamp(1.8rem, 3vw, 2.6rem);
-font-weight: 700; line-height: 1.2;
-color: var(–ink);
-margin-bottom: 1rem;
-}
-.promo-title em { font-style: italic; color: var(–honey); }
-.promo-desc { font-size: 0.95rem; color: var(–ink-lt); line-height: 1.7; margin-bottom: 2.2rem; max-width: 380px; }
-
-.promo-pills { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 2.2rem; }
-.promo-pill {
-padding: 8px 18px;
-border-radius: 6px;
-background: white;
-border: 1.5px solid rgba(92,74,50,0.12);
-font-size: 0.82rem; font-weight: 700;
-color: var(–ink-mid);
-}
-.promo-pill strong { color: var(–honey); font-size: 1rem; }
-
-/* ════════════════════════ ABOUT / OUR STORY ════════════════════════ */
-.about {
-padding: 100px 5%;
-background: white;
-position: relative;
-overflow: hidden;
-}
-
-.about::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0; right: 0; height: 3px;
-background: linear-gradient(90deg, var(–blush), var(–sage), var(–honey), var(–sky));
-}
-
-.about-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 6rem;
-align-items: center;
-}
-
-.about-visual { position: relative; }
-
-.about-main-frame {
-width: 100%; aspect-ratio: 4/5;
-max-width: 420px;
-background: var(–cream);
-border-radius: 24px 80px 24px 80px;
-display: flex; align-items: center; justify-content: center;
-overflow: hidden;
-position: relative;
-box-shadow: 0 24px 60px rgba(44,36,23,0.08);
-}
-.about-main-frame svg { width: 75%; height: 75%; }
-
-.about-badge-tl {
-position: absolute;
-top: -18px; left: -18px;
-width: 90px; height: 90px;
-border-radius: 50%;
-background: var(–honey);
-display: flex; flex-direction: column;
-align-items: center; justify-content: center;
-box-shadow: 0 8px 24px rgba(212,149,106,0.35);
-animation: spinSlow 18s linear infinite;
-}
-@keyframes spinSlow { to { transform: rotate(360deg); } }
-.badge-tl-inner {
-font-family: ‘Lora’, serif;
-font-size: 0.65rem; font-weight: 700;
-color: white; text-align: center;
-letter-spacing: 0.5px; line-height: 1.4;
-}
-
-.about-badge-br {
-position: absolute;
-bottom: 24px; right: -28px;
-background: white;
-border-radius: 16px;
-padding: 14px 16px;
-box-shadow: 0 8px 30px rgba(44,36,23,0.1);
-min-width: 140px;
-}
-.badge-br-num {
-font-family: ‘Lora’, serif;
-font-size: 1.8rem; font-weight: 700;
-color: var(–ink); line-height: 1;
-}
-.badge-br-label { font-size: 0.75rem; color: var(–ink-lt); margin-top: 3px; }
-
-.scattered-leaf {
-position: absolute;
-pointer-events: none;
-}
-.scattered-leaf:nth-child(1) { top: -30px; right: 30px; }
-.scattered-leaf:nth-child(2) { bottom: 40px; left: -20px; }
-
-.about-text { }
-
-.about-text .section-title { margin-bottom: 1.6rem; }
-
-.about-story {
-font-size: 1rem; line-height: 1.85;
-color: var(–ink-lt);
-margin-bottom: 1.4rem;
-}
-.about-story strong { color: var(–ink); font-weight: 700; }
-
-.about-values {
-display: grid; grid-template-columns: 1fr 1fr;
-gap: 1.2rem;
-margin: 2.5rem 0;
-}
-.value-item {
-padding: 1.2rem;
-background: var(–cream);
-border-radius: 14px;
-border-left: 3px solid var(–sage);
-transition: border-color 0.2s, transform 0.2s;
-}
-.value-item:nth-child(2) { border-color: var(–blush); }
-.value-item:nth-child(3) { border-color: var(–honey); }
-.value-item:nth-child(4) { border-color: var(–sky); }
-.value-item:hover { transform: translateX(4px); }
-
-.value-icon { width: 32px; height: 32px; margin-bottom: 8px; }
-.value-title { font-family: ‘Lora’, serif; font-size: 0.92rem; font-weight: 600; color: var(–ink); margin-bottom: 4px; }
-.value-desc { font-size: 0.8rem; color: var(–ink-lt); line-height: 1.5; }
-
-.founder-note {
-padding: 1.6rem;
-background: var(–warm);
-border-radius: 16px;
-position: relative;
-}
-.founder-note::before {
-content: ‘\201C’;
-position: absolute;
-top: 8px; left: 14px;
-font-family: Georgia, serif;
-font-size: 4rem;
-color: var(–honey);
-opacity: 0.25;
-line-height: 1;
-}
-.founder-text {
-font-family: ‘Lora’, serif;
-font-style: italic;
-font-size: 0.95rem; line-height: 1.75;
-color: var(–ink-mid);
-padding-left: 0.5rem;
-}
-.founder-sig { margin-top: 0.9rem; display: flex; align-items: center; gap: 10px; }
-.founder-avatar {
-width: 40px; height: 40px; border-radius: 50%;
-background: var(–blush-lt);
-display: flex; align-items: center; justify-content: center;
-overflow: hidden;
-}
-.founder-avatar svg { width: 30px; height: 30px; }
-.founder-name { font-size: 0.85rem; font-weight: 700; color: var(–ink); }
-.founder-role { font-size: 0.75rem; color: var(–ink-lt); }
-
-/* ════════════════════════ TESTIMONIALS ════════════════════════ */
-.testimonials {
-padding: 100px 5%;
-background: var(–cream);
-}
-
-.testi-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 1.6rem;
-margin-top: 3.5rem;
-}
-
-.testi-card {
-background: white;
-border-radius: 20px;
-padding: 2rem;
-position: relative;
-transition: all 0.3s ease;
-}
-.testi-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(44,36,23,0.08); }
-
-.testi-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
-.testi-author-info { display: flex; align-items: center; gap: 10px; }
-.testi-avatar {
-width: 44px; height: 44px; border-radius: 50%;
-overflow: hidden; display: flex; align-items: center; justify-content: center;
-flex-shrink: 0;
-}
-.testi-card:nth-child(1) .testi-avatar { background: var(–blush-lt); }
-.testi-card:nth-child(2) .testi-avatar { background: var(–sky-lt); }
-.testi-card:nth-child(3) .testi-avatar { background: var(–sage-lt); }
-.testi-avatar svg { width: 30px; height: 30px; }
-.testi-name { font-size: 0.88rem; font-weight: 700; color: var(–ink); }
-.testi-loc { font-size: 0.75rem; color: var(–ink-lt); }
-.testi-rating { color: var(–honey); font-size: 0.82rem; letter-spacing: 1px; }
-
-.testi-body {
-font-family: ‘Lora’, serif;
-font-style: italic;
-font-size: 0.92rem; line-height: 1.75;
-color: var(–ink-mid);
-}
-
-/* ════════════════════════ NEWSLETTER ════════════════════════ */
-.newsletter {
-margin: 0 5% 100px;
-background: var(–sage);
-border-radius: 28px;
-padding: 60px;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 3rem;
-align-items: center;
-position: relative;
-overflow: hidden;
-}
-.newsletter::after {
-content: ‘’;
-position: absolute;
-bottom: -80px; right: -80px;
-width: 300px; height: 300px;
-border-radius: 50%;
-background: rgba(255,255,255,0.07);
-}
-
-.nl-left .section-label { color: rgba(255,255,255,0.7); }
-.nl-left .section-label::before { background: rgba(255,255,255,0.5); }
-.nl-left .section-title { color: white; }
-.nl-desc { font-size: 0.95rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-top: 0.8rem; }
-
-.nl-form-wrap { }
-.nl-input-row { display: flex; gap: 0; margin-bottom: 0.8rem; }
-.nl-input {
-flex: 1;
-padding: 14px 20px;
-border: 2px solid rgba(255,255,255,0.3);
-border-right: none;
-border-radius: 8px 0 0 8px;
-background: rgba(255,255,255,0.15);
-font-family: ‘Quicksand’, sans-serif;
-font-size: 0.9rem; font-weight: 500;
-color: white;
-outline: none;
-transition: border-color 0.2s;
-backdrop-filter: blur(4px);
-}
-.nl-input::placeholder { color: rgba(255,255,255,0.55); }
-.nl-input:focus { border-color: rgba(255,255,255,0.7); }
-.nl-submit {
-padding: 14px 24px;
-background: white;
-color: var(–sage);
-border: none;
-border-radius: 0 8px 8px 0;
-font-family: ‘Quicksand’, sans-serif;
-font-size: 0.88rem; font-weight: 700;
-cursor: pointer;
-letter-spacing: 0.3px;
-transition: all 0.2s;
-white-space: nowrap;
-}
-.nl-submit:hover { background: var(–ink); color: white; }
-.nl-note { font-size: 0.75rem; color: rgba(255,255,255,0.55); }
-
-/* ════════════════════════ FOOTER ════════════════════════ */
-footer {
-background: var(–ink);
-color: white;
-padding: 64px 5% 32px;
-}
-
-.footer-top {
-display: grid;
-grid-template-columns: 2fr 1fr 1fr 1fr;
-gap: 3rem;
-padding-bottom: 3rem;
-border-bottom: 1px solid rgba(255,255,255,0.07);
-margin-bottom: 2rem;
-}
-
-.footer-brand-col { }
-.footer-logo-name {
-font-family: ‘Lora’, serif;
-font-size: 1.5rem; font-weight: 700;
-color: white;
-margin-bottom: 1rem;
-}
-.footer-logo-name span { color: var(–sage-lt); }
-.footer-about {
-font-size: 0.85rem; color: rgba(255,255,255,0.45);
-line-height: 1.75; max-width: 260px; margin-bottom: 1.6rem;
-}
-.footer-socials { display: flex; gap: 0.7rem; }
-.social-icon {
-width: 36px; height: 36px; border-radius: 8px;
-background: rgba(255,255,255,0.07);
-border: 1px solid rgba(255,255,255,0.08);
-display: flex; align-items: center; justify-content: center;
-text-decoration: none;
-transition: all 0.2s;
-}
-.social-icon svg { width: 16px; height: 16px; color: rgba(255,255,255,0.5); }
-.social-icon:hover { background: var(–honey); border-color: var(–honey); }
-.social-icon:hover svg { color: white; }
-
-.footer-col-head {
-font-size: 0.75rem; font-weight: 700;
-letter-spacing: 2px; text-transform: uppercase;
-color: rgba(255,255,255,0.35);
-margin-bottom: 1.3rem;
-}
-.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-.footer-links a {
-font-size: 0.86rem; color: rgba(255,255,255,0.5);
-text-decoration: none; transition: color 0.2s;
-}
-.footer-links a:hover { color: white; }
-
-.footer-bottom {
-display: flex; align-items: center; justify-content: space-between;
-flex-wrap: wrap; gap: 1rem;
-}
-.footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
-.footer-pay { display: flex; gap: 0.5rem; }
-.pay-chip {
-padding: 4px 10px;
-border: 1px solid rgba(255,255,255,0.1);
-border-radius: 5px;
-font-size: 0.68rem; font-weight: 700;
-color: rgba(255,255,255,0.3);
-letter-spacing: 0.3px;
-}
-
-/* ════════════════════════ SCROLL TOP ════════════════════════ */
-.scroll-top-btn {
-position: fixed; bottom: 28px; right: 28px;
-width: 46px; height: 46px;
-background: var(–ink);
-border: none; border-radius: 50%;
-color: white;
-display: flex; align-items: center; justify-content: center;
-cursor: pointer; z-index: 800;
-box-shadow: 0 6px 20px rgba(44,36,23,0.2);
-transition: all 0.25s;
-}
-.scroll-top-btn:hover { background: var(–honey); transform: translateY(-3px); }
-.scroll-top-btn svg { width: 18px; height: 18px; }
-
-/* ════════════════════════ FADE IN ════════════════════════ */
-.reveal {
-opacity: 0; transform: translateY(28px);
-transition: opacity 0.65s ease, transform 0.65s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-
-/* ════════════════════════ RESPONSIVE ════════════════════════ */
-@media (max-width: 1024px) {
-.products-grid { grid-template-columns: repeat(3, 1fr); }
-.footer-top { grid-template-columns: 1fr 1fr; }
-.about-grid { gap: 3rem; }
-}
-@media (max-width: 768px) {
-.hero { grid-template-columns: 1fr; padding-top: 90px; text-align: center; }
-.hero-desc { margin: 0 auto 2.5rem; }
-.hero-actions { justify-content: center; }
-.hero-trust { justify-content: center; }
-.hero-visual { display: none; }
-.nav-links { display: none; }
-.cat-layout { grid-template-columns: 1fr 1fr; }
-.cat-card:nth-child(1) { grid-row: auto; }
-.cat-card:nth-child(1) .cat-card-inner { height: 280px; }
-.products-grid { grid-template-columns: 1fr 1fr; }
-.promo { grid-template-columns: 1fr; }
-.promo-art { min-height: 240px; }
-.about-grid { grid-template-columns: 1fr; }
-.about-visual { display: none; }
-.testi-grid { grid-template-columns: 1fr; }
-.newsletter { grid-template-columns: 1fr; padding: 40px; }
-.footer-top { grid-template-columns: 1fr 1fr; }
-}
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kit'n Kiwi — Made for Little Hearts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #faf6f0;
+      --blush: #f2e0d5;
+      --sage: #b8c9b0;
+      --warm-sage: #8faa84;
+      --gold: #c9a96e;
+      --deep: #3a3228;
+      --mid: #7a6e62;
+      --light-mid: #b0a898;
+      --white: #fffdf9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--deep);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.35s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+      opacity: 0.5;
+    }
+    body:has(a:hover) .cursor { width: 18px; height: 18px; background: var(--warm-sage); }
+    body:has(a:hover) .cursor-ring { width: 50px; height: 50px; opacity: 0.3; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.6rem 4rem;
+      background: transparent;
+      transition: background 0.5s ease, padding 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(250,246,240,0.92);
+      backdrop-filter: blur(12px);
+      padding: 1rem 4rem;
+      border-bottom: 1px solid rgba(201,169,110,0.15);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--deep);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--deep); }
+    .nav-cta {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--deep);
+      padding: 0.65rem 1.5rem;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      background: var(--blush);
+      display: flex;
+      align-items: flex-end;
+      padding: 8rem 4rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      top: -10%; right: -10%;
+      width: 55%; aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      bottom: 10%; left: -5%;
+      width: 35%; aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(143,170,132,0.22) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-text { position: relative; z-index: 2; }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s ease forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+    .hero-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--deep);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s ease forwards;
+    }
+    .hero-heading em {
+      font-style: italic;
+      color: var(--warm-sage);
+    }
+    .hero-sub {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: var(--mid);
+      max-width: 360px;
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s ease forwards;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s ease forwards;
+    }
+    .btn-primary {
+      padding: 0.95rem 2.4rem;
+      background: var(--deep);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.3s, transform 0.25s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-ghost {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: color 0.3s, gap 0.3s;
+    }
+    .btn-ghost:hover { color: var(--deep); gap: 0.8rem; }
+    .btn-ghost::after { content: '→'; font-size: 1rem; }
+
+    .hero-right {
+      background: var(--sage);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-illustration {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .big-circle {
+      width: 72%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      position: absolute;
+      animation: float 6s ease-in-out infinite;
+    }
+    .med-circle {
+      width: 48%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      position: absolute;
+      top: 15%; right: 10%;
+      animation: float 8s 1s ease-in-out infinite reverse;
+    }
+    .kiwi-icon {
+      font-size: 8rem;
+      position: relative;
+      z-index: 2;
+      animation: float 5s 0.5s ease-in-out infinite;
+      filter: drop-shadow(0 20px 40px rgba(58,50,40,0.2));
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 2.5rem; right: 2.5rem;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: var(--deep);
+      color: var(--white);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      animation: spin-slow 20s linear infinite;
+      z-index: 3;
+    }
+    .hero-badge span {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+    .hero-badge .badge-star { font-size: 1.1rem; margin-bottom: 0.3rem; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: none;
+    }
+    .scroll-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scroll-drop 2s ease-in-out infinite;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      background: var(--deep);
+      padding: 1.1rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-inner span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin: 0 2.5rem;
+    }
+    .marquee-inner .dot { color: var(--gold); font-size: 1rem; vertical-align: middle; margin: 0 0.8rem; }
+
+    /* FEATURES */
+    .features {
+      padding: 8rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .feature-card.visible { opacity: 1; transform: translateY(0); }
+    .feature-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--blush);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: var(--deep);
+    }
+    .feature-text {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: var(--mid);
+    }
+
+    /* COLLECTION */
+    .collection {
+      padding: 6rem 4rem 8rem;
+      background: var(--white);
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      max-width: 1300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--deep);
+      line-height: 1.15;
+    }
+    .section-title em { font-style: italic; color: var(--warm-sage); }
+    .see-all {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: color 0.3s, gap 0.3s;
+      white-space: nowrap;
+      padding-bottom: 0.2rem;
+      border-bottom: 1px solid var(--light-mid);
+    }
+    .see-all:hover { color: var(--deep); gap: 0.8rem; }
+    .see-all::after { content: '→'; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .product-card {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .product-card.visible { opacity: 1; transform: translateY(0); }
+    .product-img {
+      aspect-ratio: 3/4;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .product-bg {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-bg { transform: scale(1.05); }
+    .bg-1 { background: linear-gradient(135deg, #f5e6da, #edd5c5); }
+    .bg-2 { background: linear-gradient(135deg, #d5e5d0, #c1d9ba); }
+    .bg-3 { background: linear-gradient(135deg, #dde5ef, #c8d8ec); }
+    .bg-4 { background: linear-gradient(135deg, #f0e8d5, #e8d9bb); }
+    .product-tag {
+      position: absolute;
+      top: 0.8rem; left: 0.8rem;
+      background: var(--deep);
+      color: var(--white);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+    }
+    .tag-new { background: var(--warm-sage); }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--deep);
+      margin-bottom: 0.3rem;
+    }
+    .product-sub {
+      font-size: 0.78rem;
+      color: var(--light-mid);
+      margin-bottom: 0.6rem;
+    }
+    .product-price {
+      font-size: 0.88rem;
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    /* STORY */
+    .story {
+      padding: 8rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .story-visual {
+      position: relative;
+      height: 560px;
+    }
+    .story-img-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 72%; height: 82%;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--blush), #e8cfc0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem;
+      overflow: hidden;
+    }
+    .story-img-accent {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 52%; height: 50%;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--sage), var(--warm-sage));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      border: 4px solid var(--cream);
+    }
+    .story-float-badge {
+      position: absolute;
+      top: 42%; left: -24px;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 12px 40px rgba(58,50,40,0.12);
+      z-index: 3;
+      min-width: 160px;
+    }
+    .badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .badge-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 0.3rem;
+    }
+    .story-content { opacity: 0; transform: translateX(30px); transition: opacity 0.8s, transform 0.8s; }
+    .story-content.visible { opacity: 1; transform: translateX(0); }
+    .story-content .section-eyebrow { margin-bottom: 1rem; }
+    .story-content .section-title { margin-bottom: 1.8rem; }
+    .story-body {
+      font-size: 0.9rem;
+      line-height: 2;
+      color: var(--mid);
+      margin-bottom: 2.5rem;
+    }
+    .story-stats {
+      display: flex;
+      gap: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(58,50,40,0.1);
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--deep);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light-mid);
+      margin-top: 0.4rem;
+    }
+
+    /* VALUES */
+    .values {
+      background: var(--deep);
+      padding: 8rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .values::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 50%; aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+    }
+    .values-inner { max-width: 1300px; margin: 0 auto; }
+    .values .section-eyebrow { color: var(--gold); }
+    .values .section-title { color: var(--white); margin-bottom: 4rem; }
+    .values .section-title em { color: var(--sage); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+    }
+    .value-item {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .value-item.visible { opacity: 1; transform: translateY(0); }
+    .value-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(201,169,110,0.25);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .value-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .value-text {
+      font-size: 0.83rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* CHARITY BANNER */
+    .charity {
+      background: var(--blush);
+      padding: 5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .charity::before, .charity::after {
+      content: '♡';
+      position: absolute;
+      font-size: 18rem;
+      color: rgba(201,169,110,0.08);
+      top: -2rem;
+      font-family: serif;
+    }
+    .charity::before { left: -3rem; }
+    .charity::after { right: -3rem; }
+    .charity-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 2; }
+    .charity-icon { font-size: 2.5rem; margin-bottom: 1.5rem; display: block; }
+    .charity-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--deep);
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+    .charity-title em { font-style: italic; color: var(--gold); }
+    .charity-text {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: var(--mid);
+      margin-bottom: 2.2rem;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      padding: 8rem 4rem;
+      background: var(--white);
+    }
+    .testimonials-inner { max-width: 1300px; margin: 0 auto; }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 4rem;
+    }
+    .testi-card {
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .testi-card.visible { opacity: 1; transform: translateY(0); }
+    .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; }
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--deep);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .testi-author {
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .testi-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--blush);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .testi-name { font-size: 0.8rem; font-weight: 500; color: var(--deep); }
+    .testi-location { font-size: 0.72rem; color: var(--light-mid); }
+
+    /* NEWSLETTER */
+    .newsletter {
+      padding: 7rem 4rem;
+      text-align: center;
+      background: var(--cream);
+    }
+    .newsletter-inner { max-width: 560px; margin: 0 auto; }
+    .newsletter .section-title { margin-bottom: 0.8rem; }
+    .newsletter-sub {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      max-width: 440px;
+      margin: 0 auto;
+      border: 1px solid rgba(58,50,40,0.15);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .newsletter-input {
+      flex: 1;
+      padding: 1rem 1.3rem;
+      border: none;
+      background: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      color: var(--deep);
+      outline: none;
+    }
+    .newsletter-input::placeholder { color: var(--light-mid); }
+    .newsletter-btn {
+      padding: 1rem 1.8rem;
+      background: var(--deep);
+      color: var(--white);
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: background 0.3s;
+    }
+    .newsletter-btn:hover { background: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      background: var(--deep);
+      padding: 5rem 4rem 2.5rem;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-desc {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      margin-bottom: 1.8rem;
+    }
+    .footer-socials { display: flex; gap: 1rem; }
+    .social-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: rgba(255,255,255,0.5);
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-col-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.72rem;
+    }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes scroll-drop {
+      0%, 100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      50% { opacity: 0.4; transform: scaleY(0.6); transform-origin: bottom; }
+    }
+
+    @media (max-width: 1100px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      nav { padding: 1.5rem 2rem; }
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { height: 50vw; }
+      .story { grid-template-columns: 1fr; }
+      .story-visual { height: 320px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .features { grid-template-columns: 1fr; padding: 4rem 2rem; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-left { padding: 7rem 2rem 4rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-<nav>
-  <a href="#" class="logo">
-    <!-- Kiwi logomark SVG -->
-    <svg class="logo-mark" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="40" cy="40" r="38" fill="#C4D9C4"/>
-      <ellipse cx="40" cy="40" rx="24" ry="26" fill="#8BAF8B"/>
-      <!-- kiwi seed lines -->
-      <line x1="40" y1="14" x2="40" y2="66" stroke="#FAF6EF" stroke-width="1.5" stroke-dasharray="2 3"/>
-      <line x1="24" y1="22" x2="56" y2="58" stroke="#FAF6EF" stroke-width="1.5" stroke-dasharray="2 3"/>
-      <line x1="56" y1="22" x2="24" y2="58" stroke="#FAF6EF" stroke-width="1.5" stroke-dasharray="2 3"/>
-      <circle cx="40" cy="40" r="5" fill="#FAF6EF"/>
-      <!-- tiny seeds -->
-      <ellipse cx="32" cy="28" rx="2.5" ry="3.5" fill="#2C2417" opacity="0.5" transform="rotate(-20 32 28)"/>
-      <ellipse cx="49" cy="28" rx="2.5" ry="3.5" fill="#2C2417" opacity="0.5" transform="rotate(20 49 28)"/>
-      <ellipse cx="54" cy="40" rx="2.5" ry="3.5" fill="#2C2417" opacity="0.5" transform="rotate(90 54 40)"/>
-      <ellipse cx="49" cy="52" rx="2.5" ry="3.5" fill="#2C2417" opacity="0.5" transform="rotate(-20 49 52)"/>
-      <ellipse cx="32" cy="52" rx="2.5" ry="3.5" fill="#2C2417" opacity="0.5" transform="rotate(20 32 52)"/>
-      <ellipse cx="26" cy="40" rx="2.5" ry="3.5" fill="#2C2417" opacity="0.5" transform="rotate(90 26 40)"/>
-    </svg>
-    <span class="logo-name">Kit n <span>Kiwi</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#categories">Collections</a></li>
-    <li><a href="#products">Shop</a></li>
-    <li><a href="#about">Our Story</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    </div>
-    <div class="nav-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-    </div>
-    <div class="nav-icon" style="position:relative;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      <span style="position:absolute;top:-4px;right:-4px;width:17px;height:17px;background:var(--blush);border-radius:50%;font-size:0.62rem;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;border:2px solid var(--cream);">3</span>
-    </div>
-    <button class="nav-shop-btn">Shop Now</button>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Kit'n<span>Kiwi</span></a>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#values">Values</a></li>
+      <li><a href="#">Journal</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Shop Now</a>
+  </nav>
 
-<!-- ══ HERO ══ -->
-
-<section class="hero" style="background: linear-gradient(160deg, var(--cream) 60%, var(--blush-lt) 100%);">
-  <div class="hero-bg-leaves">
-    <!-- Large bg leaf left -->
-    <svg style="top:-60px;left:-40px;width:320px;height:320px;" viewBox="0 0 200 200" fill="none">
-      <path d="M100 10 C140 10 180 40 180 100 C180 160 140 190 100 190 C60 190 20 160 20 100 C20 40 60 10 100 10Z" fill="#8BAF8B"/>
-      <path d="M100 10 L100 190" stroke="#C4D9C4" stroke-width="2"/>
-      <path d="M20 100 C60 80 140 80 180 100" stroke="#C4D9C4" stroke-width="1.5"/>
-      <path d="M30 60 C65 50 135 50 170 60" stroke="#C4D9C4" stroke-width="1"/>
-      <path d="M30 140 C65 150 135 150 170 140" stroke="#C4D9C4" stroke-width="1"/>
-    </svg>
-    <!-- Small bg leaf top right -->
-    <svg style="top:80px;right:40px;width:140px;height:140px;transform:rotate(40deg);" viewBox="0 0 200 200" fill="none">
-      <path d="M100 10 C140 10 180 40 180 100 C180 160 140 190 100 190 C60 190 20 160 20 100 C20 40 60 10 100 10Z" fill="#E8B4A0"/>
-      <path d="M100 10 L100 190" stroke="#F5D9CF" stroke-width="2"/>
-    </svg>
-    <!-- Bottom leaf -->
-    <svg style="bottom:-20px;left:30%;width:180px;height:180px;transform:rotate(-20deg);" viewBox="0 0 200 200" fill="none">
-      <path d="M100 10 C140 10 180 40 180 100 C180 160 140 190 100 190 C60 190 20 160 20 100 C20 40 60 10 100 10Z" fill="#D4956A"/>
-      <path d="M100 10 L100 190" stroke="#EDCFB5" stroke-width="2"/>
-    </svg>
-  </div>
-
-  <div class="hero-text">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-line"></div>
-      New Summer Collection 2025
-    </div>
-    <h1 class="hero-title">
-      Dressed for<br>
-      <em>Little</em><br>
-      <span class="underline-word">Adventures</span>
-    </h1>
-    <p class="hero-desc">
-      Premium children's clothing made from certified organic fabrics — thoughtfully designed for curious minds, spirited hearts, and every beautiful mess in between.
-    </p>
-    <div class="hero-actions">
-      <button class="btn-primary"><span>Explore Collection</span></button>
-      <button class="btn-ghost">
-        View Lookbook
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-    <div class="hero-trust">
-      <div class="trust-item">
-        <div class="trust-num">12K+</div>
-        <div class="trust-label">Happy Families</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-text">
+        <div class="hero-eyebrow">New Collection 2025</div>
+        <h1 class="hero-heading">
+          Dressed for<br>
+          <em>every little</em><br>
+          adventure
+        </h1>
+        <p class="hero-sub">
+          Premium children's clothing crafted with love — soft, safe, and beautifully made for the smallest hearts.
+        </p>
+        <div class="hero-btns">
+          <a href="#collection" class="btn-primary">Explore Collection</a>
+          <a href="#story" class="btn-ghost">Our Story</a>
+        </div>
       </div>
-      <div style="width:1px;background:rgba(92,74,50,0.12)"></div>
-      <div class="trust-item">
-        <div class="trust-num">200+</div>
-        <div class="trust-label">Unique Styles</div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-illustration">
+        <div class="big-circle"></div>
+        <div class="med-circle"></div>
+        <div class="kiwi-icon">🥝</div>
+        <div class="hero-badge">
+          <span class="badge-star">✦</span>
+          <span>Premium<br>Quality<br>Certified</span>
+        </div>
       </div>
-      <div style="width:1px;background:rgba(92,74,50,0.12)"></div>
-      <div class="trust-item">
-        <div class="trust-num">100%</div>
-        <div class="trust-label">Organic Cotton</div>
-      </div>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-label">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      <span>Premium Cotton</span><span class="dot">·</span>
+      <span>Non-Toxic Dyes</span><span class="dot">·</span>
+      <span>Ethically Made</span><span class="dot">·</span>
+      <span>Made for Little Hearts</span><span class="dot">·</span>
+      <span>Soft & Breathable</span><span class="dot">·</span>
+      <span>Timeless Designs</span><span class="dot">·</span>
+      <span>Child-Safe Materials</span><span class="dot">·</span>
+      <span>Premium Cotton</span><span class="dot">·</span>
+      <span>Non-Toxic Dyes</span><span class="dot">·</span>
+      <span>Ethically Made</span><span class="dot">·</span>
+      <span>Made for Little Hearts</span><span class="dot">·</span>
+      <span>Soft & Breathable</span><span class="dot">·</span>
+      <span>Timeless Designs</span><span class="dot">·</span>
+      <span>Child-Safe Materials</span><span class="dot">·</span>
     </div>
   </div>
 
-  <!-- Hero illustration -->
-
-  <div class="hero-visual">
-    <div class="hero-scene">
-      <!-- Main illustrated card -->
-      <div class="main-card">
-        <svg viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Child dress illustration -->
-          <ellipse cx="110" cy="60" rx="34" ry="38" fill="#F5D9CF"/>
-          <!-- hair -->
-          <path d="M76 48 C76 28 144 28 144 48 C144 36 136 20 110 20 C84 20 76 36 76 48Z" fill="#5C4A32"/>
-          <path d="M76 52 C70 52 66 58 68 66 C70 74 76 72 76 62Z" fill="#5C4A32"/>
-          <path d="M144 52 C150 52 154 58 152 66 C150 74 144 72 144 62Z" fill="#5C4A32"/>
-          <!-- face details -->
-          <circle cx="101" cy="58" r="3.5" fill="#8B5E52"/>
-          <circle cx="119" cy="58" r="3.5" fill="#8B5E52"/>
-          <path d="M105 70 Q110 75 115 70" stroke="#8B5E52" stroke-width="2" stroke-linecap="round"/>
-          <!-- blush -->
-          <ellipse cx="96" cy="66" rx="6" ry="3.5" fill="#E8B4A0" opacity="0.6"/>
-          <ellipse cx="124" cy="66" rx="6" ry="3.5" fill="#E8B4A0" opacity="0.6"/>
-          <!-- dress body -->
-          <path d="M82 90 C82 90 78 95 76 110 L68 200 L152 200 L144 110 C142 95 138 90 138 90 Z" fill="#8BAF8B"/>
-          <!-- dress collar -->
-          <path d="M95 88 Q110 98 125 88" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <!-- dress sleeves -->
-          <path d="M82 92 C72 92 60 102 62 115 C64 120 72 120 76 112 Z" fill="#8BAF8B"/>
-          <path d="M138 92 C148 92 160 102 158 115 C156 120 148 120 144 112 Z" fill="#8BAF8B"/>
-          <!-- dress pattern dots -->
-          <circle cx="100" cy="130" r="4" fill="white" opacity="0.5"/>
-          <circle cx="116" cy="150" r="4" fill="white" opacity="0.5"/>
-          <circle cx="100" cy="165" r="4" fill="white" opacity="0.5"/>
-          <circle cx="122" cy="130" r="3" fill="white" opacity="0.4"/>
-          <circle cx="96" cy="150" r="3" fill="white" opacity="0.4"/>
-          <!-- dress hem wavy -->
-          <path d="M68 200 Q80 210 92 200 Q104 190 116 200 Q128 210 140 200 L152 200" stroke="white" stroke-width="2" fill="none"/>
-          <!-- legs -->
-          <rect x="98" y="198" width="10" height="40" rx="5" fill="#F5D9CF"/>
-          <rect x="112" y="198" width="10" height="40" rx="5" fill="#F5D9CF"/>
-          <!-- shoes -->
-          <ellipse cx="103" cy="242" rx="12" ry="7" fill="#5C4A32"/>
-          <ellipse cx="117" cy="242" rx="12" ry="7" fill="#5C4A32"/>
-          <!-- tiny bow in hair -->
-          <path d="M104 26 C100 20 94 22 96 28 C98 34 104 30 104 26Z" fill="#E8B4A0"/>
-          <path d="M116 26 C120 20 126 22 124 28 C122 34 116 30 116 26Z" fill="#E8B4A0"/>
-          <circle cx="110" cy="26" r="4" fill="#E8B4A0"/>
-        </svg>
+  <!-- FEATURES -->
+  <section>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">Pure & Natural Fabrics</div>
+        <p class="feature-text">Every piece is crafted from premium cotton and soft wool, carefully chosen for breathability, softness, and enduring comfort against delicate skin.</p>
       </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <div class="feature-title">Safe, Vibrant Colours</div>
+        <p class="feature-text">We use only child-safe, non-toxic dyes that stay brilliant through countless washes while respecting the sensitivity of young skin.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✦</div>
+        <div class="feature-title">Timeless Craftsmanship</div>
+        <p class="feature-text">From yarn selection to final stitching, every detail is thoughtfully considered so each garment supports natural movement and gentle everyday moments.</p>
+      </div>
+    </div>
+  </section>
 
-```
-  <!-- Float cards -->
-  <div class="side-card side-card-a">
-    <div class="side-card-label">Customer Love</div>
-    <div class="rating-stars">★★★★★</div>
-    <div class="side-card-value" style="font-size:0.82rem;margin-top:2px;">2,400+ reviews</div>
-  </div>
-  <div class="side-card side-card-b">
-    <div class="side-card-label">Material</div>
-    <div class="side-card-value">100% Organic</div>
-    <div style="font-size:0.75rem;color:var(--sage);font-weight:600;margin-top:2px;">GOTS Certified</div>
-  </div>
-  <div class="side-card side-card-c">
-    <svg viewBox="0 0 28 28" width="28" fill="none" style="margin-bottom:4px;">
-      <rect width="28" height="28" rx="6" fill="#C4D9C4"/>
-      <path d="M6 22 L14 8 L22 22" stroke="#2C2417" stroke-width="2" fill="none"/>
-      <path d="M9 18 L19 18" stroke="#2C2417" stroke-width="1.5"/>
-    </svg>
-    <div class="side-card-label" style="margin-bottom:0;">Free Shipping</div>
-    <div style="font-size:0.8rem;color:var(--ink);font-weight:600;">Over ₹999</div>
-  </div>
-
-  <!-- Floating leaves around the visual -->
-  <svg class="leaf leaf-a" width="48" height="60" viewBox="0 0 48 60" fill="none">
-    <path d="M24 4 C34 4 44 14 44 30 C44 46 34 56 24 56 C14 56 4 46 4 30 C4 14 14 4 24 4Z" fill="#8BAF8B" opacity="0.5"/>
-    <path d="M24 4 L24 56" stroke="#C4D9C4" stroke-width="1.5"/>
-  </svg>
-  <svg class="leaf leaf-b" width="38" height="48" viewBox="0 0 48 60" fill="none" style="transform:rotate(50deg)">
-    <path d="M24 4 C34 4 44 14 44 30 C44 46 34 56 24 56 C14 56 4 46 4 30 C4 14 14 4 24 4Z" fill="#E8B4A0" opacity="0.5"/>
-    <path d="M24 4 L24 56" stroke="#F5D9CF" stroke-width="1.5"/>
-  </svg>
-  <svg class="leaf leaf-c" width="32" height="42" viewBox="0 0 48 60" fill="none" style="transform:rotate(-30deg)">
-    <path d="M24 4 C34 4 44 14 44 30 C44 46 34 56 24 56 C14 56 4 46 4 30 C4 14 14 4 24 4Z" fill="#D4956A" opacity="0.4"/>
-    <path d="M24 4 L24 56" stroke="#EDCFB5" stroke-width="1.5"/>
-  </svg>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ══ MARQUEE ══ -->
-
-<div class="marquee-bar">
-  <div class="marquee-track">
-    <div class="marquee-item"><div class="marquee-dot"></div>New Arrivals In</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Free Shipping Over ₹999</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>100% Organic Cotton</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Ethically Made in India</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Sizes 0 – 12 Years</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Easy 30-Day Returns</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>New Arrivals In</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Free Shipping Over ₹999</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>100% Organic Cotton</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Ethically Made in India</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Sizes 0 – 12 Years</div>
-    <div class="marquee-item"><div class="marquee-dot"></div>Easy 30-Day Returns</div>
-  </div>
-</div>
-
-<!-- ══ CATEGORIES ══ -->
-
-<section id="categories" class="categories">
-  <div class="reveal">
-    <div class="section-label">Browse by Age</div>
-    <h2 class="section-title">Shop the Collection</h2>
-    <p class="section-sub">From first steps to big adventures — curated styles for every little chapter.</p>
-  </div>
-  <div class="cat-layout reveal">
-    <!-- Big card -->
-    <div class="cat-card">
-      <div class="cat-card-inner">
-        <div class="cat-illustration">
-          <!-- Baby illustration -->
-          <svg viewBox="0 0 160 200" fill="none">
-            <ellipse cx="80" cy="55" rx="30" ry="32" fill="#F5D9CF"/>
-            <path d="M55 44 C55 26 105 26 105 44 C105 34 100 18 80 18 C60 18 55 34 55 44Z" fill="#D4956A" opacity="0.6"/>
-            <circle cx="72" cy="53" r="3" fill="#8B5E52"/>
-            <circle cx="88" cy="53" r="3" fill="#8B5E52"/>
-            <path d="M75 63 Q80 67 85 63" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-            <ellipse cx="68" cy="59" rx="5" ry="3" fill="#E8B4A0" opacity="0.6"/>
-            <ellipse cx="92" cy="59" rx="5" ry="3" fill="#E8B4A0" opacity="0.6"/>
-            <!-- onesie -->
-            <path d="M56 82 L50 140 L110 140 L104 82 Z" fill="#9FC4D4"/>
-            <path d="M56 84 C50 84 40 92 42 104 L50 104 L54 86Z" fill="#9FC4D4"/>
-            <path d="M104 84 C110 84 120 92 118 104 L110 104 L106 86Z" fill="#9FC4D4"/>
-            <path d="M56 84 Q80 92 104 84" stroke="white" stroke-width="2" fill="none"/>
-            <!-- snap bottom -->
-            <path d="M50 140 L55 160 L105 160 L110 140Z" fill="#9FC4D4"/>
-            <circle cx="76" cy="152" r="3" fill="white"/>
-            <circle cx="84" cy="152" r="3" fill="white"/>
-          </svg>
+  <!-- COLLECTION -->
+  <section class="collection" id="collection">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">The Collection</div>
+        <div class="section-title">Crafted for <em>little ones</em></div>
+      </div>
+      <a href="#" class="see-all">View all pieces</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-bg bg-1">🧸</div>
+          <div class="product-tag tag-new">New</div>
         </div>
-        <div class="cat-arrow-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="product-name">Cloud Romper</div>
+        <div class="product-sub">0–12 months · Blush Rose</div>
+        <div class="product-price">$48.00</div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-bg bg-2">🌿</div>
+          <div class="product-tag">Bestseller</div>
         </div>
-        <div class="cat-info">
-          <div class="cat-tag">0 – 18 Months</div>
-          <div class="cat-name">Baby Bliss</div>
-          <div class="cat-count">64 styles</div>
+        <div class="product-name">Meadow Dress</div>
+        <div class="product-sub">1–4 years · Sage Green</div>
+        <div class="product-price">$62.00</div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-bg bg-3">🌊</div>
+        </div>
+        <div class="product-name">Ocean Knit Set</div>
+        <div class="product-sub">2–5 years · Sky Blue</div>
+        <div class="product-price">$74.00</div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-bg bg-4">☀️</div>
+          <div class="product-tag tag-new">New</div>
+        </div>
+        <div class="product-name">Goldenrod Coord</div>
+        <div class="product-sub">3–6 years · Warm Sand</div>
+        <div class="product-price">$88.00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="story">
+    <div class="story">
+      <div class="story-visual">
+        <div class="story-img-main">🥝</div>
+        <div class="story-img-accent">💛</div>
+        <div class="story-float-badge">
+          <div class="badge-num">100%</div>
+          <div class="badge-label">Natural Materials</div>
+        </div>
+      </div>
+      <div class="story-content">
+        <div class="section-eyebrow">Our Story</div>
+        <div class="section-title">Born from <em>love</em><br>for children</div>
+        <p class="story-body">
+          Kit'n Kiwi was founded with one simple belief — what children wear should feel as good as it looks. We started small, selecting each fabric by hand, testing every dye for safety, and designing pieces that grow with your child.
+          <br><br>
+          Every collection reflects our commitment to timeless elegance and playful expression. We believe premium quality and genuine care aren't luxuries — they're the standard every child deserves.
+        </p>
+        <a href="#" class="btn-primary">Read Our Full Story</a>
+        <div class="story-stats">
+          <div>
+            <div class="stat-num">5k+</div>
+            <div class="stat-label">Happy Families</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Natural Fabrics</div>
+          </div>
+          <div>
+            <div class="stat-num">12+</div>
+            <div class="stat-label">Countries Shipped</div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Toddler -->
-    <div class="cat-card">
-      <div class="cat-card-inner">
-        <div class="cat-illustration">
-          <svg viewBox="0 0 140 170" fill="none">
-            <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-            <path d="M48 34 C48 18 92 18 92 34" fill="#5C4A32" opacity="0.7"/>
-            <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/>
-            <circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-            <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- t-shirt + shorts -->
-            <path d="M50 68 L46 108 L94 108 L90 68 Z" fill="#E8B4A0"/>
-            <path d="M50 70 C44 70 36 78 38 88 L46 88 L48 72Z" fill="#E8B4A0"/>
-            <path d="M90 70 C96 70 104 78 102 88 L94 88 L92 72Z" fill="#E8B4A0"/>
-            <rect x="46" y="108" width="22" height="32" rx="4" fill="#8BAF8B"/>
-            <rect x="72" y="108" width="22" height="32" rx="4" fill="#8BAF8B"/>
-            <rect x="48" y="140" width="18" height="10" rx="4" fill="#F5D9CF"/>
-            <rect x="74" y="140" width="18" height="10" rx="4" fill="#F5D9CF"/>
-          </svg>
-        </div>
-        <div class="cat-arrow-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-        <div class="cat-info">
-          <div class="cat-tag">18M – 3 Years</div>
-          <div class="cat-name">Toddler Tales</div>
-          <div class="cat-count">89 styles</div>
-        </div>
-      </div>
-    </div>
-    <!-- Little stars -->
-    <div class="cat-card">
-      <div class="cat-card-inner">
-        <div class="cat-illustration">
-          <svg viewBox="0 0 140 170" fill="none">
-            <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-            <!-- pigtails -->
-            <path d="M44 38 C36 32 32 20 42 18 C48 16 50 24 48 30Z" fill="#D4956A"/>
-            <path d="M96 38 C104 32 108 20 98 18 C92 16 90 24 92 30Z" fill="#D4956A"/>
-            <path d="M48 34 C48 18 92 18 92 34" fill="#D4956A" opacity="0.8"/>
-            <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/>
-            <circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-            <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- dress -->
-            <path d="M50 68 L44 130 L96 130 L90 68 Z" fill="#C5A3E8" opacity="0.8"/>
-            <path d="M50 70 C44 70 36 78 38 88 L46 88 L48 72Z" fill="#C5A3E8" opacity="0.8"/>
-            <path d="M90 70 C96 70 104 78 102 88 L94 88 L92 72Z" fill="#C5A3E8" opacity="0.8"/>
-            <path d="M44 130 Q55 138 66 130 Q77 122 88 130 L96 130" stroke="white" stroke-width="1.5" fill="none"/>
-            <rect x="62" y="130" width="8" height="24" rx="4" fill="#F5D9CF"/>
-            <rect x="70" y="130" width="8" height="24" rx="4" fill="#F5D9CF"/>
-          </svg>
-        </div>
-        <div class="cat-arrow-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-        <div class="cat-info">
-          <div class="cat-tag">4 – 7 Years</div>
-          <div class="cat-name">Little Stars</div>
-          <div class="cat-count">112 styles</div>
-        </div>
-      </div>
-    </div>
-    <!-- Big kids -->
-    <div class="cat-card">
-      <div class="cat-card-inner">
-        <div class="cat-illustration">
-          <svg viewBox="0 0 140 170" fill="none">
-            <ellipse cx="70" cy="38" rx="24" ry="26" fill="#F5D9CF"/>
-            <path d="M46 30 C46 14 94 14 94 30" fill="#2C2417" opacity="0.7"/>
-            <circle cx="62" cy="37" r="2.5" fill="#8B5E52"/>
-            <circle cx="78" cy="37" r="2.5" fill="#8B5E52"/>
-            <path d="M65 47 Q70 51 75 47" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- hoodie -->
-            <path d="M50 62 L44 130 L96 130 L90 62 Z" fill="#8BAF8B"/>
-            <path d="M50 64 C44 64 34 74 36 84 L44 84 L48 66Z" fill="#8BAF8B"/>
-            <path d="M90 64 C96 64 106 74 104 84 L96 84 L92 66Z" fill="#8BAF8B"/>
-            <path d="M58 62 Q70 72 82 62" stroke="white" stroke-width="2" fill="none"/>
-            <!-- kangaroo pocket -->
-            <rect x="60" y="100" width="20" height="15" rx="4" fill="rgba(255,255,255,0.2)"/>
-            <!-- jeans -->
-            <rect x="46" y="130" width="22" height="30" rx="4" fill="#9FC4D4"/>
-            <rect x="72" y="130" width="22" height="30" rx="4" fill="#9FC4D4"/>
-          </svg>
-        </div>
-        <div class="cat-arrow-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-        <div class="cat-info">
-          <div class="cat-tag">8 – 12 Years</div>
-          <div class="cat-name">Big Kids</div>
-          <div class="cat-count">78 styles</div>
-        </div>
-      </div>
-    </div>
-    <!-- Accessories -->
-    <div class="cat-card">
-      <div class="cat-card-inner">
-        <div class="cat-illustration">
-          <svg viewBox="0 0 140 120" fill="none">
-            <!-- hat -->
-            <path d="M30 70 L70 20 L110 70 Z" fill="#E8B4A0"/>
-            <rect x="20" y="68" width="100" height="14" rx="7" fill="#D4956A"/>
-            <!-- bow -->
-            <path d="M50 40 C44 34 36 36 38 44 C40 52 50 48 50 40Z" fill="#F5D9CF"/>
-            <path d="M90 40 C96 34 104 36 102 44 C100 52 90 48 90 40Z" fill="#F5D9CF"/>
-            <circle cx="70" cy="40" r="6" fill="#F5D9CF"/>
-            <!-- small bag below -->
-            <rect x="50" y="90" width="40" height="30" rx="8" fill="#9FC4D4"/>
-            <path d="M58 90 C58 82 82 82 82 90" stroke="#9FC4D4" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <circle cx="70" cy="106" r="4" fill="white" opacity="0.5"/>
-          </svg>
-        </div>
-        <div class="cat-arrow-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-        <div class="cat-info">
-          <div class="cat-tag">All Ages</div>
-          <div class="cat-name">Accessories</div>
-          <div class="cat-count">43 styles</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ PRODUCTS ══ -->
+  <!-- VALUES -->
+  <section class="values" id="values">
+    <div class="values-inner">
+      <div class="section-eyebrow">What We Stand For</div>
+      <div class="section-title">Our <em>values</em></div>
+      <div class="values-grid">
+        <div class="value-item">
+          <div class="value-num">01</div>
+          <div class="value-title">Child Safety First</div>
+          <p class="value-text">Every material and dye is rigorously tested to ensure it meets the highest safety standards for sensitive young skin.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-num">02</div>
+          <div class="value-title">Sustainable Sourcing</div>
+          <p class="value-text">We partner with responsible suppliers who share our commitment to ethical labour practices and environmental stewardship.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-num">03</div>
+          <div class="value-title">Lasting Quality</div>
+          <p class="value-text">Our garments are designed and constructed to last — because true sustainability means things that don't need replacing.</p>
+        </div>
+        <div class="value-item">
+          <div class="value-num">04</div>
+          <div class="value-title">Giving Back</div>
+          <p class="value-text">A portion of every purchase goes towards improving maternal and child nutrition globally. Because every child deserves a healthy start.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="products" class="products">
-  <div class="products-header reveal">
-    <div>
-      <div class="section-label">Best Sellers</div>
-      <h2 class="section-title">Little Favourites</h2>
-      <div class="filter-row">
-        <button class="filter-pill active">All</button>
-        <button class="filter-pill">Dresses</button>
-        <button class="filter-pill">Tops</button>
-        <button class="filter-pill">Bottoms</button>
-        <button class="filter-pill">Sets</button>
-        <button class="filter-pill">Baby</button>
-      </div>
+  <!-- CHARITY BANNER -->
+  <section class="charity">
+    <div class="charity-inner">
+      <span class="charity-icon">💛</span>
+      <h2 class="charity-title">Every purchase helps a<br><em>child thrive</em></h2>
+      <p class="charity-text">
+        We proudly donate a portion of our profits to improve maternal and child nutrition. When you shop Kit'n Kiwi, you're not just dressing your little one beautifully — you're helping nourish another.
+      </p>
+      <a href="#" class="btn-primary">Learn About Our Mission</a>
     </div>
-    <a href="#" class="view-all-link">
-      View All
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-  </div>
-  <div class="products-grid">
-    <!-- Product 1 -->
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M48 34 C48 18 92 18 92 34" fill="#D4956A" opacity="0.7"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M50 68 L44 148 L96 148 L90 68 Z" fill="#E8B4A0"/>
-          <path d="M50 70 C44 70 36 78 38 88 L46 88 L48 72Z" fill="#E8B4A0"/>
-          <path d="M90 70 C96 70 104 78 102 88 L94 88 L92 72Z" fill="#E8B4A0"/>
-          <path d="M44 148 Q56 158 68 148 Q80 138 92 148 L96 148" stroke="white" stroke-width="1.5" fill="none"/>
-          <!-- floral pattern dots -->
-          <circle cx="65" cy="100" r="4" fill="white" opacity="0.4"/>
-          <circle cx="75" cy="115" r="3" fill="white" opacity="0.4"/>
-          <circle cx="80" cy="100" r="3" fill="white" opacity="0.3"/>
-          <rect x="62" y="148" width="8" height="18" rx="4" fill="#F5D9CF"/>
-          <rect x="70" y="148" width="8" height="18" rx="4" fill="#F5D9CF"/>
-        </svg>
-        <div class="product-badge-wrap"><span class="p-badge p-badge-new">New</span></div>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">2–4 Yrs</span><span class="product-rating">★★★★★</span></div>
-        <div class="product-name">Bloom Floral Dress</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#E8B4A0"></div>
-          <div class="swatch" style="background:#9FC4D4"></div>
-          <div class="swatch" style="background:#C5A3E8"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-now">₹1,299</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-    <!-- Product 2 -->
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-img-wrap">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M48 34 C48 18 92 18 92 34" fill="#2C2417" opacity="0.6"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- tee -->
-          <path d="M50 68 L46 110 L94 110 L90 68 Z" fill="#9FC4D4"/>
-          <path d="M50 70 C44 70 34 78 36 88 L44 88 L48 72Z" fill="#9FC4D4"/>
-          <path d="M90 70 C96 70 106 78 104 88 L96 88 L92 72Z" fill="#9FC4D4"/>
-          <!-- shorts -->
-          <rect x="46" y="110" width="22" height="30" rx="4" fill="#8BAF8B"/>
-          <rect x="72" y="110" width="22" height="30" rx="4" fill="#8BAF8B"/>
-          <rect x="48" y="140" width="18" height="12" rx="5" fill="#F5D9CF"/>
-          <rect x="74" y="140" width="18" height="12" rx="5" fill="#F5D9CF"/>
-        </svg>
-        <div class="product-badge-wrap"><span class="p-badge p-badge-sale">–20%</span></div>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">4–6 Yrs</span><span class="product-rating">★★★★★</span></div>
-        <div class="product-name">Sky & Sage Play Set</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#9FC4D4"></div>
-          <div class="swatch" style="background:#8BAF8B"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-old">₹1,199</span><span class="price-now">₹959</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-    <!-- Product 3 -->
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-img-wrap">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M48 34 C48 18 92 18 92 34" fill="#D4956A" opacity="0.5"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- onesie -->
-          <path d="M50 66 L46 140 L94 140 L90 66 Z" fill="#D4E8F0"/>
-          <path d="M50 68 C44 68 36 76 38 86 L46 86 L48 70Z" fill="#D4E8F0"/>
-          <path d="M90 68 C96 68 104 76 102 86 L94 86 L92 70Z" fill="#D4E8F0"/>
-          <path d="M58 64 Q70 74 82 64" stroke="white" stroke-width="2" fill="none"/>
-          <circle cx="64" cy="110" r="3" fill="white" opacity="0.5"/>
-          <circle cx="70" cy="125" r="3" fill="white" opacity="0.5"/>
-          <circle cx="76" cy="110" r="3" fill="white" opacity="0.5"/>
-          <path d="M46 140 L48 158 L92 158 L94 140Z" fill="#D4E8F0"/>
-          <circle cx="65" cy="150" r="3" fill="white"/><circle cx="75" cy="150" r="3" fill="white"/>
-        </svg>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">0–12 Mths</span><span class="product-rating">★★★★☆</span></div>
-        <div class="product-name">Cloud Nine Romper</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#D4E8F0"></div>
-          <div class="swatch" style="background:#F5D9CF"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-now">₹849</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-    <!-- Product 4 -->
-    <div class="product-card reveal reveal-delay-3">
-      <div class="product-img-wrap">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M48 34 C48 18 92 18 92 34" fill="#2C2417" opacity="0.65"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- hoodie -->
-          <path d="M50 66 L44 134 L96 134 L90 66 Z" fill="#8BAF8B"/>
-          <path d="M50 68 C44 68 32 78 34 90 L44 90 L48 70Z" fill="#8BAF8B"/>
-          <path d="M90 68 C96 68 108 78 106 90 L96 90 L92 70Z" fill="#8BAF8B"/>
-          <path d="M58 66 Q70 76 82 66" stroke="#C4D9C4" stroke-width="2" fill="none"/>
-          <rect x="58" y="106" width="24" height="18" rx="5" fill="rgba(255,255,255,0.2)"/>
-          <!-- joggers -->
-          <rect x="46" y="134" width="22" height="32" rx="4" fill="#5C4A32" opacity="0.7"/>
-          <rect x="72" y="134" width="22" height="32" rx="4" fill="#5C4A32" opacity="0.7"/>
-          <rect x="48" y="164" width="18" height="10" rx="4" fill="#2C2417" opacity="0.6"/>
-          <rect x="74" y="164" width="18" height="10" rx="4" fill="#2C2417" opacity="0.6"/>
-        </svg>
-        <div class="product-badge-wrap"><span class="p-badge p-badge-new">New</span></div>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">6–8 Yrs</span><span class="product-rating">★★★★★</span></div>
-        <div class="product-name">Forest Explorer Set</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#8BAF8B"></div>
-          <div class="swatch" style="background:#D4956A"></div>
-          <div class="swatch" style="background:#9FC4D4"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-now">₹1,649</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-    <!-- Products 5-8 simplified -->
-    <div class="product-card reveal">
-      <div class="product-img-wrap" style="background:#EDE8F5;">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M44 30 C46 12 94 12 96 30" fill="#C5A3E8" opacity="0.8"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 56 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M48 68 L44 150 L96 150 L92 68Z" fill="#C5A3E8" opacity="0.8"/>
-          <path d="M48 70 C42 70 34 78 36 88 L44 88 L46 72Z" fill="#C5A3E8" opacity="0.8"/>
-          <path d="M92 70 C98 70 106 78 104 88 L96 88 L94 72Z" fill="#C5A3E8" opacity="0.8"/>
-          <path d="M44 150 Q56 160 68 150 Q80 140 92 150 L96 150" stroke="white" stroke-width="1.5" fill="none"/>
-          <rect x="62" y="150" width="8" height="16" rx="4" fill="#F5D9CF"/>
-          <rect x="70" y="150" width="8" height="16" rx="4" fill="#F5D9CF"/>
-        </svg>
-        <div class="product-badge-wrap"><span class="p-badge p-badge-sale">–15%</span></div>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">3–7 Yrs</span><span class="product-rating">★★★★★</span></div>
-        <div class="product-name">Lavender Dream Dress</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#C5A3E8"></div>
-          <div class="swatch" style="background:#E8B4A0"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-old">₹1,599</span><span class="price-now">₹1,359</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-img-wrap">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M48 34 C48 18 92 18 92 34" fill="#D4956A" opacity="0.6"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M50 66 L46 140 L94 140 L90 66 Z" fill="#EDCFB5"/>
-          <path d="M50 68 C44 68 36 76 38 86 L46 86 L48 70Z" fill="#EDCFB5"/>
-          <path d="M90 68 C96 68 104 76 102 86 L94 86 L92 70Z" fill="#EDCFB5"/>
-          <path d="M58 64 Q70 72 82 64" stroke="white" stroke-width="2" fill="none"/>
-          <circle cx="66" cy="105" r="3.5" fill="white" opacity="0.45"/>
-          <circle cx="74" cy="118" r="3.5" fill="white" opacity="0.45"/>
-          <path d="M46 140 L48 158 L92 158 L94 140Z" fill="#EDCFB5"/>
-          <circle cx="65" cy="151" r="3" fill="white"/><circle cx="75" cy="151" r="3" fill="white"/>
-        </svg>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">0–6 Mths</span><span class="product-rating">★★★★★</span></div>
-        <div class="product-name">Honey Bear Romper</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#EDCFB5"></div>
-          <div class="swatch" style="background:#E8B4A0"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-now">₹749</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-img-wrap" style="background:#D4EDE4;">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M46 32 C48 14 92 14 94 32" fill="#5C4A32" opacity="0.65"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 55 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- striped tee -->
-          <path d="M50 66 L46 110 L94 110 L90 66 Z" fill="#8BAF8B"/>
-          <path d="M50 68 C44 68 34 76 36 86 L44 86 L48 70Z" fill="#8BAF8B"/>
-          <path d="M90 68 C96 68 106 76 104 86 L96 86 L92 70Z" fill="#8BAF8B"/>
-          <rect x="46" y="80" width="48" height="5" fill="white" opacity="0.3"/>
-          <rect x="46" y="92" width="48" height="5" fill="white" opacity="0.3"/>
-          <!-- shorts -->
-          <rect x="46" y="110" width="22" height="30" rx="4" fill="#9FC4D4"/>
-          <rect x="72" y="110" width="22" height="30" rx="4" fill="#9FC4D4"/>
-          <rect x="48" y="138" width="18" height="12" rx="5" fill="#F5D9CF"/>
-          <rect x="74" y="138" width="18" height="12" rx="5" fill="#F5D9CF"/>
-        </svg>
-        <div class="product-badge-wrap"><span class="p-badge p-badge-new">New</span></div>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">5–9 Yrs</span><span class="product-rating">★★★★★</span></div>
-        <div class="product-name">Meadow Stripe Set</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#8BAF8B"></div>
-          <div class="swatch" style="background:#9FC4D4"></div>
-          <div class="swatch" style="background:#E8B4A0"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-now">₹1,099</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-card reveal reveal-delay-3">
-      <div class="product-img-wrap">
-        <svg viewBox="0 0 140 170" fill="none">
-          <ellipse cx="70" cy="42" rx="26" ry="28" fill="#F5D9CF"/>
-          <path d="M46 30 C44 12 96 12 94 30" fill="#D4956A" opacity="0.55"/>
-          <circle cx="62" cy="41" r="2.5" fill="#8B5E52"/><circle cx="78" cy="41" r="2.5" fill="#8B5E52"/>
-          <path d="M65 51 Q70 56 75 51" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M50 66 L44 148 L96 148 L90 66 Z" fill="#F5D9CF"/>
-          <path d="M50 68 C44 68 34 78 36 88 L44 88 L48 70Z" fill="#F5D9CF"/>
-          <path d="M90 68 C96 68 106 78 104 88 L96 88 L92 70Z" fill="#F5D9CF"/>
-          <!-- floral smocking -->
-          <path d="M54 90 Q70 84 86 90" stroke="#E8B4A0" stroke-width="2" fill="none"/>
-          <path d="M54 98 Q70 92 86 98" stroke="#E8B4A0" stroke-width="2" fill="none"/>
-          <circle cx="62" cy="94" r="2.5" fill="#E8B4A0"/>
-          <circle cx="70" cy="91" r="2.5" fill="#E8B4A0"/>
-          <circle cx="78" cy="94" r="2.5" fill="#E8B4A0"/>
-          <path d="M44 148 Q56 158 68 148 Q80 138 92 148 L96 148" stroke="#E8B4A0" stroke-width="1.5" fill="none"/>
-          <rect x="62" y="148" width="8" height="16" rx="4" fill="#F5D9CF" opacity="0.7"/>
-          <rect x="70" y="148" width="8" height="16" rx="4" fill="#F5D9CF" opacity="0.7"/>
-        </svg>
-        <button class="p-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-      </div>
-      <div class="product-body">
-        <div class="product-meta-row"><span class="product-age-tag">2–6 Yrs</span><span class="product-rating">★★★★★</span></div>
-        <div class="product-name">Smocked Garden Dress</div>
-        <div class="product-swatches">
-          <div class="swatch" style="background:#F5D9CF"></div>
-          <div class="swatch" style="background:#C4D9C4"></div>
-          <div class="swatch" style="background:#D4E8F0"></div>
-        </div>
-        <div class="product-footer-row">
-          <div class="product-price"><span class="price-now">₹1,449</span></div>
-          <button class="add-btn">+</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ PROMO BANNER ══ -->
-
-<div class="promo reveal">
-  <div class="promo-art">
-    <div class="promo-art-bg"></div>
-    <svg viewBox="0 0 260 340" fill="none">
-      <!-- Two kids -->
-      <!-- Kid 1 -->
-      <ellipse cx="80" cy="70" rx="30" ry="32" fill="#F5D9CF"/>
-      <path d="M54 58 C54 38 106 38 106 58" fill="#D4956A" opacity="0.7"/>
-      <circle cx="72" cy="68" r="3" fill="#8B5E52"/><circle cx="88" cy="68" r="3" fill="#8B5E52"/>
-      <path d="M75 80 Q80 85 85 80" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M58 98 L52 170 L108 170 L102 98Z" fill="#E8B4A0"/>
-      <path d="M58 100 C52 100 40 110 42 122 L52 122 L56 102Z" fill="#E8B4A0"/>
-      <path d="M102 100 C108 100 120 110 118 122 L108 122 L104 102Z" fill="#E8B4A0"/>
-      <path d="M52 170 Q62 178 72 170 Q82 162 92 170 Q102 178 108 170" stroke="white" stroke-width="1.5" fill="none"/>
-      <rect x="68" y="170" width="10" height="20" rx="4" fill="#F5D9CF"/>
-      <rect x="82" y="170" width="10" height="20" rx="4" fill="#F5D9CF"/>
-      <!-- Kid 2 -->
-      <ellipse cx="180" cy="70" rx="30" ry="32" fill="#F5D9CF"/>
-      <path d="M154 56 C155 36 206 36 206 56" fill="#5C4A32" opacity="0.7"/>
-      <circle cx="172" cy="68" r="3" fill="#8B5E52"/><circle cx="188" cy="68" r="3" fill="#8B5E52"/>
-      <path d="M175 80 Q180 85 185 80" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M158 98 L152 190 L208 190 L202 98Z" fill="#8BAF8B"/>
-      <path d="M158 100 C152 100 140 110 142 122 L152 122 L156 102Z" fill="#8BAF8B"/>
-      <path d="M202 100 C208 100 220 110 218 122 L208 122 L204 102Z" fill="#8BAF8B"/>
-      <rect x="154" y="190" width="24" height="34" rx="5" fill="#9FC4D4"/>
-      <rect x="182" y="190" width="24" height="34" rx="5" fill="#9FC4D4"/>
-      <rect x="156" y="222" width="20" height="12" rx="5" fill="#2C2417" opacity="0.5"/>
-      <rect x="184" y="222" width="20" height="12" rx="5" fill="#2C2417" opacity="0.5"/>
-      <!-- holding hands -->
-      <path d="M108 150 Q130 160 152 150" stroke="#F5D9CF" stroke-width="8" stroke-linecap="round"/>
-    </svg>
-  </div>
-  <div class="promo-content">
-    <div class="promo-eyebrow">Limited Time Offer</div>
-    <h2 class="promo-title">Summer Sale —<br><em>Up to 40% Off</em></h2>
-    <p class="promo-desc">Our biggest seasonal sale is here. Stock up on sun-ready styles, breezy sets and must-have staples before they sell out.</p>
-    <div class="promo-pills">
-      <div class="promo-pill">Dresses <strong>40%</strong></div>
-      <div class="promo-pill">Sets <strong>30%</strong></div>
-      <div class="promo-pill">Accessories <strong>25%</strong></div>
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-eyebrow">What Parents Say</div>
+      <div class="section-title">Loved by <em>little families</em></div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The quality is beyond anything I've found at this price. My daughter wore her Cloud Romper every week for months and it still looks brand new."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">👩</div>
+            <div>
+              <div class="testi-name">Amara H.</div>
+              <div class="testi-location">London, UK</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I love that they donate to child nutrition — it means so much to buy from a brand that genuinely cares. And the designs are absolutely gorgeous."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">👩‍🦱</div>
+            <div>
+              <div class="testi-name">Sophie M.</div>
+              <div class="testi-location">Paris, France</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"My son has eczema and we've struggled with so many brands. Kit'n Kiwi is the only one where he never has a reaction. Safe and beautiful."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">👨</div>
+            <div>
+              <div class="testi-name">Daniel K.</div>
+              <div class="testi-location">Toronto, Canada</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn-primary"><span>Shop the Sale</span></button>
-  </div>
-</div>
+  </section>
 
-<!-- ══ OUR STORY ══ -->
-
-<section id="about" class="about">
-  <div class="about-grid">
-    <div class="about-visual reveal">
-      <!-- Scattered leaves -->
-      <svg class="scattered-leaf" width="60" height="76" viewBox="0 0 48 60" fill="none" style="transform:rotate(25deg);">
-        <path d="M24 4 C34 4 44 14 44 30 C44 46 34 56 24 56 C14 56 4 46 4 30 C4 14 14 4 24 4Z" fill="#8BAF8B" opacity="0.35"/>
-        <path d="M24 4 L24 56" stroke="#C4D9C4" stroke-width="1.5"/>
-      </svg>
-      <svg class="scattered-leaf" width="44" height="56" viewBox="0 0 48 60" fill="none" style="transform:rotate(-15deg);">
-        <path d="M24 4 C34 4 44 14 44 30 C44 46 34 56 24 56 C14 56 4 46 4 30 C4 14 14 4 24 4Z" fill="#D4956A" opacity="0.3"/>
-        <path d="M24 4 L24 56" stroke="#EDCFB5" stroke-width="1.5"/>
-      </svg>
-
-```
-  <div class="about-main-frame">
-    <!-- Illustrated family/brand scene -->
-    <svg viewBox="0 0 280 340" fill="none" width="100%" height="100%">
-      <!-- background meadow -->
-      <ellipse cx="140" cy="320" rx="130" ry="30" fill="#C4D9C4" opacity="0.3"/>
-      <!-- tree -->
-      <rect x="200" y="160" width="16" height="120" rx="6" fill="#D4956A" opacity="0.5"/>
-      <ellipse cx="208" cy="145" rx="40" ry="50" fill="#8BAF8B" opacity="0.4"/>
-      <ellipse cx="208" cy="130" rx="28" ry="36" fill="#8BAF8B" opacity="0.5"/>
-      <!-- Small child with kite -->
-      <ellipse cx="90" cy="120" rx="22" ry="24" fill="#F5D9CF"/>
-      <path d="M70 112 C70 96 110 96 110 112" fill="#D4956A" opacity="0.65"/>
-      <circle cx="84" cy="119" r="2.5" fill="#8B5E52"/>
-      <circle cx="96" cy="119" r="2.5" fill="#8B5E52"/>
-      <path d="M87 128 Q90 132 93 128" stroke="#8B5E52" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M72 140 L66 210 L114 210 L108 140Z" fill="#9FC4D4"/>
-      <path d="M72 142 C66 142 54 150 56 162 L66 162 L70 144Z" fill="#9FC4D4"/>
-      <path d="M108 142 C114 142 126 150 124 162 L114 162 L110 144Z" fill="#9FC4D4"/>
-      <rect x="78" y="210" width="10" height="28" rx="4" fill="#F5D9CF"/>
-      <rect x="92" y="210" width="10" height="28" rx="4" fill="#F5D9CF"/>
-      <!-- kite -->
-      <path d="M110 130 L130 60 L160 130 L130 180 Z" fill="#E8B4A0" opacity="0.8"/>
-      <line x1="130" y1="60" x2="130" y2="180" stroke="white" stroke-width="1"/>
-      <line x1="110" y1="130" x2="160" y2="130" stroke="white" stroke-width="1"/>
-      <path d="M110 130 Q90 120 82 122" stroke="#D4956A" stroke-width="1.5" stroke-dasharray="3 3"/>
-      <!-- kite tail -->
-      <path d="M130 180 Q140 200 128 215 Q118 228 132 240" stroke="#E8B4A0" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <!-- flowers on ground -->
-      <circle cx="50" cy="278" r="5" fill="#E8B4A0"/>
-      <circle cx="62" cy="270" r="4" fill="#D4E8F0"/>
-      <circle cx="150" cy="275" r="5" fill="#C5A3E8" opacity="0.6"/>
-      <circle cx="165" cy="268" r="4" fill="#8BAF8B" opacity="0.8"/>
-    </svg>
-  </div>
-
-  <div class="about-badge-tl">
-    <div class="badge-tl-inner">Est.<br>2019<br>India</div>
-  </div>
-  <div class="about-badge-br">
-    <div class="badge-br-num">12K+</div>
-    <div class="badge-br-label">Happy Families</div>
-  </div>
-</div>
-
-<div class="about-text reveal reveal-delay-1">
-  <div class="section-label">Our Story</div>
-  <h2 class="section-title">Born from a<br>Mother's Love</h2>
-
-  <p class="about-story">
-    Kit n Kiwi began in <strong>2019 in a tiny Mumbai apartment</strong> with a sewing machine, a newborn, and a question every new parent asks: <em>why is children's clothing either cheap and scratchy, or expensive and dull?</em>
-  </p>
-  <p class="about-story">
-    Our founder, Meera, believed children deserve clothing that is <strong>genuinely soft, beautifully designed, and honestly priced</strong> — clothes that keep up with the mess, the laughter, and the endless growing.
-  </p>
-
-  <div class="about-values">
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 32 32" fill="none">
-        <path d="M16 4 C20 4 26 8 26 16 C26 24 20 28 16 28 C12 28 6 24 6 16 C6 8 12 4 16 4Z" fill="#C4D9C4"/>
-        <path d="M16 4 L16 28" stroke="#8BAF8B" stroke-width="1.5"/>
-        <path d="M6 16 C10 14 22 14 26 16" stroke="#8BAF8B" stroke-width="1"/>
-      </svg>
-      <div class="value-title">Organic Fabrics</div>
-      <div class="value-desc">GOTS-certified cotton, gentle on sensitive skin</div>
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="newsletter-inner">
+      <div class="section-eyebrow">Stay Connected</div>
+      <div class="section-title">Join the <em>Kit'n Kiwi</em> family</div>
+      <p class="newsletter-sub">Be the first to know about new arrivals, exclusive offers, and the stories behind our collections.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Your email address"/>
+        <button class="newsletter-btn">Subscribe</button>
+      </div>
     </div>
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 32 32" fill="none">
-        <path d="M8 16 C8 10 14 6 16 6 C18 6 24 10 24 16 C24 22 20 26 16 26 C12 26 8 22 8 16Z" fill="#F5D9CF"/>
-        <path d="M11 20 L14 23 L22 13" stroke="#E8B4A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <div class="value-title">Built to Last</div>
-      <div class="value-desc">Double-stitched, wash-after-wash durable</div>
-    </div>
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="11" fill="#EDCFB5"/>
-        <path d="M10 16 Q16 10 22 16 Q16 22 10 16Z" fill="#D4956A"/>
-      </svg>
-      <div class="value-title">Joyful Design</div>
-      <div class="value-desc">Whimsical, age-appropriate, made to delight</div>
-    </div>
-    <div class="value-item">
-      <svg class="value-icon" viewBox="0 0 32 32" fill="none">
-        <rect x="4" y="10" width="24" height="18" rx="4" fill="#D4E8F0"/>
-        <path d="M4 16 L28 16" stroke="#9FC4D4" stroke-width="1.5"/>
-        <circle cx="10" cy="24" r="2" fill="#9FC4D4"/>
-        <circle cx="22" cy="24" r="2" fill="#9FC4D4"/>
-        <path d="M10 10 L10 6 M22 10 L22 6" stroke="#9FC4D4" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      <div class="value-title">Ethical Made</div>
-      <div class="value-desc">Fair wages, safe workshops, proud craftsmanship</div>
-    </div>
-  </div>
+  </section>
 
-  <div class="founder-note">
-    <p class="founder-text">Every piece we make carries the same intention I had on day one — that a child in Kit n Kiwi should feel completely, freely, joyfully themselves.</p>
-    <div class="founder-sig">
-      <div class="founder-avatar">
-        <svg viewBox="0 0 30 30" fill="none">
-          <ellipse cx="15" cy="11" rx="7" ry="8" fill="#F5D9CF"/>
-          <path d="M8 9 C8 3 22 3 22 9" fill="#D4956A" opacity="0.7"/>
-          <path d="M6 28 C6 20 24 20 24 28" fill="#E8B4A0"/>
-        </svg>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Kit'n<span>Kiwi</span></div>
+        <p class="footer-desc">Premium children's clothing made for little hearts. Crafted with care, worn with joy.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">📸</a>
+          <a href="#" class="social-btn">📌</a>
+          <a href="#" class="social-btn">f</a>
+        </div>
       </div>
       <div>
-        <div class="founder-name">Meera Kapoor</div>
-        <div class="founder-role">Founder, Kit n Kiwi</div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Newborns (0–12m)</a></li>
+          <li><a href="#">Toddlers (1–4y)</a></li>
+          <li><a href="#">Kids (4–8y)</a></li>
+          <li><a href="#">Gift Sets</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Values & Mission</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Help</div>
+        <ul class="footer-links">
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping & Returns</a></li>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
       </div>
     </div>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ══ TESTIMONIALS ══ -->
-
-<section id="testimonials" class="testimonials">
-  <div class="reveal">
-    <div class="section-label">Parent Reviews</div>
-    <h2 class="section-title">What Families Say</h2>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card reveal">
-      <div class="testi-top">
-        <div class="testi-author-info">
-          <div class="testi-avatar">
-            <svg viewBox="0 0 30 30" fill="none"><ellipse cx="15" cy="11" rx="7" ry="7" fill="#F5D9CF"/><path d="M8 8 C8 2 22 2 22 8" fill="#D4956A" opacity="0.7"/><path d="M6 28 C6 20 24 20 24 28" fill="#E8B4A0"/></svg>
-          </div>
-          <div>
-            <div class="testi-name">Priya Sharma</div>
-            <div class="testi-loc">Mumbai · Mom of 2</div>
-          </div>
-        </div>
-        <div class="testi-rating">★★★★★</div>
-      </div>
-      <p class="testi-body">"My daughter refuses to take off her Bloom Floral Dress. The fabric is incredibly soft and the colours are even more vibrant in person. We have ordered five more pieces since."</p>
+    <div class="footer-bottom">
+      <span>©️ 2025 Kit'n Kiwi. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
     </div>
-    <div class="testi-card reveal reveal-delay-1">
-      <div class="testi-top">
-        <div class="testi-author-info">
-          <div class="testi-avatar">
-            <svg viewBox="0 0 30 30" fill="none"><ellipse cx="15" cy="11" rx="7" ry="7" fill="#F5D9CF"/><path d="M8 8 C8 2 22 2 22 8" fill="#5C4A32" opacity="0.6"/><path d="M6 28 C6 20 24 20 24 28" fill="#9FC4D4"/></svg>
-          </div>
-          <div>
-            <div class="testi-name">Rahul Nair</div>
-            <div class="testi-loc">Bangalore · Dad of 1</div>
-          </div>
-        </div>
-        <div class="testi-rating">★★★★★</div>
-      </div>
-      <p class="testi-body">"After 40+ washes, the prints are still vibrant and the stitching is perfect. Kit n Kiwi is my go-to for every birthday gift — the quality speaks for itself."</p>
-    </div>
-    <div class="testi-card reveal reveal-delay-2">
-      <div class="testi-top">
-        <div class="testi-author-info">
-          <div class="testi-avatar">
-            <svg viewBox="0 0 30 30" fill="none"><ellipse cx="15" cy="11" rx="7" ry="7" fill="#F5D9CF"/><path d="M8 8 C8 2 22 2 22 8" fill="#D4956A" opacity="0.7"/><path d="M6 28 C6 20 24 20 24 28" fill="#8BAF8B"/></svg>
-          </div>
-          <div>
-            <div class="testi-name">Anjali Mehta</div>
-            <div class="testi-loc">Delhi · Mom of 3</div>
-          </div>
-        </div>
-        <div class="testi-rating">★★★★★</div>
-      </div>
-      <p class="testi-body">"My toddler has eczema and Kit n Kiwi fabrics are the only ones that don't irritate her skin. Knowing every piece is truly organic makes such a difference for us."</p>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<!-- ══ NEWSLETTER ══ -->
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+    function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+    animateRing();
 
-<div class="newsletter reveal">
-  <div class="nl-left">
-    <div class="section-label">Join the Family</div>
-    <h2 class="section-title" style="color:white;">Get ₹200 Off<br>Your First Order</h2>
-    <p class="nl-desc">Early access to new arrivals, members-only sales, and gentle parenting inspiration in your inbox.</p>
-  </div>
-  <div class="nl-form-wrap">
-    <div class="nl-input-row">
-      <input class="nl-input" type="email" placeholder="Your email address">
-      <button class="nl-submit">Subscribe</button>
-    </div>
-    <p class="nl-note">No spam, ever. Unsubscribe any time.</p>
-  </div>
-</div>
+    // Navbar scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
 
-<!-- ══ FOOTER ══ -->
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = el.dataset.delay || 0;
+          setTimeout(() => el.classList.add('visible'), delay);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
 
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand-col">
-      <div class="footer-logo-name">Kit n <span>Kiwi</span></div>
-      <p class="footer-about">Premium children's clothing crafted with love, designed for adventure, and made to last through every glorious mess.</p>
-      <div class="footer-socials">
-        <a href="https://instagram.com/kitnkiwi" target="_blank" class="social-icon" title="@kitnkiwi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        <a href="https://instagram.com/rishit_bhxtt" target="_blank" class="social-icon" title="@rishit_bhxtt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        <a href="mailto:kitnkiwi@gmail.com" class="social-icon" title="kitnkiwi@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
-      </div>
-      <div style="margin-top:1rem; font-size:0.8rem; color:rgba(255,255,255,0.35); line-height:1.9;">
-        <div>📸 <a href="https://instagram.com/kitnkiwi" target="_blank" style="color:rgba(255,255,255,0.5);text-decoration:none;">@kitnkiwi</a></div>
-        <div>📸 <a href="https://instagram.com/rishit_bhxtt" target="_blank" style="color:rgba(255,255,255,0.5);text-decoration:none;">@rishit_bhxtt</a></div>
-        <div>✉️ <a href="mailto:kitnkiwi@gmail.com" style="color:rgba(255,255,255,0.5);text-decoration:none;">kitnkiwi@gmail.com</a></div>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-head">Shop</div>
-      <ul class="footer-links">
-        <li><a href="#">New Arrivals</a></li>
-        <li><a href="#">Best Sellers</a></li>
-        <li><a href="#">Baby Collection</a></li>
-        <li><a href="#">Toddler Range</a></li>
-        <li><a href="#">Sale</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-head">Help</div>
-      <ul class="footer-links">
-        <li><a href="#">Size Guide</a></li>
-        <li><a href="#">Shipping Info</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Contact Us</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-head">Company</div>
-      <ul class="footer-links">
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Sustainability</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Affiliates</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom" style="flex-direction:column; gap:0.8rem; text-align:center;">
-    <div style="display:flex; align-items:center; justify-content:space-between; width:100%; flex-wrap:wrap; gap:1rem;">
-      <div class="footer-copy">© 2025 Kit n Kiwi. Made with 💕 in India.</div>
-      <div class="footer-pay">
-        <div class="pay-chip">VISA</div>
-        <div class="pay-chip">MC</div>
-        <div class="pay-chip">UPI</div>
-        <div class="pay-chip">PAYTM</div>
-        <div class="pay-chip">COD</div>
-      </div>
-    </div>
-    <div style="font-size:0.78rem; color:rgba(255,255,255,0.22); border-top:1px solid rgba(255,255,255,0.07); padding-top:0.9rem; width:100%; display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
-      <span>👗 Clothing Designed by <a href="https://instagram.com/rishit_bhxtt" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-weight:700;" onmouseover="this.style.color='#FF6B9D'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Rishit Bhatt</a></span>
-      <span style="opacity:0.3;">|</span>
-      <span>💻 Website Designed &amp; Developed by <a href="https://instagram.com/rishit_bhxtt" target="_blank" style="color:rgba(255,255,255,0.45); text-decoration:none; font-weight:700;" onmouseover="this.style.color='#FF8C61'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Rishit Bhatt</a></span>
-      <span style="opacity:0.3;">|</span>
-      <span>📸 <a href="https://instagram.com/rishit_bhxtt" target="_blank" style="color:rgba(255,255,255,0.4);text-decoration:none;font-weight:600;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">@rishit_bhxtt</a></span>
-    </div>
-  </div>
-</footer>
-
-<button class="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
-
-<script>
-// Scroll reveal
-const revealEls = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-  });
-}, { threshold: 0.1 });
-revealEls.forEach(el => obs.observe(el));
-
-// Filter pills
-document.querySelectorAll('.filter-pill').forEach(pill => {
-  pill.addEventListener('click', () => {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-  });
-});
-
-// Add to cart
-document.querySelectorAll('.add-btn').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    this.innerHTML = `<svg viewBox="0 0 24 24" width="14" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>`;
-    this.style.background = 'var(--sage)';
-    setTimeout(() => {
-      this.innerHTML = '+';
-      this.style.background = '';
-    }, 1600);
-  });
-});
-
-// Wishlist
-document.querySelectorAll('.p-wish').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    const svg = this.querySelector('svg');
-    if (this.dataset.loved) {
-      svg.setAttribute('fill', 'none');
-      delete this.dataset.loved;
-    } else {
-      svg.setAttribute('fill', 'var(--blush)');
-      this.dataset.loved = '1';
-    }
-  });
-});
-</script>
-
+    document.querySelectorAll('.feature-card, .product-card, .value-item, .testi-card, .story-content').forEach((el, i) => {
+      el.dataset.delay = (i % 4) * 120;
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
